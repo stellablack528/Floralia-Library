@@ -1,0 +1,20 @@
+{
+  "source_policy": "仅记录已打开并核对的具体资料；未核对的花卉文化内容显示待补充。只存书目信息、链接和自己的短摘要，不批量下载或复制网页正文。",
+  "reference_portals": [
+    {"name": "Oxford Flower17", "purpose": "数据集类别和划分", "url": "https://www.robots.ox.ac.uk/~vgg/data/flowers/17/index.html"},
+    {"name": "Kew Plants of the World Online", "purpose": "核查植物学名与分类；通用类别不能直接定到种", "url": "https://powo.science.kew.org/"},
+    {"name": "《中国植物志》", "purpose": "核查中文植物名称、形态与分布", "url": "https://www.iplant.cn/frps"},
+    {"name": "Poetry Foundation", "purpose": "逐篇核查英文诗歌作者、题目和文本", "url": "https://www.poetryfoundation.org/"}
+  ],
+  "verified_items": [
+    {
+      "class_key": "daffodil",
+      "kind": "literature",
+      "creator": "William Wordsworth",
+      "title": "I Wandered Lonely as a Cloud",
+      "url": "https://www.poetryfoundation.org/poems/45521/i-wandered-lonely-as-a-cloud",
+      "checked_on": "2026-11-17",
+      "our_summary": "诗中写到金色水仙与花朵摇曳，以及回忆中的愉悦。此文献支持文学关联，不证明特定植物学名或统一花语。"
+    }
+  ]
+}

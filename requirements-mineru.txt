@@ -1,0 +1,2 @@
+# Separate from the flower classifier's PyTorch environment.
+mineru==4.2.3

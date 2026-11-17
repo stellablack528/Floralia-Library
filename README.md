@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/stellablack528/flower-and-folio/main/web/assets/floral-header.webp" alt="Floralia Library — Watercolor Botanical Illustration" width="420">
+<img src="https://raw.githubusercontent.com/stellablack528/Floralia-Library/main/assets/floral-header.webp" alt="Floralia Library — Watercolor Botanical Illustration" width="420">
 
 # Floralia Library
 ### 花与书页 · An AI-Powered Botanical & Literary Library
@@ -49,6 +49,13 @@ Rather than ending with a classification label, Floralia aims to invite further 
 - **个人收藏**：保存喜爱的花卉书页，回顾探索记录。
 
 项目目前已完成主要 Web 前端及交互流程。深度学习识别模型、Grad-CAM 可解释性分析和扩展文学知识库仍处于开发规划阶段。
+
+### 当前开发状态（2026-11）
+
+- Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
+- UI 仍为**演示识别**，真实分类模型与 Grad-CAM 尚未接入。植物学名及未核实的文化内容显示为待核对／待补充。
+- MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
+- Qt6/QML 文献界面、知识提取、SQLite 入库、识花联动和 RAG 检索仍属于后续阶段。
 
 ---
 

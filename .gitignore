@@ -10,3 +10,15 @@ desktop.ini
 # Logs & temp
 *.log
 *.tmp
+
+# Local Python environments, datasets, generated parse results
+.venv/
+.venv-mineru/
+__pycache__/
+*.py[cod]
+data/raw/
+data/processed/
+data/splits/
+models/
+documents/parsed/
+app/local_state.sqlite3

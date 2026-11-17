@@ -1,0 +1,19 @@
+[
+  {"class_id":0,"key":"daffodil","name_en":"Daffodil","name_zh":"黄水仙","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":1,"key":"snowdrop","name_en":"Snowdrop","name_zh":"雪滴花","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":2,"key":"lily-of-the-valley","name_en":"Lily of the valley","name_zh":"铃兰","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":3,"key":"bluebell","name_en":"Bluebell","name_zh":"蓝铃花","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":4,"key":"crocus","name_en":"Crocus","name_zh":"番红花","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":5,"key":"iris","name_en":"Iris","name_zh":"鸢尾","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":6,"key":"tiger-lily","name_en":"Tiger lily","name_zh":"虎皮百合","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":7,"key":"tulip","name_en":"Tulip","name_zh":"郁金香","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":8,"key":"fritillary","name_en":"Fritillary","name_zh":"贝母花","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":9,"key":"sunflower","name_en":"Sunflower","name_zh":"向日葵","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":10,"key":"daisy","name_en":"Daisy","name_zh":"雏菊","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":11,"key":"coltsfoot","name_en":"Colt's foot","name_zh":"款冬","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":12,"key":"dandelion","name_en":"Dandelion","name_zh":"蒲公英","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":13,"key":"cowslip","name_en":"Cowslip","name_zh":"黄花九轮草","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":14,"key":"buttercup","name_en":"Buttercup","name_zh":"毛茛","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":15,"key":"windflower","name_en":"Windflower","name_zh":"银莲花","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"},
+  {"class_id":16,"key":"pansy","name_en":"Pansy","name_zh":"三色堇","scientific_name":null,"scientific_name_note":"数据集类别为英文通用名，不能据此确定唯一物种。"}
+]

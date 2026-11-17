@@ -88,6 +88,8 @@ FF.views.library = (function () {
             <div class="folio-text">${f.season}</div>
             <div class="folio-label">核对说明</div>
             <div class="folio-text">${f.note}</div>
+            <div class="folio-label">参考资料</div>
+            <div class="folio-text">${f.sources.length ? f.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.creator} · ${s.title}</a>`).join("<br>") : "待补充"}</div>
             <div class="folio-actions">
               <button class="fav-toggle ${favOn ? "on" : ""}" id="fav-btn">${favOn ? "&#10084; 已收藏 · 点击取消" : "&#9825; 收藏这页书"}</button>
               <button class="btn-primary" id="identify-again">上传照片验证它<span class="arrow">&#8594;</span></button>
