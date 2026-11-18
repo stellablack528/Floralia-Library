@@ -75,7 +75,7 @@ FF.views.identify = (function () {
       <div class="result-top">
         <div class="rk">TOP 1 · 预测类别</div>
         <div class="flower">${first.flower.zh} · ${first.flower.en}</div>
-        <div class="latin">${first.flower.latin}</div>
+        <div class="latin">代表植物 · ${first.flower.latin}</div>
         <div class="conf">
           <div class="bar"><i style="width:0%"></i></div>
           <b>${first.score}%</b>

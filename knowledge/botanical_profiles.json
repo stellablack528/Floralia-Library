@@ -1,0 +1,362 @@
+{
+  "daffodil": {
+    "representative_name": "Narcissus pseudonarcissus",
+    "family": "石蒜科",
+    "genus": "水仙属",
+    "traits": [
+      "单朵花通常有浅黄色花被片",
+      "中央有颜色较深的喇叭形副冠",
+      "叶片狭长，呈灰绿色"
+    ],
+    "habitat": "英国的湿润草地、林地和林缘可见。",
+    "flowering": "在英国通常为 3–4 月。",
+    "scope": "Daffodil 也用于其他水仙属植物和栽培品种，本页以野生黄水仙为例。",
+    "references": [
+      {
+        "publisher": "Woodland Trust",
+        "title": "Wild daffodil (Narcissus pseudonarcissus)",
+        "url": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wild-daffodil/"
+      }
+    ]
+  },
+  "snowdrop": {
+    "representative_name": "Galanthus nivalis",
+    "family": "石蒜科",
+    "genus": "雪滴花属",
+    "traits": [
+      "花通常单生、下垂",
+      "外侧三枚白色花被片较长",
+      "内侧花被片较短，常带绿色斑纹"
+    ],
+    "habitat": "适合湿润而排水良好的半阴环境，可在落叶树下成片生长。",
+    "flowering": "英国园艺资料通常记为冬末至早春。",
+    "scope": "Snowdrop 泛指雪滴花属植物，本页介绍常见的普通雪滴花。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Galanthus nivalis",
+        "url": "https://www.rhs.org.uk/plants/7568/galanthus-nivalis/details"
+      }
+    ]
+  },
+  "lily-of-the-valley": {
+    "representative_name": "Convallaria majalis",
+    "family": "天门冬科",
+    "genus": "铃兰属",
+    "traits": [
+      "弧形花序上排列多朵白色小铃状花",
+      "叶片宽于花茎，呈椭圆至狭卵形",
+      "地下根状茎可使植株成片生长"
+    ],
+    "habitat": "在阴凉处生长良好，偏好富含腐殖质的湿润土壤。",
+    "flowering": "通常在晚春开花，以英国园艺资料为例。",
+    "scope": "代表条目为 Convallaria majalis。铃兰虽有英文俗名 Lily of the valley，分类上属于天门冬科。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Convallaria majalis",
+        "url": "https://www.rhs.org.uk/plants/4327/convallaria-majalis/details"
+      }
+    ]
+  },
+  "bluebell": {
+    "representative_name": "Hyacinthoides non-scripta",
+    "family": "天门冬科",
+    "genus": "蓝铃花属",
+    "traits": [
+      "蓝紫色钟状花多偏向花茎一侧",
+      "花被片尖端向外反卷",
+      "狭长叶由近地面处长出"
+    ],
+    "habitat": "原产欧洲西部，常见于英国林地，也可见于篱边和草地。",
+    "flowering": "英国通常为 4–5 月。",
+    "scope": "以英国蓝铃花为例，西班牙蓝铃花及其杂交类型是相近但独立的分类对象。",
+    "references": [
+      {
+        "publisher": "Woodland Trust",
+        "title": "Bluebell (Hyacinthoides non-scripta)",
+        "url": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bluebell/"
+      }
+    ]
+  },
+  "crocus": {
+    "representative_name": "Crocus vernus",
+    "family": "鸢尾科",
+    "genus": "番红花属",
+    "traits": [
+      "从球茎长出狭长叶片",
+      "花呈杯形",
+      "代表种的花有白色或深浅不同的紫色"
+    ],
+    "habitat": "可栽植于草坪等排水良好的地段，在适宜条件下能自然扩展。",
+    "flowering": "C. vernus 主要于春季开花，英国皇家园艺学会也记载至初夏。",
+    "scope": "番红花属包含春花和秋花种。本页代表种是春番红花，文化记录涉及同属的藏红花。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Crocus vernus",
+        "url": "https://www.rhs.org.uk/plants/29659/crocus-vernus/details"
+      }
+    ]
+  },
+  "iris": {
+    "representative_name": "Iris germanica",
+    "family": "鸢尾科",
+    "genus": "鸢尾属",
+    "traits": [
+      "叶片呈剑形，多为灰绿色",
+      "花大，花色随栽培类型变化",
+      "有髯类的外轮花被片常可见绒毛状结构"
+    ],
+    "habitat": "适合阳光充足、排水良好的花境。",
+    "flowering": "英国园艺资料记为 5–6 月。",
+    "scope": "Iris 指鸢尾属，代表条目采用 RHS 所列的有髯鸢尾 I. germanica。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Iris germanica",
+        "url": "https://www.rhs.org.uk/plants/9256/iris-germanica/details"
+      }
+    ]
+  },
+  "tiger-lily": {
+    "representative_name": "Lilium lancifolium",
+    "family": "百合科",
+    "genus": "百合属",
+    "traits": [
+      "橙色花被片有深色斑点",
+      "花多下垂，花被片明显向后反卷",
+      "叶腋常长出深色珠芽"
+    ],
+    "habitat": "北卡罗来纳州推广资料记录它适应向阳、土壤湿润的栽培环境。",
+    "flowering": "通常在夏季开花。",
+    "scope": "本页以虎皮百合（卷丹）为例。Tiger lily 在英语中也可指其他百合。",
+    "references": [
+      {
+        "publisher": "North Carolina Extension Gardener Plant Toolbox",
+        "title": "Lilium lancifolium (Tiger Lily)",
+        "url": "https://plants.ces.ncsu.edu/plants/lilium-lancifolium/"
+      }
+    ]
+  },
+  "tulip": {
+    "representative_name": "Tulipa gesneriana",
+    "family": "百合科",
+    "genus": "郁金香属",
+    "traits": [
+      "叶片宽披针形",
+      "代表植株通常开单瓣花",
+      "花色可从黄、橙到红或紫红"
+    ],
+    "habitat": "作为球根观赏植物，适合日照充足、排水良好的花坛。",
+    "flowering": "这个代表条目在英国通常于晚春开花。",
+    "scope": "园艺郁金香包含多种及杂交类型，RHS 也指出标作 T. gesneriana 的栽培球根中有不少为杂交种。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Tulipa gesneriana",
+        "url": "https://www.rhs.org.uk/plants/18512/tulipa-gesneriana/details"
+      }
+    ]
+  },
+  "fritillary": {
+    "representative_name": "Fritillaria meleagris",
+    "family": "百合科",
+    "genus": "贝母属",
+    "traits": [
+      "花多下垂呈钟形",
+      "常见紫粉相间的棋盘格纹",
+      "叶片细长，带灰绿色"
+    ],
+    "habitat": "可见于湿润草甸。牛津莫德林学院草甸有标本记录。",
+    "flowering": "代表种于春季开花。",
+    "scope": "Fritillary 也用于贝母属其他物种，本页用有典型格纹的 F. meleagris 作代表。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Fritillaria meleagris",
+        "url": "https://www.rhs.org.uk/plants/7403/fritillaria-meleagris/details"
+      },
+      {
+        "publisher": "Royal Botanic Gardens, Kew",
+        "title": "Herbarium specimen K001338981 (Magdalen Meadows)",
+        "url": "https://records.data.kew.org/occurrences/bcb33a11-063e-4729-addc-120b176594dc"
+      }
+    ]
+  },
+  "sunflower": {
+    "representative_name": "Helianthus annuus",
+    "family": "菊科",
+    "genus": "向日葵属",
+    "traits": [
+      "显眼的花盘是由多朵小花组成的头状花序",
+      "外圈通常为黄色舌状花",
+      "中央密布盘花，颜色常较深"
+    ],
+    "habitat": "原产北美，常在阳光充足的开阔地或花园种植。",
+    "flowering": "北卡罗来纳州推广资料记为夏季中后期。",
+    "scope": "向日葵属也有多年生种，本页使用常见的一年生向日葵作为代表。",
+    "references": [
+      {
+        "publisher": "North Carolina Extension Gardener Plant Toolbox",
+        "title": "Helianthus annuus (Common Sunflower)",
+        "url": "https://plants.ces.ncsu.edu/plants/helianthus-annuus/common-name/common-sunflower/"
+      }
+    ]
+  },
+  "daisy": {
+    "representative_name": "Bellis perennis",
+    "family": "菊科",
+    "genus": "雏菊属",
+    "traits": [
+      "白色舌状花围绕黄色小花组成花盘",
+      "舌状花末端有时泛粉红",
+      "低矮的匙形叶聚成基生莲座"
+    ],
+    "habitat": "英国草坪、短草地等常见，可耐受经常修剪的环境。",
+    "flowering": "英国可在一年中大部分时间见到开花。",
+    "scope": "Daisy 是宽泛的英文俗名。这里介绍普通雏菊，文学出处里的 daisy 保留原文俗名的范围。",
+    "references": [
+      {
+        "publisher": "The Wildlife Trusts",
+        "title": "Common daisy",
+        "url": "https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/common-daisy"
+      }
+    ]
+  },
+  "coltsfoot": {
+    "representative_name": "Tussilago farfara",
+    "family": "菊科",
+    "genus": "款冬属",
+    "traits": [
+      "早春先开黄色头状花序，随后才长出显眼的叶",
+      "花梗短，带鳞片",
+      "叶宽，轮廓带齿，植株有地下根状茎"
+    ],
+    "habitat": "在花境中可借根状茎扩展，也见于受扰动的开放地。",
+    "flowering": "通常在早春开花。",
+    "scope": "以 RHS 所称 coltsfoot 的款冬为代表。观察带鳞片的花梗和先花后叶的现象，有助与蒲公英作比较。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Tussilago farfara",
+        "url": "https://www.rhs.org.uk/plants/18563/tussilago-farfara/details"
+      },
+      {
+        "publisher": "Smithsonian Environmental Research Center",
+        "title": "Tussilago farfara species summary",
+        "url": "https://invasions.si.edu/nemesis/chesreport/species_summary/tussilago%20farfara"
+      }
+    ]
+  },
+  "dandelion": {
+    "representative_name": "Taraxacum officinale",
+    "family": "菊科",
+    "genus": "蒲公英属",
+    "traits": [
+      "花盘主要由黄色舌状小花组成",
+      "叶片常有深裂，组成基生莲座",
+      "果序成熟后像白色绒球，可随风散播"
+    ],
+    "habitat": "英国的草坪、花坛和铺装缝隙都能见到。",
+    "flowering": "可在相当长的季节内开花，英国资料以春季最常见。",
+    "scope": "蒲公英属含许多难区分的小种。学名采用 RHS 代表档案，形态和生态也参考其蒲公英总览。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Taraxacum officinale",
+        "url": "https://www.rhs.org.uk/plants/232327/taraxacum-officinale/details"
+      },
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Dandelion",
+        "url": "https://www.rhs.org.uk/weeds/dandelion"
+      }
+    ]
+  },
+  "cowslip": {
+    "representative_name": "Primula veris",
+    "family": "报春花科",
+    "genus": "报春花属",
+    "traits": [
+      "皱褶明显的叶片组成基生莲座",
+      "细长花茎顶端有一簇下垂黄花",
+      "花冠呈筒状，花口常见橙色斑点"
+    ],
+    "habitat": "英国可见于草地、林缘和树篱旁，常与石灰质土壤相关。",
+    "flowering": "英国通常为 4–5 月。",
+    "scope": "这里介绍欧洲常见的 P. veris。它与同属的普通报春及其杂交类型外观相近。",
+    "references": [
+      {
+        "publisher": "Woodland Trust",
+        "title": "Cowslip (Primula veris)",
+        "url": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/cowslip/"
+      }
+    ]
+  },
+  "buttercup": {
+    "representative_name": "Ranunculus acris",
+    "family": "毛茛科",
+    "genus": "毛茛属",
+    "traits": [
+      "花瓣鲜黄、有光泽，整体呈浅杯形",
+      "植株直立，有毛",
+      "叶片掌状分裂"
+    ],
+    "habitat": "代表种是草甸植物，常见于草地，并可适应湿润而排水适中的土壤。",
+    "flowering": "英国园艺资料记为初夏至仲夏。",
+    "scope": "Buttercup 指多种毛茛属植物，本页以草甸毛茛为例。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Ranunculus acris",
+        "url": "https://www.rhs.org.uk/plants/50360/ranunculus-acris/details"
+      }
+    ]
+  },
+  "windflower": {
+    "representative_name": "Anemonoides nemorosa",
+    "family": "毛茛科",
+    "genus": "Anemonoides 属",
+    "traits": [
+      "单花常呈白色星形，部分带浅粉色",
+      "花瓣状结构实际为萼片",
+      "叶片深裂，植株常在林地成片"
+    ],
+    "habitat": "常见于落叶林，并在树冠尚未展叶时利用地面的春季光照。",
+    "flowering": "英国通常为 3–5 月。",
+    "scope": "Windflower 有多个用法。本页以林地银莲花为例，Woodland Trust 同时列出异名 Anemone nemorosa。",
+    "references": [
+      {
+        "publisher": "Woodland Trust",
+        "title": "Wood anemone (Anemonoides nemorosa)",
+        "url": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wood-anemone/"
+      }
+    ]
+  },
+  "pansy": {
+    "representative_name": "Viola × wittrockiana",
+    "family": "堇菜科",
+    "genus": "堇菜属",
+    "traits": [
+      "花朵常有重叠的圆形花瓣",
+      "许多品种的花心附近有深色斑块",
+      "花色和斑纹随栽培类型变化"
+    ],
+    "habitat": "常作冷凉季节的花坛和盆栽花卉，可种于向阳或部分遮阴的地点。",
+    "flowering": "品种和播种时期会影响花期，部分园艺品种可从秋季开到春季。",
+    "scope": "本页以现代园艺三色堇为代表。历史文献中的 pansy 可以指历史园艺类型或野生近缘植物。",
+    "references": [
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Viola × wittrockiana Joker Series",
+        "url": "https://www.rhs.org.uk/plants/56768/viola-%C3%97-wittrockiana-joker-series-p/details"
+      },
+      {
+        "publisher": "Royal Horticultural Society",
+        "title": "Plants for kids – pansies",
+        "url": "https://www.rhs.org.uk/education-learning/children-young-people/family-activities/grow-it/pansy"
+      }
+    ]
+  }
+}

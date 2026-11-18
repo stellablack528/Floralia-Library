@@ -220,6 +220,10 @@ a { color: var(--forest); }
 .folio-rule { height: 1px; background: linear-gradient(90deg, var(--gold) 0 34px, var(--line) 34px); margin: 1.4rem 0; opacity: .7; }
 .folio-label { color: var(--gold-deep); font-size: .7rem; font-weight: 700; letter-spacing: .12em; margin-top: 1.2rem; }
 .folio-text { color: #5e6c60; font-size: .92rem; line-height: 1.85; margin-top: .4rem; }
+.folio-text a { color: var(--forest); overflow-wrap: anywhere; text-underline-offset: .16em; }
+.folio-culture { border-inline-start: 2px solid var(--line); margin-top: .65rem; padding-inline-start: 1rem; }
+.folio-culture h3 { color: var(--forest); font-size: 1.05rem; margin: 0; }
+.folio-culture p { margin-bottom: 0; }
 .folio-traits { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
 .folio-traits span { background: #f2efe3; border: 1px solid var(--line); color: #5e6c60; font-size: .78rem; padding: .32rem .8rem; border-radius: 999px; }
 .folio-actions { display: flex; gap: .9rem; margin-top: 1.6rem; align-items: center; }

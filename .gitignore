@@ -19,6 +19,7 @@ __pycache__/
 data/raw/
 data/processed/
 data/splits/
+data/knowledge/
 models/
 documents/parsed/
 app/local_state.sqlite3

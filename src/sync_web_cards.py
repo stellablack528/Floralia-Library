@@ -1,38 +1,79 @@
-"""Render the 17 reviewed class names and cultural-source state into the demo UI."""
+"""Validate and export the Flower17 knowledge base for the Web library."""
 
 from __future__ import annotations
 
 import json
+from collections import defaultdict
 from pathlib import Path
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-classes = json.loads((ROOT / "knowledge" / "classes.json").read_text(encoding="utf-8"))
-sources = json.loads((ROOT / "knowledge" / "cultural_sources.json").read_text(encoding="utf-8"))
-verified = {item["class_key"]: item for item in sources["verified_items"]}
+KNOWLEDGE = ROOT / "knowledge"
+classes = json.loads((KNOWLEDGE / "classes.json").read_text(encoding="utf-8"))
+profiles = json.loads((KNOWLEDGE / "botanical_profiles.json").read_text(encoding="utf-8"))
+sources = json.loads((KNOWLEDGE / "cultural_sources.json").read_text(encoding="utf-8"))
+culture = defaultdict(list)
+for record in sources["verified_items"]:
+    culture[record["class_key"]].append(record)
+
+class_keys = {item["key"] for item in classes}
+if [item["class_id"] for item in classes] != list(range(17)) or len(class_keys) != 17:
+    raise ValueError("Expected all 17 Flower17 class IDs and unique keys in dataset order")
+for name, records in (("botanical profiles", profiles), ("cultural records", culture)):
+    missing, unknown = class_keys - records.keys(), records.keys() - class_keys
+    if missing or unknown:
+        raise ValueError(f"Invalid {name}: missing {sorted(missing)}, unknown {sorted(unknown)}")
+
+
+def require_text(record: dict, fields: tuple[str, ...], context: str) -> None:
+    for field in fields:
+        if not isinstance(record.get(field), str) or not record[field].strip():
+            raise ValueError(f"{context}: {field} must be nonempty text")
+
+
+def require_source(record: dict, context: str) -> None:
+    require_text(record, ("title", "publisher", "url"), context)
+    url = urlsplit(record["url"])
+    if url.scheme != "https" or not url.hostname or url.username or url.password:
+        raise ValueError(f"{context}: expected a public HTTPS source URL")
 
 cards = []
 for item in classes:
-    cultural = verified.get(item["key"])
+    key = item["key"]
+    profile = profiles[key]
+    records = culture[key]
+    require_text(profile, ("representative_name", "family", "genus", "habitat", "flowering", "scope"), key)
+    traits = profile["traits"]
+    if len(traits) < 2 or not all(isinstance(trait, str) and trait.strip() for trait in traits):
+        raise ValueError(f"{key}: expected at least two visible traits")
+    if not profile["references"]:
+        raise ValueError(f"{key}: expected a botanical source")
+    for source in profile["references"]:
+        require_source(source, key)
+    for record in records:
+        require_source(record, key)
+        require_text(record, ("kind", "theme", "creator", "locator", "our_summary", "scope", "checked_on"), key)
     cards.append(
         {
             "class_id": item["class_id"],
             "order": item["class_id"] + 1,
-            "key": item["key"],
+            "key": key,
             "zh": item["name_zh"],
             "en": item["name_en"],
-            "latin": item["scientific_name"] or "待核对",
-            "family": "待核对",
-            "speak": "待补充",
-            "meaning": cultural["our_summary"] if cultural else "待补充：尚无逐条核对的文学或文化资料。",
-            "traits": ["待补充"],
-            "season": "待补充",
-            "note": item["scientific_name_note"] + (" 文学关联见下方已核对来源；其他内容待补充。" if cultural else " 文学与文化资料待补充。"),
-            "sources": [{"title": cultural["title"], "creator": cultural["creator"], "url": cultural["url"]}] if cultural else [],
+            "latin": profile["representative_name"],
+            "family": profile["family"],
+            "genus": profile["genus"],
+            "traits": traits,
+            "habitat": profile["habitat"],
+            "season": profile["flowering"],
+            "note": profile["scope"],
+            "sources": profile["references"],
+            "culture": [{field: value for field, value in record.items() if field != "class_key"} for record in records],
         }
     )
 
-prefix = """/* Generated from knowledge/classes.json and knowledge/cultural_sources.json.
+prefix = """/* Generated from knowledge/classes.json, botanical_profiles.json and cultural_sources.json.
    Edit those source files, then run src/sync_web_cards.py. */
 window.FF = window.FF || {};
 FF.data = { flowers: """

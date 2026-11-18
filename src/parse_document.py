@@ -8,6 +8,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -32,8 +33,8 @@ def parse(input_path: Path, tier: str, device: str, output_root: Path) -> Path:
         for chunk in iter(lambda: source.read(1024 * 1024), b""):
             hasher.update(chunk)
     digest = hasher.hexdigest()
-    dest = output_root / f"{input_path.stem}-{digest[:10]}-{tier}"
-    dest.mkdir(parents=True, exist_ok=True)
+    output_root.mkdir(parents=True, exist_ok=True)
+    dest = Path(tempfile.mkdtemp(prefix=f"{input_path.stem}-{digest[:10]}-{tier}-", dir=output_root.resolve()))
     archive = dest / "result.zip"
     command = [str(CLI), "parse", str(input_path), "-o", str(archive), "--format", "zip", "--tier", tier]
     env = os.environ.copy()

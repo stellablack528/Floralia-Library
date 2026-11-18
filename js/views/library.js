@@ -6,30 +6,47 @@ window.FF = window.FF || {};
 FF.views = FF.views || {};
 
 FF.views.library = (function () {
+  const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  const escapeHTML = (value) => String(value).replace(/[&<>"']/g, char => entities[char]);
+
+  function sourceLink(source) {
+    return `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.publisher)} · ${escapeHTML(source.title)}</a>`;
+  }
+
+  function cultureHTML(record) {
+    return `
+      <article class="folio-culture">
+        <h3>${escapeHTML(record.theme)}</h3>
+        <p class="folio-text">${escapeHTML(record.kind)} · ${escapeHTML(record.creator)} · ${escapeHTML(record.title)}</p>
+        <p class="folio-text">${escapeHTML(record.our_summary)}</p>
+        <p class="folio-text">${escapeHTML(record.scope)}</p>
+        <p class="folio-text">${sourceLink(record)} · ${escapeHTML(record.locator)}</p>
+      </article>`;
+  }
 
   /* ---------- 列表 ---------- */
-  function cardHTML(f, i) {
+  function cardHTML(f) {
     const fav = FF.store.isFavorite(f.key) ? '<span class="fav">&#10084;</span>' : "";
     return `
-      <a class="lib-card" href="#/library/${f.key}">
+      <a class="lib-card" href="#/library/${encodeURIComponent(f.key)}">
         ${fav}
         <div class="no">No.${String(f.order).padStart(2, "0")}</div>
-        <div class="zh">${f.zh}</div>
-        <div class="en">${f.en}</div>
-        <div class="speak">花语 · ${f.speak}</div>
+        <div class="zh">${escapeHTML(f.zh)}</div>
+        <div class="en">${escapeHTML(f.en)}</div>
+        <div class="speak">${escapeHTML(f.culture[0].kind)} · ${escapeHTML(f.culture[0].theme)}</div>
       </a>`;
   }
 
-  function renderList(params) {
+  function renderList() {
     document.getElementById("view").innerHTML = `
       <div class="page">
         <div class="page-kicker">THE HERBARIUM · 花卉资料馆</div>
         <h2>十七页花之书</h2>
-        <p class="lede">Oxford Flower17 的 17 个类别，每一页都是一张资料卡：中文名、学名、花语与寓意。花语为西方花语文化的通用整理，文学引文待核对后补充。</p>
+        <p class="lede">查阅 Oxford Flower17 各类的代表植物、辨识特征与花期，阅读有出处的文学、艺术和民俗记录。</p>
         <div class="lib-toolbar">
           <div class="lib-search">
             <span class="glyph">&#9906;</span>
-            <input id="lib-q" type="text" placeholder="搜索中文名、英文名或花语…">
+            <input id="lib-q" type="search" aria-label="搜索花卉资料" placeholder="搜索花名、学名、作品或关键词…">
           </div>
           <div class="lib-count" id="lib-count"></div>
         </div>
@@ -42,13 +59,14 @@ FF.views.library = (function () {
 
     function drawList() {
       const q = input.value.trim().toLowerCase();
-      const list = FF.data.flowers.filter((f) =>
-        !q || [f.zh, f.en, f.latin, f.speak, f.family].join(" ").toLowerCase().includes(q)
-      );
+      const list = FF.data.flowers.filter((f) => {
+        const topics = f.culture.flatMap(record => [record.kind, record.theme, record.creator, record.title, record.our_summary]);
+        return !q || [f.zh, f.en, f.latin, f.family, f.genus, ...f.traits, ...topics].join(" ").toLowerCase().includes(q);
+      });
       grid.innerHTML = list.length
         ? list.map((f) => cardHTML(f)).join("")
-        : `<div class="lib-empty" style="grid-column:1/-1;">图鉴里没有找到「${input.value}」，换个关键词试试。</div>`;
-      count.textContent = `共 ${list.length} 页 · 全 17 页`;
+        : `<div class="lib-empty" style="grid-column:1/-1;">找不到「${escapeHTML(input.value)}」，换个关键词试试。</div>`;
+      count.textContent = `共 ${list.length} 页 · 全 ${FF.data.flowers.length} 页`;
     }
 
     input.addEventListener("input", drawList);
@@ -74,22 +92,20 @@ FF.views.library = (function () {
           <div class="folio-card">
             <a class="back" href="#/library">&#8592; 返回资料馆</a>
             <div class="folio-kicker page-kicker">FOLIO No.${String(f.order).padStart(2, "0")}</div>
-            <div class="folio-name">${f.zh}</div>
-            <div class="folio-latin">${f.latin}</div>
-            <div class="folio-en">${f.en} · ${f.family}</div>
+            <div class="folio-name">${escapeHTML(f.zh)}</div>
+            <div class="folio-latin">代表植物 · ${escapeHTML(f.latin)}</div>
+            <div class="folio-en">${escapeHTML(f.en)} · ${escapeHTML(f.family)} · ${escapeHTML(f.genus)}</div>
             <div class="folio-rule"></div>
-            <div class="folio-label">花语</div>
-            <div class="folio-text">${f.speak}</div>
-            <div class="folio-label">寓意与联想（项目赏析）</div>
-            <div class="folio-text">${f.meaning}</div>
             <div class="folio-label">辨识特征</div>
-            <div class="folio-traits">${f.traits.map((t) => `<span>${t}</span>`).join("")}</div>
-            <div class="folio-label">分布与花期</div>
-            <div class="folio-text">${f.season}</div>
-            <div class="folio-label">核对说明</div>
-            <div class="folio-text">${f.note}</div>
-            <div class="folio-label">参考资料</div>
-            <div class="folio-text">${f.sources.length ? f.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.creator} · ${s.title}</a>`).join("<br>") : "待补充"}</div>
+            <div class="folio-traits">${f.traits.map(t => `<span>${escapeHTML(t)}</span>`).join("")}</div>
+            <div class="folio-label">生境与花期</div>
+            <div class="folio-text">${escapeHTML(f.habitat)} ${escapeHTML(f.season)}</div>
+            <div class="folio-label">类别说明</div>
+            <div class="folio-text">${escapeHTML(f.note)}</div>
+            <div class="folio-label">植物资料来源</div>
+            <div class="folio-text">${f.sources.map(sourceLink).join("<br>")}</div>
+            <div class="folio-label">文献与文学</div>
+            ${f.culture.map(cultureHTML).join("")}
             <div class="folio-actions">
               <button class="fav-toggle ${favOn ? "on" : ""}" id="fav-btn">${favOn ? "&#10084; 已收藏 · 点击取消" : "&#9825; 收藏这页书"}</button>
               <button class="btn-primary" id="identify-again">上传照片验证它<span class="arrow">&#8594;</span></button>

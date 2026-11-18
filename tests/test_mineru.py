@@ -23,6 +23,10 @@ class MinerUIntegrationTest(unittest.TestCase):
             self.assertTrue((dest / "structured_content.json").is_file())
             metadata = json.loads((dest / "metadata.json").read_text(encoding="utf-8"))
             self.assertEqual(metadata["original_name"], sample.name)
+            repeat = parse(sample, "flash", "cpu", Path(temp))
+            self.assertNotEqual(dest, repeat)
+            self.assertEqual(metadata["sha256"], json.loads((repeat / "metadata.json").read_text(encoding="utf-8"))["sha256"])
+            self.assertEqual(metadata, json.loads((dest / "metadata.json").read_text(encoding="utf-8")))
             self.assertEqual(metadata["fact_review_status"], "unreviewed")
 
     def test_missing_document_is_reported(self):

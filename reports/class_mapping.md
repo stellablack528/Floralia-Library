@@ -33,9 +33,7 @@
 
 ## 文化资料
 
-`knowledge/cultural_sources.json` 记录已核对的具体作品与研究入口。目前只有黄水仙的文学关联已核对到 [华兹华斯《I Wandered Lonely as a Cloud》原文](https://www.poetryfoundation.org/poems/45521/i-wandered-lonely-as-a-cloud)。它支持“水仙出现在这首诗中”的说法，不支持唯一学名或统一花语。其他 16 类保持“待补充”。
-
-植物学名与形态将逐条使用 [Kew POWO](https://powo.science.kew.org/) 和 [《中国植物志》](https://www.iplant.cn/frps) 核对。某些类别无法缩到物种，此时 `scientific_name` 应继续为空，并在 `scientific_name_note` 解释原因。网页内容先保存链接和自己的摘要，不批量下载或复制全文。
+17 类均有带出处的代表植物档案和文化记录。`knowledge/classes.json` 保留模型类别的物种层级边界，代表植物及参考学名另存于 `knowledge/botanical_profiles.json`。条目来源和更新方式见 [知识库说明](../docs/knowledge.md)。
 
 ## 验证结果
 

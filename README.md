@@ -53,9 +53,10 @@ Rather than ending with a classification label, Floralia aims to invite further 
 ### 当前开发状态（2026-11）
 
 - Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
-- UI 仍为**演示识别**，真实分类模型与 Grad-CAM 尚未接入。植物学名及未核实的文化内容显示为待核对／待补充。
+- UI 仍为**演示识别**，真实分类模型与 Grad-CAM 尚未接入。17 类均已有带出处的代表植物档案与文献文化条目，见 [知识库说明](docs/knowledge.md)。
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
-- Qt6/QML 文献界面、知识提取、SQLite 入库、识花联动和 RAG 检索仍属于后续阶段。
+- Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
+- SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
 
 ---
 

@@ -18,7 +18,7 @@
 
 `--device gpu` 是可选的 ONNX 设备请求，需在本机验证可用；默认强制 CPU，避免占用 4GB 显存。此入口不添加 `--remote`，文档只在本机解析。官方说明 [Flash 适合文本预览，Basic 支持 OCR、公式和表格](https://opendatalab.github.io/MinerU/usage/tiers/)。
 
-每次输出到 `documents/parsed/<原名>-<SHA前10位>-<档位>/`：
+每次输出到 `documents/parsed/<原名>-<SHA前10位>-<档位>-<运行后缀>/`，重复解析保留各自的输出：
 
 - `markdown.md`：阅读预览。
 - `middle_json.json`：版面和页级结构。
