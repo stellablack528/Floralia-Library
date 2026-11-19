@@ -6,10 +6,10 @@ window.FF = window.FF || {};
 
 FF.router = (function () {
   const routes = [
-    { path: "#/login",      view: () => FF.views.login.render(),    public: true,  bare: true },
+    { path: "#/login",      view: (p) => FF.views.login.render(p),  public: true,  bare: true },
     { path: "#/identify",   view: () => FF.views.identify.render(), public: false, bare: false },
     { path: "#/library",    view: () => FF.views.library.renderList(), public: false, bare: false },
-    { path: "#/library/:key", view: (p) => FF.views.library.renderDetail(p.key), public: false, bare: false },
+    { path: "#/library/:key", view: (p) => FF.views.library.renderDetail(p), public: false, bare: false },
     { path: "#/history",    view: () => FF.views.history.render(),  public: false, bare: false }
   ];
 

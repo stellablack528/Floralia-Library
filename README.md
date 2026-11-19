@@ -48,12 +48,12 @@ Rather than ending with a classification label, Floralia aims to invite further 
 - **文学与艺术**：与花卉相关的诗歌、文学作品、神话及文化典故。
 - **个人收藏**：保存喜爱的花卉书页，回顾探索记录。
 
-项目目前已完成主要 Web 前端及交互流程。深度学习识别模型、Grad-CAM 可解释性分析和扩展文学知识库仍处于开发规划阶段。
+本机 Web 识花台已接入最终模型 **Floralia Bloom 1.0（花页识花）**，支持 17 类花卉识别、Top-3、Grad-CAM 热力图和书页跳转。见[本机识花运行说明](docs/model.md)。
 
 ### 当前开发状态（2026-11）
 
 - Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
-- UI 仍为**演示识别**，真实分类模型与 Grad-CAM 尚未接入。17 类均已有带出处的代表植物档案与文献文化条目，见 [知识库说明](docs/knowledge.md)。
+- 本机服务运行真实识别，静态托管提供带标注的演示模式。17 类均已有带出处的代表植物档案与文献文化条目，见 [知识库说明](docs/knowledge.md)。
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
 - Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
 - SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
@@ -72,9 +72,7 @@ Upload a flower photograph and explore its possible identity.
 - Top-1 prediction and Top-3 candidate display
 - Direct navigation to botanical records
 
-**Current status:** The interface uses a deterministic demonstration classifier based on image-byte features. It does not perform genuine visual recognition yet.
-
-The planned recognition pipeline will use a fine-tuned ResNet18 model trained on Oxford Flowers17.
+**Current status:** The local Web server runs Floralia Bloom 1.0, a MobileNetV3 Small model for Oxford Flower17. Static hosting shows a labelled demo. See the [local inference setup](docs/model.md).
 
 ### 🌿 Botanical Encyclopedia · 植物资料馆
 
@@ -157,7 +155,7 @@ The intention is to create a digital reading experience that feels like explorin
 | Persistence | Browser `localStorage` |
 | UI Styling | CSS Custom Properties, Responsive Design |
 | Assets | WebP, SVG |
-| Development Server | Python `http.server` |
+| Development Server | Local Python inference server |
 | Dataset Reference | Oxford Flowers17 |
 
 The Web application requires no JavaScript framework, package manager or build system.
@@ -219,7 +217,7 @@ The current frontend consists of independent modules for data, storage, routing,
 - `router.js` handles navigation, route parameters and authentication guards.
 - `views/` contains the page-specific interfaces.
 
-The architecture is intended to allow the demonstration recognition function to be replaced by a genuine model inference interface without redesigning the entire user experience.
+The local identification page calls `POST /api/identify` and maps returned category keys to the existing folios.
 
 A backend and secure account system will be required before production deployment.
 
@@ -263,7 +261,7 @@ Model selection will use validation-set results, with the held-out test set rese
 
 ### Explainable AI — Grad-CAM
 
-The planned Grad-CAM integration will visualise image regions associated with a predicted class.
+The local Identification Desk generates a Grad-CAM overlay for any of the three returned classes. Each overlay is aligned with the model's 224 × 224 input crop.
 
 This can help investigate whether the model attends to relevant floral structures or background features.
 
@@ -323,7 +321,7 @@ The repository retains its existing `flower-and-folio` directory name. **Florali
 
 ### Prerequisites
 
-- Python 3.10+ for the optional local HTTP server
+- Python 3.12 with PyTorch, Torchvision and Pillow for local inference
 - A modern browser such as Chrome, Edge or Firefox
 
 No Node.js or npm installation is required.
@@ -331,40 +329,40 @@ No Node.js or npm installation is required.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/stellablack528/flower-and-folio.git
-cd flower-and-folio
+git clone https://github.com/stellablack528/Floralia-Library.git
+cd Floralia-Library
 ```
 
 ### 2. Launch the Web Application
 
-Run from the project root.
+Place the verified model checkpoint as described in [local inference setup](docs/model.md). Run from the project root.
 
 **Windows**
 
 ```powershell
-python -m http.server 8600 --directory web
+.\.venv\Scripts\python.exe -B src\serve_floralia.py
 ```
 
 **macOS / Linux**
 
 ```bash
-python3 -m http.server 8600 --directory web
+python3 -B src/serve_floralia.py
 ```
 
 Open your browser at:
 
-**http://localhost:8600**
+**http://127.0.0.1:8501/**
 
 ### 3. Explore Floralia
 
 1. Create a local demonstration account.
 2. Visit the identification page and upload a flower image.
-3. Explore the Top-3 demonstration results.
+3. Compare the three candidates returned by Floralia Bloom 1.0.
 4. Open the corresponding botanical records.
 5. Browse, search and bookmark flower entries.
 6. Review your history in the personal collection.
 
-> **Demonstration notice:** Recognition results are simulated and must not be interpreted as genuine botanical identification. Uploaded photographs are processed locally for the current demonstration workflow.
+> The local model ranks the 17 Flower17 categories. Static hosting shows a labelled demo.
 
 ### Legacy Streamlit Prototype
 
@@ -405,8 +403,8 @@ This prototype supports basic flower-page exploration, image preview and local r
 - [ ] Implement partial fine-tuning experiment
 - [ ] Compare Macro-F1, Top-k metrics and class-level errors
 - [ ] Evaluate low-confidence prediction handling
-- [ ] Integrate real inference into the Web interface
-- [ ] Generate and display Grad-CAM explanations
+- [x] Integrate real inference into the local Web interface
+- [x] Generate and display Grad-CAM explanations
 
 ### 🌱 Future Development
 

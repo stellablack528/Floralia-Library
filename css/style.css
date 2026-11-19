@@ -178,6 +178,18 @@ a { color: var(--forest); }
 .rank-row .nm { flex: 1; color: #4d5c50; font-weight: 500; }
 .rank-row .pc { color: var(--muted); font-family: var(--latin); }
 
+.cam-panel { border-top: 1px solid var(--line); margin-top: 1.1rem; padding-top: 1rem; }
+.cam-panel h4 { color: var(--forest); margin: 0 0 .7rem; font-size: 1rem; }
+.cam-choices { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .7rem; }
+.cam-choices .btn-ghost { padding: .38rem .75rem; font-size: .82rem; }
+.cam-choices button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: #fff; }
+.cam-output, .cam-caption { color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.cam-caption { margin: .55rem 0 0; }
+.cam-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.cam-images figure { margin: 0; }
+.cam-images img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.cam-images figcaption { margin-top: .25rem; text-align: center; }
+
 .result-links { display: flex; gap: .8rem; margin-top: 1.2rem; }
 .result-links .btn-primary, .result-links .btn-ghost { flex: 1; }
 
