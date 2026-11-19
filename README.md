@@ -112,13 +112,13 @@ Literary quotations will be accompanied by their authors, works and sources wher
 
 A personal space for collecting discoveries.
 
-- Account registration and sign-in
+- Account registration, sign-in, and guest access
 - Flower browsing and identification history
 - Favourite flower entries
 - Per-account local records
 - Searchable botanical collection
 
-All account and collection data currently remain in the browser's `localStorage`.
+Registered readers' data uses the browser's `localStorage`. Guest history and favourites use `sessionStorage` and are cleared on guest sign-out.
 
 ---
 
@@ -355,7 +355,7 @@ Open your browser at:
 
 ### 3. Explore Floralia
 
-1. Create a local demonstration account.
+1. Continue as a guest or create a local demonstration account.
 2. Visit the identification page and upload a flower image.
 3. Compare the three candidates returned by Floralia Bloom 1.0.
 4. Open the corresponding botanical records.

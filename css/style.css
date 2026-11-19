@@ -111,6 +111,8 @@ a { color: var(--forest); }
 .btn-primary[disabled] { opacity: .65; cursor: wait; }
 .btn-primary .arrow { font-family: var(--latin); margin-left: .3rem; }
 
+.login-card .guest-entry { width: 100%; margin-top: .65rem; color: var(--forest); }
+
 .login-switch { margin-top: 1.25rem; font-size: .84rem; color: #5c6b5f; }
 .login-switch a { color: var(--forest); font-weight: 600; }
 .login-foot { margin-top: 1.4rem; font-family: var(--latin); font-size: .78rem; letter-spacing: .12em; color: #a3a08d; }

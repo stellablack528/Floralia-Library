@@ -22,7 +22,8 @@ FF.views.history = (function () {
       <div class="page">
         <div class="page-kicker">READER'S LEDGER · 我的足迹</div>
         <h2>你在这本图鉴里留下的痕迹</h2>
-        <p class="lede">每一次识别与翻阅都会记在这里，数据保存在本机浏览器中。</p>
+        <p class="lede">${FF.store.session()?.guest ? "足迹和收藏暂存在此标签页，退出游客模式时清除。" :
+          "每一次识别与翻阅都会记在这里，数据保存在本机浏览器中。"}</p>
 
         <div class="stat-row">
           <div class="stat-box"><b>${new Set(records.map((r) => r.key)).size}</b><span>查过的花（去重）</span></div>

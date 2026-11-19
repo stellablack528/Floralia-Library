@@ -1,6 +1,6 @@
 /* ============================================================
    Florentia · 花与书页 — 本地存储层
-   账号 / 会话 / 查花记录 / 收藏 全部保存在浏览器 localStorage。
+   注册读者数据存在 localStorage，游客会话、足迹和收藏存在 sessionStorage。
    这是纯前端演示方案；接入后端后改为调用 API，接口签名保持一致。
    注意：密码哈希仅为本地演示，不可用于真实密码存储。
    ============================================================ */
@@ -9,20 +9,21 @@ window.FF = window.FF || {};
 FF.store = (function () {
   const USERS_KEY = "ff.users";
   const SESSION_KEY = "ff.session";
+  const GUEST_KEY = "ff.guest";
   const HISTORY_KEY = "ff.history";
   const FAVS_KEY = "ff.favorites";
 
-  function read(key, fallback) {
+  function read(key, fallback, storage = localStorage) {
     try {
-      const raw = localStorage.getItem(key);
+      const raw = storage.getItem(key);
       return raw ? JSON.parse(raw) : fallback;
     } catch (e) {
       return fallback;
     }
   }
 
-  function write(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+  function write(key, value, storage = localStorage) {
+    storage.setItem(key, JSON.stringify(value));
   }
 
   /* 极简字符串哈希（djb2 变体），仅作演示，
@@ -64,25 +65,45 @@ FF.store = (function () {
   }
 
   /* ---- 会话 ---- */
+  function startGuest() {
+    write(GUEST_KEY, true, sessionStorage);
+  }
+
+  function clearGuest() {
+    for (const key of [GUEST_KEY, HISTORY_KEY, FAVS_KEY]) sessionStorage.removeItem(key);
+  }
+
   function setSession(user, remember) {
+    clearGuest();
     write(SESSION_KEY, { ...user, remember: !!remember, at: Date.now() });
   }
-  function session() { return read(SESSION_KEY, null); }
-  function logout() { localStorage.removeItem(SESSION_KEY); }
 
-  /* ---- 查花记录（每个账号独立） ---- */
-  function historyKey() {
-    const s = session();
-    return s ? HISTORY_KEY + "." + s.account : null;
+  function session() {
+    return read(GUEST_KEY, false, sessionStorage) ? { guest: true, nickname: "游客" } : read(SESSION_KEY, null);
   }
+
+  function logout() {
+    if (session()?.guest) clearGuest();
+    else localStorage.removeItem(SESSION_KEY);
+  }
+
+  function personalStorage(key) {
+    const reader = session();
+    if (!reader) return null;
+    return reader.guest ? { key, storage: sessionStorage } :
+      { key: key + "." + reader.account, storage: localStorage };
+  }
+
+  /* ---- 查花记录 ---- */
   function history() {
-    const k = historyKey();
-    return k ? read(k, []) : [];
+    const target = personalStorage(HISTORY_KEY);
+    return target ? read(target.key, [], target.storage) : [];
   }
   function addHistory(entry) {
-    const k = historyKey();
-    if (!k) return;
-    const list = read(k, []);
+    const target = personalStorage(HISTORY_KEY);
+    if (!target) return;
+    const { key, storage } = target;
+    const list = read(key, [], storage);
     list.unshift({
       key: entry.key,
       zh: entry.zh,
@@ -90,35 +111,32 @@ FF.store = (function () {
       time: entry.time || Date.now(),
       source: entry.source || "identify"   /* identify=识别 / library=浏览 */
     });
-    write(k, list.slice(0, 200));
+    write(key, list.slice(0, 200), storage);
   }
 
-  /* ---- 收藏（每个账号独立） ---- */
-  function favKey() {
-    const s = session();
-    return s ? FAVS_KEY + "." + s.account : null;
-  }
+  /* ---- 收藏 ---- */
   function favorites() {
-    const k = favKey();
-    return k ? read(k, {}) : {};
+    const target = personalStorage(FAVS_KEY);
+    return target ? read(target.key, {}, target.storage) : {};
   }
   function isFavorite(key) { return !!favorites()[key]; }
-  function toggleFavorite(key, zh, en) {
-    const k = favKey();
-    if (!k) return false;
-    const map = read(k, {});
-    if (map[key]) {
-      delete map[key];
-      write(k, map);
+  function toggleFavorite(flowerKey, zh, en) {
+    const target = personalStorage(FAVS_KEY);
+    if (!target) return false;
+    const { key, storage } = target;
+    const map = read(key, {}, storage);
+    if (map[flowerKey]) {
+      delete map[flowerKey];
+      write(key, map, storage);
       return false;
     }
-    map[key] = { zh, en, time: Date.now() };
-    write(k, map);
+    map[flowerKey] = { zh, en, time: Date.now() };
+    write(key, map, storage);
     return true;
   }
 
   return {
-    register, login, setSession, session, logout,
+    register, login, startGuest, setSession, session, logout,
     history, addHistory,
     favorites, isFavorite, toggleFavorite
   };

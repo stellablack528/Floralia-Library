@@ -40,10 +40,12 @@ window.FF = window.FF || {};
         ${links.map((l) => `<a href="${l.href}" class="${active(l) ? "active" : ""}">${l.label}</a>`).join("")}
       </nav>
       <div class="nav-user">
-        <div class="who"><strong>${session.nickname}</strong><small>${session.account}</small></div>
+        <div class="who"><strong></strong><small></small></div>
         <button class="nav-exit" id="nav-exit">退出</button>
       </div>`;
 
+    nav.querySelector(".who strong").textContent = session.nickname;
+    nav.querySelector(".who small").textContent = session.guest ? "临时会话" : session.account;
     document.getElementById("nav-exit").addEventListener("click", () => {
       FF.store.logout();
       FF.toast("已退出阅览室。");

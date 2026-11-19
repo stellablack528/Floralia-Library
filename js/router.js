@@ -12,6 +12,13 @@ FF.router = (function () {
     { path: "#/library/:key", view: (p) => FF.views.library.renderDetail(p), public: false, bare: false },
     { path: "#/history",    view: () => FF.views.history.render(),  public: false, bare: false }
   ];
+  let requestedRoute;
+
+  function enter() {
+    const destination = requestedRoute || "#/identify";
+    requestedRoute = undefined;
+    location.hash = destination;
+  }
 
   function currentHash() {
     return location.hash || "#/identify";
@@ -54,12 +61,13 @@ FF.router = (function () {
     /* 登录守卫 */
     const session = FF.store.session();
     if (!route.public && !session) {
+      requestedRoute = hash;
       location.hash = "#/login";
       return;
     }
     /* 已登录用户访问登录页 → 送回识花台 */
     if (route.path === "#/login" && session) {
-      location.hash = "#/identify";
+      enter();
       return;
     }
 
@@ -79,5 +87,5 @@ FF.router = (function () {
     render();
   }
 
-  return { start, render };
+  return { start, render, enter };
 })();

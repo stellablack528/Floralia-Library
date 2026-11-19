@@ -19,7 +19,7 @@ FF.views.login = (function () {
           <h1>Florentia Library</h1>
           <div class="motto">Where Stories Bloom</div>
           <p class="lead">${isLogin
-            ? "欢迎回到花与书页。请使用你的账号登录，继续你的阅读旅程。"
+            ? "登录保存阅读记录，或以游客身份直接体验识花与书页。"
             : "在 Florentia 办一张新借书证。你的查花记录与收藏，都会保存在这本手册里。"}</p>
           <div class="form-error hidden" id="form-error"></div>
           <form id="auth-form" autocomplete="off">
@@ -55,6 +55,7 @@ FF.views.login = (function () {
               ${isLogin ? "登录阅览室" : "办理借书证"}<span class="arrow">&#8594;</span>
             </button>
           </form>
+          <button type="button" class="btn-ghost guest-entry" id="guest-btn">以游客身份进入</button>
           <div class="login-switch">
             ${isLogin
               ? `还没有借书证？<a href="#/login?mode=register">注册新读者</a>`
@@ -73,6 +74,11 @@ FF.views.login = (function () {
 
   function bind(mode) {
     const form = document.getElementById("auth-form");
+    const guest = document.getElementById("guest-btn");
+    guest.addEventListener("click", () => {
+      FF.store.startGuest();
+      FF.router.enter();
+    });
     const eye = document.getElementById("eye-btn");
     if (eye) {
       eye.addEventListener("click", () => {
@@ -94,31 +100,35 @@ FF.views.login = (function () {
       const pass = document.getElementById("f-pass").value;
       const btn = document.getElementById("submit-btn");
       btn.disabled = true;
+      guest.disabled = true;
 
       /* crypto.subtle 不可用时无感降级：直接同步校验 */
       setTimeout(() => {
+        if (!form.isConnected) return;
         if (mode === "login") {
           const res = FF.store.login(account, pass);
           if (!res.ok) {
             btn.disabled = false;
+            guest.disabled = false;
             showError(res.msg);
             return;
           }
           const remember = document.getElementById("f-remember").checked;
           FF.store.setSession(res.user, remember);
           FF.toast(`欢迎回来，${res.user.nickname}。`);
-          location.hash = "#/identify";
+          FF.router.enter();
         } else {
           const nick = document.getElementById("f-nick").value;
           const res = FF.store.register(account, nick, pass);
           if (!res.ok) {
             btn.disabled = false;
+            guest.disabled = false;
             showError(res.msg);
             return;
           }
           FF.store.setSession({ account: account.trim(), nickname: nick.trim() }, false);
           FF.toast("借书证已办好，欢迎加入 Florentia。");
-          location.hash = "#/identify";
+          FF.router.enter();
         }
       }, 420);
     });
