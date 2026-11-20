@@ -238,6 +238,12 @@ a { color: var(--forest); }
 .folio-card .folio-name { font-family: var(--serif); font-size: 2.15rem; font-weight: 700; color: var(--forest); margin: 0; }
 .folio-latin { color: var(--muted); font-family: var(--latin); font-style: italic; font-size: 1.18rem; margin-top: .2rem; }
 .folio-en { color: #a3a08d; font-family: var(--latin); letter-spacing: .1em; font-size: .8rem; text-transform: uppercase; margin-top: .3rem; }
+.folio-meaning { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .3rem .8rem; align-items: baseline; padding: .75rem .9rem; margin-top: 1rem; border-left: 2px solid var(--gold-deep); background: #f3eee2; }
+.folio-meaning > span { color: var(--forest); font-size: .78rem; font-weight: 700; }
+.folio-meaning p { margin: 0; color: var(--forest); font-family: var(--serif); font-size: 1.12rem; }
+.folio-meaning details { grid-column: 2; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+.folio-meaning summary { width: fit-content; cursor: pointer; }
+.folio-meaning details div { margin-top: .25rem; }
 .folio-jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
 .folio-jump button { padding: .42rem .75rem; background: #f3eee2; color: var(--forest); border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: .82rem; cursor: pointer; }
 .folio-jump button:hover { background: #e6ece3; }
@@ -249,13 +255,6 @@ a { color: var(--forest); }
 .folio-culture { border-inline-start: 2px solid var(--line); margin-top: .65rem; padding-inline-start: 1rem; }
 .folio-culture h3, .folio-culture h4 { color: var(--forest); font-size: 1.05rem; margin: 0; }
 .folio-culture p { margin-bottom: 0; }
-.folio-artwork { margin: 0; background: #f3ede0; border-radius: 9px; padding: .75rem; }
-.folio-artwork img { display: block; width: 100%; height: auto; border-radius: 4px; }
-.folio-artwork figcaption { padding: .8rem .25rem .1rem; font-size: .88rem; line-height: 1.65; }
-.folio-artwork figcaption h4 { font-family: var(--serif); color: var(--forest); font-size: 1.1rem; margin: 0; }
-.folio-artwork figcaption p { margin: .22rem 0; }
-.artwork-credit { color: var(--muted); }
-.artwork-links { display: flex; gap: .45rem 1rem; flex-wrap: wrap; font-size: .82rem; margin-top: .5rem; }
 .folio-evidence blockquote, .folio-excerpt { margin: .4rem 0; color: var(--ink); white-space: pre-line; }
 .folio-evidence blockquote, .folio-excerpt[lang="fr"] { font: italic 1rem/1.5 var(--latin); }
 .folio-evidence-label { margin-top: .65rem; color: var(--gold-deep); font-size: .76rem; font-weight: 600; }

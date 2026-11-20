@@ -1,0 +1,243 @@
+{
+  "sources": {
+    "greenaway": {
+      "title": "Kate Greenaway · Language of Flowers (1884)",
+      "publisher": "Biodiversity Heritage Library",
+      "url": "https://www.biodiversitylibrary.org/item/269449"
+    },
+    "floralPoetry": {
+      "title": "The Language of Flowers: Including Floral Poetry (1884)",
+      "publisher": "Cornell University Library / Internet Archive",
+      "url": "https://archive.org/details/languageflowers00l"
+    },
+    "tigerLily": {
+      "title": "The Poetry of Flowers (1859), p. 42 · cited by J. Stewart",
+      "publisher": "Birkbeck Institutional Research Online",
+      "url": "https://eprints.bbk.ac.uk/id/eprint/55425/1/Stewart%20J%2C%20final%20thesis%20for%20library.pdf"
+    },
+    "loudon": {
+      "title": "Jane Loudon · British Wild Flowers",
+      "publisher": "University of Toronto Libraries / Internet Archive",
+      "url": "https://archive.org/details/britishwildflowe00loud"
+    },
+    "plum": {
+      "title": "中国十大传统名花 · Ten Traditional Chinese Flowers",
+      "publisher": "东莞植物园 · Dongguan Botanical Garden",
+      "url": "https://dgcg.dg.gov.cn/zwy/kxjy/201301/76ff708a28fb4ce581de915b9e93cfdf.shtml"
+    },
+    "zhou": {
+      "title": "周敦颐《爱莲说》 · On the Love of the Lotus",
+      "publisher": "维基文库 · Wikisource",
+      "url": "https://zh.wikisource.org/wiki/愛蓮說"
+    },
+    "osmanthus": {
+      "title": "桂花的文化内涵 · The cultural meaning of sweet osmanthus",
+      "publisher": "北京市园林绿化局 · Beijing Municipal Forestry and Parks Bureau",
+      "url": "https://yllhj.beijing.gov.cn/ztxx/bjhx/hhzs/201809/t20180926_118641.shtml"
+    }
+  },
+  "entries": {
+    "daffodil": {
+      "zh": "送你一枝黄水仙，聊表敬意。",
+      "en": "A daffodil carries my warm regard.",
+      "source": "greenaway",
+      "locator": "Daffodil"
+    },
+    "snowdrop": {
+      "zh": "寒冬未尽，希望已开。",
+      "en": "Hope blooms before winter is over.",
+      "source": "greenaway",
+      "locator": "Snowdrop"
+    },
+    "lily-of-the-valley": {
+      "zh": "愿幸福归来。",
+      "en": "May happiness return.",
+      "source": "greenaway",
+      "locator": "Lily of the Valley"
+    },
+    "bluebell": {
+      "zh": "任时光流转，心意始终如一。",
+      "en": "My feelings remain true as time goes by.",
+      "source": "greenaway",
+      "locator": "Bluebell",
+      "note": {
+        "zh": "原书写通名 Bluebell，未注明学名。",
+        "en": "The historical entry gives the common name Bluebell without a scientific name."
+      }
+    },
+    "crocus": {
+      "zh": "春日初开，正如少年欢喜。",
+      "en": "The first spring blooms carry the joy of youth.",
+      "source": "greenaway",
+      "locator": "Crocus, Spring",
+      "note": {
+        "zh": "原书指春花番红花，藏红花另有条目。",
+        "en": "The entry is for spring crocuses. Saffron crocus is listed separately."
+      }
+    },
+    "iris": {
+      "zh": "托一枝鸢尾，捎去我的消息。",
+      "en": "Let an iris carry my message to you.",
+      "source": "greenaway",
+      "locator": "Iris",
+      "note": {
+        "zh": "原书用通名 Iris。",
+        "en": "The book uses the common name Iris."
+      }
+    },
+    "tiger-lily": {
+      "zh": "鲜艳的虎皮百合，有一份张扬的骄矜。",
+      "en": "The showy tiger lily wears an air of pretension.",
+      "source": "tigerLily",
+      "locator": "Tiger Lily (p. 42), Stewart’s footnote 32",
+      "note": {
+        "zh": "1859 年英国花语诗集中的写法，由研究者转引。原书花名为 Tiger Lily。",
+        "en": "A Victorian book’s usage as quoted in Stewart’s research. The historical entry uses the common name Tiger Lily."
+      }
+    },
+    "tulip": {
+      "zh": "一枝红郁金香，替我说出爱意。",
+      "en": "Let a red tulip declare my love.",
+      "source": "greenaway",
+      "locator": "Tulip, Red",
+      "note": {
+        "zh": "原书限红色郁金香。",
+        "en": "The entry specifies red tulips."
+      }
+    },
+    "fritillary": {
+      "zh": "方格贝母，在旧花语中代表受迫害。",
+      "en": "In old flower language, the chequered fritillary stands for persecution.",
+      "source": "greenaway",
+      "locator": "Chequered Fritillary"
+    },
+    "sunflower": {
+      "zh": "一枝矮秆向日葵，捎去我的爱慕。",
+      "en": "A dwarf sunflower carries my adoration.",
+      "source": "greenaway",
+      "locator": "Sunflower, Dwarf",
+      "note": {
+        "zh": "原书把矮秆与高秆向日葵分列，两者含义不同。",
+        "en": "Greenaway gives tall and dwarf sunflowers different meanings."
+      }
+    },
+    "daisy": {
+      "zh": "小小的雏菊，象征未经世事的纯真。",
+      "en": "The little daisy stands for innocence.",
+      "source": "greenaway",
+      "locator": "Daisy"
+    },
+    "coltsfoot": {
+      "zh": "愿公道终能伸张。",
+      "en": "May justice prevail.",
+      "source": "greenaway",
+      "locator": "Coltsfoot"
+    },
+    "dandelion": {
+      "zh": "把心中的疑问，交给风里的蒲公英。",
+      "en": "Let the wind carry your question to the dandelion.",
+      "source": "greenaway",
+      "locator": "Dandelion",
+      "note": {
+        "zh": "据花语书的「乡间问卜」意象改写。",
+        "en": "A line adapted from the book’s association with a rustic oracle."
+      }
+    },
+    "cowslip": {
+      "zh": "低垂的花铃，自有动人的温婉。",
+      "en": "The nodding bells have a quiet grace.",
+      "source": "greenaway",
+      "locator": "Cowslip"
+    },
+    "buttercup": {
+      "zh": "金黄的毛茛，寄托生活丰足的愿望。",
+      "en": "Golden buttercups carry a wish for abundance.",
+      "source": "floralPoetry",
+      "locator": "Buttercups (p. 64)",
+      "note": {
+        "zh": "原书使用通名 Buttercups。",
+        "en": "The book uses the common name Buttercups."
+      }
+    },
+    "windflower": {
+      "zh": "林地银莲花，在英国旧花语中寄意病痛。",
+      "en": "In old British flower lore, the wood anemone stands for sickness.",
+      "source": "loudon",
+      "locator": "Wood Anemone (Anemone nemorosa)",
+      "note": {
+        "zh": "Loudon 专指林地银莲花，并在书中对这条旧花语表示不解。",
+        "en": "Loudon identifies the wood anemone and questions the old association."
+      }
+    },
+    "pansy": {
+      "zh": "送你一朵三色堇，愿你偶尔想起我。",
+      "en": "A pansy asks you to think of me now and then.",
+      "source": "greenaway",
+      "locator": "Pansy"
+    },
+    "camellia": {
+      "zh": "红山茶，出众而不张扬。",
+      "en": "The red camellia stands for quiet excellence.",
+      "source": "greenaway",
+      "locator": "Camellia Japonica, Red",
+      "note": {
+        "zh": "原书限红色山茶，白色另有寓意。",
+        "en": "Greenaway gives white camellias a separate meaning."
+      }
+    },
+    "hydrangea": {
+      "zh": "在英国旧花语里，绣球也寄意冷淡。",
+      "en": "In Victorian flower language, a hydrangea can convey coldness.",
+      "source": "greenaway",
+      "locator": "Hydrangea",
+      "note": {
+        "zh": "原书用通名 Hydrangea，记有无情之意。",
+        "en": "The book uses the common name Hydrangea and lists heartlessness as one meaning."
+      }
+    },
+    "plum-blossom": {
+      "zh": "凌寒而开，自有一身坚韧。",
+      "en": "The plum blossom’s quiet strength sees it through the cold.",
+      "source": "plum",
+      "locator": "梅花 / Plum blossom"
+    },
+    "peach-blossom": {
+      "zh": "见你如见桃花，叫我心甘情愿地倾心。",
+      "en": "A peach blossom says that my heart is yours.",
+      "source": "greenaway",
+      "locator": "Peach Blossom"
+    },
+    "lotus": {
+      "zh": "出淤泥而不染，守一份高洁。",
+      "en": "The lotus rises from the mud with its purity intact.",
+      "source": "zhou",
+      "locator": "莲，花之君子者也 / The lotus is the flower of the noble person."
+    },
+    "osmanthus": {
+      "zh": "桂花飘香，愿你蟾宫折桂。",
+      "en": "As the osmanthus blooms, may you earn the honours you seek.",
+      "source": "osmanthus",
+      "locator": "古代科举及第的象征 / The imperial examinations",
+      "note": {
+        "zh": "这是后来的桂花文化借用「折桂」典故的寓意。古文中的「桂」可能指其他植物。",
+        "en": "Sweet-osmanthus culture borrows the classical image of plucking a branch of gui. The term can refer to other plants in early texts."
+      }
+    },
+    "tree-peony": {
+      "zh": "一枝牡丹满堂春，寄来富贵好意头。",
+      "en": "A peony in bloom brings a wish for prosperity.",
+      "source": "zhou",
+      "locator": "牡丹，花之富貴者也 / The peony is the flower of wealth and honour."
+    },
+    "wisteria": {
+      "zh": "花串垂下来，欢迎远道而来的你。",
+      "en": "The trailing wisteria welcomes you from afar.",
+      "source": "floralPoetry",
+      "locator": "Vocabulary · Wistaria",
+      "note": {
+        "zh": "Wistaria 是原书拼写，其条目指紫藤通名。",
+        "en": "Wistaria is the spelling in the book, which uses a common name."
+      }
+    }
+  }
+}

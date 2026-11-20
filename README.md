@@ -24,11 +24,11 @@ An exploration of **flower recognition, botanical knowledge, and the literature 
 
 ## 📖 About Floralia
 
-**Floralia Library** is an evolving flower-recognition and digital botanical library that brings together **computer vision, botany, literature, and cultural symbolism**.
+**Floralia Library** is a flower-recognition and botanical library that brings together **computer vision, botany, literature, and the history of plant use**.
 
 Inspired by classical European libraries and botanical manuscripts, the project reimagines flower identification as the experience of opening an illustrated book.
 
-A photograph becomes an entry into a botanical collection, where a flower is introduced through its scientific identity, distinguishing characteristics, cultural meanings, and literary associations.
+A photograph opens a folio with the flower’s scientific identity, distinguishing characteristics, and sourced readings on literature or historical uses.
 
 Rather than ending with a classification label, Floralia aims to invite further exploration.
 
@@ -44,16 +44,27 @@ Rather than ending with a classification label, Floralia aims to invite further 
 
 - **植物学信息**：中英文名称、学名、科属、形态特征、分布与花期。
 - **花卉识别**：基于深度学习的类别预测及 Top-3 候选结果。
-- **花语与象征**：花卉在不同文化传统中的寓意。
-- **文学与艺术**：与花卉相关的诗歌、文学作品、神话及文化典故。
+- **一句花语**：每种花配一条中英短句，可展开核对传统出处。
+- **文学典故**：在诗文、小说、戏剧和有出处的故事中查阅花卉意象。
+- **用物史**：了解花、果实等植物部位在饮食、香料和日常工艺中的用途。
 - **个人收藏**：保存喜爱的花卉书页，回顾探索记录。
 
 资料馆收录 25 张中英双语书页。为本机配置 **Floralia Bloom 25** 后，识花台支持 25 类预测、Top-3、Grad-CAM 和书页跳转。见[本机识花运行说明](docs/model.md)和[扩展实验报告](docs/bloom25.md)。
 
+## 实机截图 · Screenshots
+
+**从一张照片到三个候选。** 本机运行 Floralia Bloom 25，从留出集的一张梅花实拍图得到首选「梅花」，预测分数为 91.8%。图中也可看到模型实际使用的裁剪和所选类别的 Grad-CAM。[实拍图 iNaturalist 观测记录](https://www.inaturalist.org/observations/201540541) · [照片 CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+![Floralia Bloom 25 本机实拍识别、前三候选及 Grad-CAM](assets/readme/recognition.png)
+
+**从候选翻到书页。** 梅花页开头有一句花语，下方可读林逋的宋诗和中国用梅果调味的用物史。
+
+![梅花书页里的一句花语、植物档案、宋诗和青梅用物史](assets/readme/plum-folio.png)
+
 ### 当前开发状态（2026-11）
 
 - Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
-- 本机服务使用可用的 25 类或 17 类权重运行真实识别，静态托管提供带标注的演示模式。25 张书页均有带出处的植物档案与文学或文化条目，见 [知识库说明](docs/knowledge.md)。
+- 本机服务使用可用的 25 类或 17 类权重运行真实识别，静态托管提供带标注的演示模式。25 张书页均有植物档案，文学典故与用物史按来源逐条收录。[资料收录裁定](docs/knowledge.md#资料收录裁定)
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
 - Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
 - SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
@@ -86,28 +97,17 @@ Each flower entry may contain:
 | Botanical Identity | Chinese name, English name, scientific name and family |
 | Identification | Distinguishing morphological features |
 | Distribution & Season | Habitat, distribution and flowering period |
-| Floriography | Traditional flower language and cultural symbolism |
-| Literary Heritage | Poetry, mythology and literary references |
+| Literary Heritage | Sourced poetry, fiction, drama and legends |
+| History of Use | Documented uses in food, fragrance and everyday crafts |
 | Personal Collection | Bookmarks and browsing records |
 
-The current collection contains entries for all **17 categories of Oxford Flowers17**.
+The collection contains **25 bilingual folios** covering all 17 Oxford Flowers17 categories and eight additional flowers.
 
 Scientific names, flowering periods and other botanical details are subject to further source verification.
 
 ### 📜 Flowers in Literature · 花与文学
 
-Floralia seeks to connect botanical observation with human imagination.
-
-Future literary entries will explore how flowers appear in:
-
-- Classical poetry and literary works
-- European mythology and folklore
-- Historical traditions of floriography
-- Artistic and cultural symbolism
-
-Literary quotations will be accompanied by their authors, works and sources wherever verifiable.
-
-**This literary collection is a planned extension.** The current pages primarily provide flower-language summaries and cultural commentary.
+书页的阅读栏收录中国和西方的文学典故与用物史。读者可以在梅花页读宋诗与青梅的饮食史，也可以在蓝铃花页读英国林地传说与旧书装订的历史。条目附出处、定位与相关植物部位。[资料收录裁定](docs/knowledge.md#资料收录裁定)
 
 ### 📚 Personal Library · 我的花之书页
 
@@ -157,24 +157,20 @@ The intention is to create a digital reading experience that feels like explorin
 | UI Styling | CSS Custom Properties, Responsive Design |
 | Assets | WebP, SVG |
 | Development Server | Local Python inference server |
-| Dataset Reference | Oxford Flowers17 |
+| Datasets | Oxford Flowers17 and curated iNaturalist observations |
 
 The Web application requires no JavaScript framework, package manager or build system.
 
-### Planned Machine Learning Stack
+### Model and Document Processing
 
 | Component | Technologies |
 |---|---|
 | Deep Learning | PyTorch, torchvision |
-| Classification Backbone | ResNet18 |
+| Classification | ResNet18 teacher and MobileNetV3-Small student |
 | Transfer Learning | Frozen-backbone and partial fine-tuning experiments |
 | Dataset Processing | Pillow, NumPy, SciPy |
-| Configuration | PyYAML |
-| Evaluation | scikit-learn |
-| Visualisation | matplotlib |
 | Explainable AI | Grad-CAM |
-
-These machine-learning components are planned and have not yet been integrated into the current Web application.
+| Document Processing | MinerU, SQLite |
 
 ---
 
@@ -189,8 +185,11 @@ flowchart TD
     C --> F["Personal Collection"]
 
     D --> G["Image Upload"]
-    G --> H["Demo Recognition"]
+    G --> H["Local Bloom inference"]
+    G -. "Static hosting" .-> S["Labelled demo"]
     H --> I["Top-1 / Top-3 Results"]
+    S --> I
+    H --> P["Class-specific Grad-CAM"]
     I --> E
 
     E --> J["Botanical Records"]
@@ -200,13 +199,8 @@ flowchart TD
     D --> L
     E --> L
 
-    M["Oxford Flowers17"] --> N["ResNet18 Training"]
-    N --> O["Model Evaluation"]
-    O --> P["Grad-CAM"]
-    P -. "Planned integration" .-> D
-
-    classDef planned stroke-dasharray:5 5;
-    class M,N,O,P planned;
+    M["Oxford Flowers17 / iNaturalist"] --> N["Train and evaluate"]
+    N --> H
 ```
 
 **Architecture notes**
@@ -224,97 +218,56 @@ A backend and secure account system will be required before production deploymen
 
 ---
 
-## 🧠 Machine Learning Roadmap
+## 算法与测试 · Models and Evaluation
 
-Floralia begins with **Oxford Flowers17**, a dataset containing 17 flower categories with 80 images per category.
+1. **迁移学习。** 从 ImageNet 预训练的 ResNet18 出发，用 Oxford Flowers17 官方第一组划分（训练 680、验证 340、测试 340）。A 组只训练分类头并固定主干 BatchNorm 的运行统计量，B 组再解冻最后一个残差阶段。验证集原图 Top-1 分别为 **90.9%** 和 **93.2%**。
+2. **蒸馏对照。** S0 用真实标签训练 MobileNetV3-Small 的分类层。S1 在同样的训练起点增加 B 组教师的软标签，温度为 3，教师损失权重为 0.3。五个随机种子成对重跑后，原图验证集的平均 Macro-F1 为 S0 **0.9446**、S1 **0.9367**，S1 五对中有一对提高。
+3. **微调与部署。** S2 让学生模型末段的一部分参与微调。Floralia Bloom 1.0 用 **25% S0 + 75% S2** 合并参数，一次前向计算即可推理。官方第一组测试原图上，混合模型与 S0 的 Top-1 均为 321/340，混合模型的 Top-3 多命中一张。低光、强光、模糊、遮挡和紧裁由同批照片生成，按条件分别统计。[17 类模型与评估说明](docs/model.md)
+4. **扩展到 25 类。** Bloom 25 沿用原模型特征提取层，训练 25 类输出层。训练回放旧类样本并使用旧模型的软标签。新类照片从 iNaturalist 筛选，按摄影者分组后分成 435 张训练、109 张验证、111 张留出测试。以验证集各类别等权的首选准确率选中第 20 轮，再报告留出集成绩。[重跑命令和逐类结果](docs/bloom25.md)
 
-The initial research focus is the effectiveness of transfer learning under a limited-data setting.
+| 测试集 | 模型 | Top-1 · 首选正确 | Top-3 · 前三命中 |
+|---|---|---:|---:|
+| Oxford 官方第一组，原有 17 类 340 张 | Bloom 1.0 | 321/340（94.4%） | 336/340（98.8%） |
+| 同一批 Oxford 原图 | Bloom 25 | 323/340（95.0%） | 336/340（98.8%） |
+| iNaturalist 留出集，新增 8 类 111 张 | Bloom 25 | 90/111（81.1%） | 105/111（94.6%） |
 
-### Experiment A — Feature Extraction
+**本机复核。** 上传两张留出集梅花照片，样本一的首选为梅花（91.8%），并走通 Top-3、Grad-CAM 和书页跳转。样本二的首选是牡丹（34.6%），梅花排第二（26.6%），界面显示低分提示。梅花留出集总共 8 张，首选正确 4 张。Grad-CAM 对应模型实际看到的 224 × 224 裁剪区域，便于核对它对指定候选使用的图像线索。[样本一](https://www.inaturalist.org/observations/201540541) · [样本二](https://www.inaturalist.org/observations/19411279) · [逐类结果](docs/bloom25.md)
 
-Use a pretrained ResNet18 as a fixed feature extractor.
+### 参考论文与用途
 
-- Freeze the convolutional backbone.
-- Keep BatchNorm running statistics fixed.
-- Train a replacement classification head.
-- Evaluate generalisation on the validation set.
+| 论文或数据来源 | 在项目中的用途 |
+|---|---|
+| He 等，2016，[Deep Residual Learning for Image Recognition](https://doi.org/10.1109/CVPR.2016.90) | ResNet18 教师的主干，迁移学习 A/B 的共同起点。 |
+| Howard 等，2019，[Searching for MobileNetV3](https://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) | 通过 torchvision 使用 MobileNetV3-Small 作为学生与部署模型。 |
+| Hinton 等，2015，[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) | 用温度软化教师分数，比较学生有无教师项的效果。 |
+| Lakshminarayanan 等，2017，[Deep Ensembles](https://arxiv.org/abs/1612.01474) | 参考预测集成思路，做过候选概率和原始分数加权的单独对照。 |
+| Wortsman 等，2022，[Model Soups](https://proceedings.mlr.press/v162/wortsman22a.html) | 参考同结构模型的权重平均思路，试验 S0 与 S2 的混合权重。 |
+| Selvaraju 等，2017，[Grad-CAM](https://openaccess.thecvf.com/content_ICCV_2017/html/Selvaraju_Grad-CAM_Visual_Explanations_ICCV_2017_paper.html) | 为指定识别候选显示类别响应热力图。 |
+| Borsch 等，2020，[World Flora Online](https://doi.org/10.1002/tax.12373) | 参考学名、分类与来源的组织方式。 |
+| Joly 等，2014，[Interactive Plant Identification Based on Social Image Data](https://www.documentation.ird.fr/hor/PAR00012198) | 参考 Pl@ntNet 用实地观察照片辅助植物辨识的做法。 |
+| Garcin 等，2021，[Pl@ntNet-300K](https://datasets-benchmarks-proceedings.neurips.cc/paper_files/paper/2021/hash/7e7757b1e12abcb736ab9a754ffb617a-Abstract-round2.html) | 参考逐类报告样本量与相似类别问题。项目实际训练数据来自 [Oxford Flowers17](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) 和 [iNaturalist](https://github.com/inaturalist/inaturalist-open-data)。 |
 
-### Experiment B — Partial Fine-Tuning
-
-Investigate whether limited backbone adaptation improves classification.
-
-- Unfreeze the final residual stage.
-- Train the classification head and selected backbone layers.
-- Compare with Experiment A under a controlled evaluation protocol.
-
-### Model Evaluation
-
-Planned metrics include:
-
-- Top-1 Accuracy
-- Top-3 Accuracy
-- Macro-F1 Score
-- Confusion Matrix
-- Per-class performance analysis
-- Misclassification case studies
-
-Model selection will use validation-set results, with the held-out test set reserved for final evaluation.
-
-### Explainable AI — Grad-CAM
-
-The local Identification Desk generates a Grad-CAM overlay for any of the three returned classes. Each overlay is aligned with the model's 224 × 224 input crop.
-
-This can help investigate whether the model attends to relevant floral structures or background features.
-
-Grad-CAM provides qualitative evidence about model behaviour; it does not guarantee prediction correctness.
+蒸馏与参数混合是将论文方法应用于花卉识别的对照实验。逐轮、逐种子与逐图日志保存在本机。[训练脚本](src/train_bloom25.py) · [数据审计](reports/data_audit.md) · [测试汇总](docs/bloom25.md)
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-flower-and-folio/
-│
+Floralia-Library/
 ├── README.md
-│
-├── web/                        # Main Web application
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   ├── data.js             # Botanical data and demo classifier
-│   │   ├── store.js            # Local persistence
-│   │   ├── router.js           # Hash router
-│   │   ├── app.js              # Application entry
-│   │   └── views/
-│   │       ├── login.js
-│   │       ├── identify.js
-│   │       ├── library.js
-│   │       └── history.js
-│   └── assets/
-│       ├── floral-header.webp
-│       └── library-bg.webp
-│
-├── app/                        # Legacy Streamlit prototype
-│   ├── main.py
-│   ├── style.css
-│   └── local_state.sqlite3
-│
-├── knowledge/
-│   └── demo_cards.json
-│
-├── data/                       # Local datasets (not committed)
-├── models/                     # Planned model artefacts
-├── notebooks/                  # Planned experiments
-├── configs/                    # Planned training configurations
-├── src/                        # Planned ML implementation
-├── tests/                      # Planned tests
-│
-└── reports/
-    └── data_audit.md
+├── index.html                  # Web application entry point
+├── css/
+├── js/                         # Views, routing and generated folio data
+├── assets/                     # Illustrations and screenshots
+├── knowledge/                  # Botanical and cultural sources
+├── src/                        # Inference, training and document processing
+├── tests/
+├── docs/                       # Setup and evaluation notes
+└── reports/                    # Dataset audit and category mapping
 ```
 
-The repository retains its existing `flower-and-folio` directory name. **Floralia Library** is the project's display and product name.
+Local datasets and model checkpoints are stored outside Git. The local development copy can also serve frontend files from a `web/` directory.
 
 ---
 
@@ -363,17 +316,7 @@ Open your browser at:
 5. Browse, search and bookmark flower entries.
 6. Review your history in the personal collection.
 
-> The local model ranks the 17 Flower17 categories. Static hosting shows a labelled demo.
-
-### Legacy Streamlit Prototype
-
-An earlier Streamlit-based prototype is also retained:
-
-```powershell
-python -m streamlit run app/main.py
-```
-
-This prototype supports basic flower-page exploration, image preview and local records. It is separate from the primary Web application.
+> The local service supports 25 or 17 categories according to the loaded checkpoint. Static hosting shows a labelled demo.
 
 ---
 
@@ -388,21 +331,17 @@ This prototype supports basic flower-page exploration, image preview and local r
 - [x] Drag-and-drop image upload and preview
 - [x] Deterministic demonstration recognition
 - [x] Top-1 and Top-3 result presentation
-- [x] Botanical library covering 17 flower categories
-- [x] Flower-language and cultural-information cards
+- [x] Botanical library covering 25 flower categories
+- [x] Source-linked literary and historical-use entries
 - [x] Searchable botanical records
 - [x] Personal history and favourites
 - [x] Per-account local data separation
 - [x] Global notification system
-- [x] Preservation of the earlier Streamlit prototype
 
 ### 🚧 In Progress / Next Steps
 
-- [ ] Verify the official dataset splits and data integrity
-- [ ] Establish a reproducible PyTorch training environment
-- [ ] Implement ResNet18 feature-extraction baseline
-- [ ] Implement partial fine-tuning experiment
-- [ ] Compare Macro-F1, Top-k metrics and class-level errors
+- [x] Audit the official dataset split and complete the ResNet18 transfer-learning comparison
+- [x] Compare student variants across five random seeds and report held-out metrics
 - [ ] Evaluate low-confidence prediction handling
 - [x] Integrate real inference into the local Web interface
 - [x] Generate and display Grad-CAM explanations

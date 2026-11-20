@@ -16,8 +16,11 @@ extra_folios = json.loads((KNOWLEDGE / "extra_folios.json").read_text(encoding="
 english_folios = json.loads((KNOWLEDGE / "folio_english.json").read_text(encoding="utf-8"))
 profiles = json.loads((KNOWLEDGE / "botanical_profiles.json").read_text(encoding="utf-8"))
 sources = json.loads((KNOWLEDGE / "cultural_sources.json").read_text(encoding="utf-8"))
-artworks = json.loads((KNOWLEDGE / "classic_images.json").read_text(encoding="utf-8"))
-asset_root = ROOT / "web" if (ROOT / "web" / "assets").is_dir() else ROOT
+flower_language = json.loads((KNOWLEDGE / "flower_language.json").read_text(encoding="utf-8"))
+PUBLISHED_READING_KINDS = {
+    "诗歌", "童话", "史诗与名字", "小说", "小说与名字", "诗歌与名字",
+    "戏剧", "戏剧与象征", "宋诗", "散文", "宋词", "唐诗", "神话", "林地传说", "用物史",
+}
 culture = defaultdict(list)
 for record in sources["verified_items"]:
     culture[record["class_key"]].append(record)
@@ -28,10 +31,10 @@ if [item["class_id"] for item in classes] != list(range(17)) or len(class_keys) 
 folio_keys = class_keys | extra_folios.keys()
 if english_folios.keys() != folio_keys:
     raise ValueError("Every folio must have English content")
+if flower_language["entries"].keys() != folio_keys:
+    raise ValueError("Every folio must have exactly one flower-language entry")
 if class_keys & extra_folios.keys() or any(not re.fullmatch(r"[a-z]+(?:-[a-z]+)*", key) for key in extra_folios):
     raise ValueError("Additional folio keys must be unique and use lowercase words separated by hyphens")
-if artworks.keys() - folio_keys:
-    raise ValueError(f"Unexpected artwork keys: {sorted(artworks.keys() - folio_keys)}")
 for name, records in (("botanical profiles", profiles), ("cultural records", culture)):
     missing, unknown = class_keys - records.keys(), records.keys() - class_keys
     if missing or unknown:
@@ -55,17 +58,14 @@ def require_source(record: dict, context: str) -> None:
     require_https(record["url"], context)
 
 
-for key, artwork in artworks.items():
-    require_source(artwork, key)
-    require_text(artwork, ("title_zh", "creator", "year", "accession", "asset", "image_source", "alt",
-                           "caption", "rights", "rights_url"), key)
-    for url_key in ("image_source", "rights_url"):
-        require_https(artwork[url_key], key)
-    path = asset_root / artwork["asset"]
-    if artwork["asset"] != f"assets/folio/{key}.webp" or not path.is_file():
-        raise ValueError(f"{key}: artwork must have the expected local WebP asset")
-    if any(type(artwork[field]) is not int or artwork[field] < 1 for field in ("width", "height")):
-        raise ValueError(f"{key}: artwork dimensions must be positive integers")
+for source_key, source in flower_language["sources"].items():
+    require_source(source, source_key)
+for key, meaning in flower_language["entries"].items():
+    require_text(meaning, ("zh", "en", "source", "locator"), key)
+    if meaning["source"] not in flower_language["sources"]:
+        raise ValueError(f"{key}: unknown flower-language source")
+    if "note" in meaning:
+        require_text(meaning["note"], ("zh", "en"), key)
 
 
 def make_card(key: str, item: dict, profile: dict, records: list, order: int) -> dict:
@@ -80,21 +80,24 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         require_source(source, key)
     if "comparison" in profile:
         require_text(profile, ("comparison",), key)
-    if not records:
-        raise ValueError(f"{key}: expected a cultural record")
     english = english_folios[key]
     require_text(english, ("family", "habitat", "season", "note"), key)
     if len(english["culture"]) != len(records) or len(english["traits"]) != len(traits):
         raise ValueError(f"{key}: English traits and cultural records must match the folio")
-    if key in artworks and len(english.get("art", [])) != 5:
-        raise ValueError(f"{key}: expected English artwork description, caption and credit")
-    for record in records:
+    published = []
+    english_culture = []
+    for record, translation in zip(records, english["culture"], strict=True):
+        if record["kind"] not in PUBLISHED_READING_KINDS:
+            continue
         require_source(record, key)
         require_text(record, ("kind", "theme", "creator", "locator", "our_summary", "scope", "checked_on"), key)
         if "excerpt" in record or "excerpt_language" in record:
             require_text(record, ("excerpt",), key)
             if "excerpt_language" in record:
                 require_text(record, ("excerpt_language",), key)
+        published.append({field: value for field, value in record.items() if field != "class_key"})
+        english_culture.append(translation)
+    meaning = flower_language["entries"][key]
     return {
         "class_id": item.get("class_id"),
         "order": order,
@@ -111,9 +114,12 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         "note": profile["scope"],
         **({"comparison": profile["comparison"]} if "comparison" in profile else {}),
         "sources": profile["references"],
-        "culture": [{field: value for field, value in record.items() if field != "class_key"} for record in records],
-        "english": english,
-        **({"artwork": artworks[key]} if key in artworks else {}),
+        "culture": published,
+        "flower_language": {**meaning, "source": flower_language["sources"][meaning["source"]]},
+        "english": {
+            **{field: english[field] for field in ("family", "habitat", "season", "note", "traits")},
+            "culture": english_culture,
+        },
     }
 
 

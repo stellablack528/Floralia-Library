@@ -64,7 +64,7 @@
     },
     {
       "class_key": "bluebell",
-      "kind": "林地民俗",
+      "kind": "林地传说",
       "theme": "仙灵的蓝铃",
       "creator": "Woodland Trust",
       "title": "Bluebell (Hyacinthoides non-scripta)",
@@ -74,6 +74,19 @@
       "our_summary": "英国林地民俗把蓝铃花和仙灵联系起来，有故事说在蓝铃花林听见铃声，是仙灵出现的征兆。",
       "scope": "这是 Woodland Trust 收录的民间传说。",
       "checked_on": "2026-11-18"
+    },
+    {
+      "class_key": "bluebell",
+      "kind": "用物史",
+      "theme": "蓝铃花与旧书的书脊",
+      "creator": "英国国民信托",
+      "title": "A guide to bluebells in the UK",
+      "publisher": "National Trust",
+      "url": "https://www.nationaltrust.org.uk/discover/nature/trees-plants/a-guide-to-bluebells-in-the-uk",
+      "locator": "Practical uses for bluebells · From feathers to fashion",
+      "our_summary": "英国国民信托记载，蓝铃花球茎里的黏性物质曾用来装订书籍。",
+      "scope": "这条记载涉及英国蓝铃花在书籍装订中的历史用途。",
+      "checked_on": "2026-11-20"
     },
     {
       "class_key": "crocus",

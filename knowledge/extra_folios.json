@@ -107,7 +107,19 @@
       ]
     },
     "culture": [
-      {"kind": "宋诗", "theme": "《山园小梅》里的疏影与暗香", "creator": "林逋", "title": "山园小梅", "publisher": "维基文库原文", "url": "https://zh.wikisource.org/wiki/山園小梅_(林逋)", "locator": "组诗第一首，颔联", "our_summary": "诗人把梅枝的疏影映在清浅的水边，把梅香放在黄昏月色里来写。一联同时写出了枝姿和香气。", "scope": "这是林逋诗中的写景方式，可和该物种的早春开花、花有香气一起阅读。", "checked_on": "2026-11-20"}
+      {"kind": "宋诗", "theme": "《山园小梅》里的疏影与暗香", "creator": "林逋", "title": "山园小梅", "publisher": "维基文库原文", "url": "https://zh.wikisource.org/wiki/山園小梅_(林逋)", "locator": "组诗第一首，颔联", "excerpt": "疏影橫斜水清淺，暗香浮動月黃昏。", "excerpt_language": "zh-Hant", "our_summary": "诗人把梅枝的疏影映在清浅的水边，把梅香放在黄昏月色里来写。一联同时写出了枝姿和香气。", "scope": "这是林逋诗中的写景方式，可和该物种的早春开花、花有香气一起阅读。", "checked_on": "2026-11-20"},
+      {
+        "kind": "用物史",
+        "theme": "中国饮食中的青梅与乌梅",
+        "creator": "崔月姣",
+        "title": "四月节令饮馔之青梅煮酒",
+        "publisher": "故宫博物院",
+        "url": "https://www.dpm.org.cn/explode/others/259793.html",
+        "locator": "《紫禁城》2023 年第 5 期，第 2–3 页",
+        "our_summary": "故宫博物院梳理了梅子在中国饮食中的用法。梅果用于调酸，旧时也有把青梅盐渍晒成白梅、把较熟的梅果熏制成乌梅的记载。",
+        "scope": "这条资料说的是梅树结出的果实。",
+        "checked_on": "2026-11-20"
+      }
     ]
   },
   "peach-blossom": {
@@ -174,7 +186,19 @@
       ]
     },
     "culture": [
-      {"kind": "宋词", "theme": "《鹧鸪天》如何写桂花的淡色与留香", "creator": "李清照", "title": "鹧鸪天（暗淡轻黄体性柔）", "publisher": "香港教育大学图书馆收录文本", "url": "https://www.lib.eduhk.hk/pure-data/pub/201721674/201721674_1.pdf", "locator": "附录三，在同名词作的声韵分析表中可对照上下片", "our_summary": "上片写桂花颜色浅淡，但香气留得住。下片让梅、菊与桂花相对照，抬高了桂花在秋日花木中的位置。", "scope": "这首词以桂花的香气来写它的风致。不同品种的实际花色见上方植物档案。", "checked_on": "2026-11-20"}
+      {"kind": "宋词", "theme": "《鹧鸪天》如何写桂花的淡色与留香", "creator": "李清照", "title": "鹧鸪天（暗淡轻黄体性柔）", "publisher": "香港教育大学图书馆收录文本", "url": "https://www.lib.eduhk.hk/pure-data/pub/201721674/201721674_1.pdf", "locator": "附录三，在同名词作的声韵分析表中可对照上下片", "our_summary": "上片写桂花颜色浅淡，但香气留得住。下片让梅、菊与桂花相对照，抬高了桂花在秋日花木中的位置。", "scope": "这首词以桂花的香气来写它的风致。不同品种的实际花色见上方植物档案。", "checked_on": "2026-11-20"},
+      {
+        "kind": "用物史",
+        "theme": "桂花如何给茶和糖果添香",
+        "creator": "Wellcome Collection",
+        "title": "Kwei plant (Osmanthus fragrans): flowering stem with floral segments",
+        "publisher": "Wellcome Collection",
+        "url": "https://wellcomecollection.org/works/a6bjqw89",
+        "locator": "馆藏说明 · Description",
+        "our_summary": "英国 Wellcome 馆藏的一幅十八世纪桂花版画旁，目录说明记载了用桂花雄花给茶和糖果添香的用途。",
+        "scope": "馆藏版画使用旧名 Olea fragrans，植物档案使用现行学名 Osmanthus fragrans。",
+        "checked_on": "2026-11-20"
+      }
     ]
   },
   "tree-peony": {
