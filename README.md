@@ -161,16 +161,19 @@ The intention is to create a digital reading experience that feels like explorin
 
 The Web application requires no JavaScript framework, package manager or build system.
 
-### Model and Document Processing
+### Libraries and Tools · 已使用的库与工具
 
-| Component | Technologies |
-|---|---|
-| Deep Learning | PyTorch, torchvision |
-| Classification | ResNet18 teacher and MobileNetV3-Small student |
-| Transfer Learning | Frozen-backbone and partial fine-tuning experiments |
-| Dataset Processing | Pillow, NumPy, SciPy |
-| Explainable AI | Grad-CAM |
-| Document Processing | MinerU, SQLite |
+| 功能 | 开源项目 | 在 Floralia 中的用途 |
+|---|---|---|
+| 本机识花 | [PyTorch](https://github.com/pytorch/pytorch), [torchvision](https://github.com/pytorch/vision), [Pillow](https://github.com/python-pillow/Pillow) | Pillow 读取上传的照片。torchvision 提供 ResNet18 和 MobileNetV3-Small 的模型接口与图像预处理。PyTorch 负责训练、推理，并计算 Grad-CAM 所需的梯度。 |
+| 数据与评估 | [NumPy](https://github.com/numpy/numpy), [SciPy](https://github.com/scipy/scipy), [scikit-learn](https://github.com/scikit-learn/scikit-learn), [Matplotlib](https://github.com/matplotlib/matplotlib) | NumPy 处理图像和指标数组，SciPy 读取 Oxford 官方的 `.mat` 划分文件，scikit-learn 计算 Macro-F1 等评估指标，Matplotlib 绘制实验图。 |
+| 文献解析 | [MinerU](https://github.com/opendatalab/MinerU) | 在独立环境中使用已验证的 MinerU 4.2.3 解析 PDF 或扫描图像，生成带页码信息的 Markdown 和 JSON。 |
+| 知识与文献存储 | [SQLite](https://github.com/sqlite/sqlite) | 通过 Python 标准库的 `sqlite3` 保存植物资料、文献来源、摘录和审核记录。 |
+| 可选的本机翻译 | [llama.cpp](https://github.com/ggml-org/llama.cpp), [Hy-MT2](https://github.com/Tencent-Hunyuan/Hy-MT2) | llama.cpp 在本机提供推理服务，Hy-MT2-1.8B 生成英文文献摘录的中文译文初稿。 |
+| 开发与验收 | [uv](https://github.com/astral-sh/uv), [Playwright](https://github.com/microsoft/playwright), [psutil](https://github.com/giampaolo/psutil) | uv 管理 Python 环境。Playwright 验证浏览器流程和采集实机截图。psutil 用于本机 MinerU 性能测量。 |
+| 早期原型 | [Streamlit](https://github.com/streamlit/streamlit) | 用于最初的本机演示原型。当前网页采用原生 HTML、CSS 和 JavaScript。 |
+
+真实识花还需要单独配置 Bloom 模型权重。文献解析和翻译各有独立的运行说明。[本机识花](docs/model.md) · [MinerU](docs/mineru.md) · [本机翻译](docs/translation.md)
 
 ---
 
