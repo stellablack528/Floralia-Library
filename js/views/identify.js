@@ -75,7 +75,7 @@ FF.views.identify = (function () {
   }
 
   function resultState(ranked, result) {
-    const [first, second, third] = ranked;
+    const [first, ...otherCandidates] = ranked;
     const label = localModel ? escapeText(result.model_name) + " · 模型预测分数" : "静态演示 · 示例分数";
     return `
       <div class="result-top">
@@ -87,11 +87,14 @@ FF.views.identify = (function () {
           <b>${first.score.toFixed(1)}%</b>
         </div>
       </div>
-      <div class="rank-row"><span class="no">02</span><span class="nm">${second.flower.zh} · ${second.flower.en}</span><span class="pc">${second.score.toFixed(1)}%</span></div>
-      <div class="rank-row"><span class="no">03</span><span class="nm">${third.flower.zh} · ${third.flower.en}</span><span class="pc">${third.score.toFixed(1)}%</span></div>
+      ${otherCandidates.map(({flower, score}, index) => `
+        <a class="rank-row" href="#/library/${encodeURIComponent(flower.key)}">
+          <span class="no">0${index + 2}</span><span class="nm">${escapeText(flower.zh)} · ${escapeText(flower.en)}</span>
+          <span class="pc">${score.toFixed(1)}%</span><span class="rank-link">书页 →</span>
+        </a>`).join("")}
       <div class="result-links">
         <button class="btn-ghost" id="rechoose2">重新上传</button>
-        <button class="btn-primary" id="open-folio" data-key="${first.flower.key}">查看花之书页<span class="arrow">&#8594;</span></button>
+        <button class="btn-primary" id="open-folio" data-key="${first.flower.key}">查看${escapeText(first.flower.zh)}书页<span class="arrow">&#8594;</span></button>
       </div>
       <div class="demo-note" style="margin-top:1rem;">${label} · 仅支持 Flower17 的 17 类。${result.low_score ? " 第一候选分数较低，请核对候选或换一张照片。" : ""}</div>
       ${localModel ? camPanel(ranked) : ""}`;

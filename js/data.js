@@ -1,4 +1,4 @@
-/* Generated from knowledge/classes.json, botanical_profiles.json and cultural_sources.json.
+/* Generated from knowledge files. See docs/knowledge.md for sources.
    Edit those source files, then run src/sync_web_cards.py. */
 window.FF = window.FF || {};
 FF.data = { flowers: [
@@ -39,7 +39,24 @@ FF.data = { flowers: [
         "scope": "作品中的 daffodils 是文学意象。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "artwork": {
+      "title_zh": "黄水仙与马蹄莲花卉图案",
+      "title": "Flower Design: Daffodils and Calla Lilies",
+      "creator": "佚名（法国）",
+      "year": "19 世纪",
+      "publisher": "大都会艺术博物馆",
+      "accession": "1977.585.1",
+      "url": "https://www.metmuseum.org/art/collection/search/355339",
+      "image_source": "https://images.metmuseum.org/CRDImages/dp/original/DP812930.jpg",
+      "asset": "assets/folio/daffodil.webp",
+      "width": 1200,
+      "height": 854,
+      "alt": "浅色纸面上，黄水仙与马蹄莲沿中轴对称排列。",
+      "caption": "黄色的喇叭形花冠分布在画面中央和两侧，与白色马蹄莲组成对称的装饰纹样。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
   },
   {
     "class_id": 1,
@@ -246,7 +263,24 @@ FF.data = { flowers: [
         "scope": "名字灵感：Iris 可以直接用作英文名，也可借传信意象给角色取名「花信」。",
         "checked_on": "2026-11-19"
       }
-    ]
+    ],
+    "artwork": {
+      "title_zh": "鸢尾花",
+      "title": "Irises",
+      "creator": "文森特·梵高",
+      "year": "1889 年",
+      "publisher": "J. Paul Getty Museum",
+      "accession": "90.PA.20",
+      "url": "https://www.getty.edu/art/collection/object/103JNH",
+      "image_source": "https://media.getty.edu/iiif/image/e5d29650-11f8-4897-9540-54a9dd65b04f/full/1200,/0/default.jpg",
+      "asset": "assets/folio/iris.webp",
+      "width": 1200,
+      "height": 944,
+      "alt": "蓝紫色鸢尾密布花圃，画面左侧有一株白色鸢尾。",
+      "caption": "梵高在圣雷米画下这片花圃。蓝紫色花朵和交叠的长叶铺满画面，一株白鸢尾从左侧花丛里探出来。",
+      "rights": "公有领域 · Getty Open Content",
+      "rights_url": "https://www.getty.edu/projects/open-content-program/"
+    }
   },
   {
     "class_id": 6,
@@ -431,7 +465,24 @@ FF.data = { flowers: [
         "scope": "名字灵感：「向晴」可用作昵称或角色名，借的是诗中朝向光亮的意象。",
         "checked_on": "2026-11-19"
       }
-    ]
+    ],
+    "artwork": {
+      "title_zh": "向日葵",
+      "title": "Sunflowers",
+      "creator": "文森特·梵高",
+      "year": "1887 年",
+      "publisher": "大都会艺术博物馆",
+      "accession": "49.41",
+      "url": "https://www.metmuseum.org/art/collection/search/436524",
+      "image_source": "https://images.metmuseum.org/CRDImages/ep/original/DP-41223-001.jpg",
+      "asset": "assets/folio/sunflower.webp",
+      "width": 1200,
+      "height": 848,
+      "alt": "两朵剪下的向日葵横放在蓝底上，花盘朝着不同方向。",
+      "caption": "这是梵高在巴黎创作的静物。两朵剪下的向日葵横放在蓝底上，花盘和打卷的花瓣占据大半画面。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
   },
   {
     "class_id": 10,
@@ -720,17 +771,554 @@ FF.data = { flowers: [
         "checked_on": "2026-11-18"
       }
     ]
+  },
+  {
+    "class_id": null,
+    "order": 18,
+    "key": "camellia",
+    "zh": "山茶花",
+    "en": "Japanese camellia",
+    "aliases": [
+      "山茶",
+      "茶花",
+      "椿",
+      "Tsubaki"
+    ],
+    "latin": "Camellia japonica",
+    "family": "山茶科",
+    "genus": "山茶属",
+    "traits": [
+      "常绿，叶片深绿有光泽，边缘有细齿",
+      "花常单生，可见白色、粉色、红色及斑色",
+      "园艺品种的花瓣层数和花形变化较大"
+    ],
+    "habitat": "原产中国部分沿海地区、韩国济州岛，以及日本中南部至台湾一带。园艺栽培一般适合半阴、湿润而排水良好的环境。",
+    "season": "北卡罗来纳州立大学推广资料记载多在冬末到早春开花，实际花期随品种和气候变化。",
+    "note": "山茶花和茶花在园艺语境中也可泛指其他山茶属花卉。本页介绍植物学上的山茶 Camellia japonica。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Camellia japonica L.",
+        "url": "https://powo.science.kew.org/taxon/828524-1"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Camellia japonica",
+        "url": "https://plants.ces.ncsu.edu/plants/camellia-japonica/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "小说",
+        "theme": "《茶花女》与剧院包厢里的花束",
+        "creator": "小仲马（Alexandre Dumas fils）",
+        "title": "La Dame aux camélias",
+        "publisher": "Project Gutenberg",
+        "url": "https://www.gutenberg.org/ebooks/2419",
+        "locator": "第二章，叙述玛格丽特在剧院包厢摆放茶花的段落（小说初版 1848 年）",
+        "our_summary": "每逢新剧上演，玛格丽特的剧院包厢前总摆着三样随身物：望远镜、糖果袋和一束茶花。花店后来便以「茶花女」称呼她。",
+        "scope": "这是小说中人物绰号的来历。原文只写 camélias，关联到山茶属的文学意象。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "山茶花",
+      "title": "Camelia japonica of Japanse roos",
+      "creator": "小川一真（Kazumasa Ogawa）",
+      "year": "约 1890–1895 年",
+      "publisher": "荷兰国立博物馆（Rijksmuseum）",
+      "accession": "RP-F-2001-7-1575-6",
+      "url": "https://www.rijksmuseum.nl/en/collection/object/Camelia-japonica-of-Japanse-roos--bdc7b9a87f18143d1367aaffad6b7d37",
+      "image_source": "https://iiif.micr.io/dNCzo/full/950,/0/default.jpg",
+      "asset": "assets/folio/camellia.webp",
+      "width": 876,
+      "height": 1200,
+      "alt": "浅色纸面中央，数朵红白条纹山茶沿带叶枝条开放。",
+      "caption": "小川一真将带有红白条纹的山茶收入《Some Japanese Flowers》。馆方将这张图版著录为珂罗版与彩色石印。",
+      "rights": "公有领域",
+      "rights_url": "https://creativecommons.org/publicdomain/mark/1.0/"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 19,
+    "key": "hydrangea",
+    "zh": "绣球花",
+    "en": "Bigleaf hydrangea",
+    "aliases": [
+      "八仙花",
+      "紫阳花",
+      "大叶绣球",
+      "Ajisai",
+      "紫陽花"
+    ],
+    "latin": "Hydrangea macrophylla",
+    "family": "绣球科",
+    "genus": "绣球属",
+    "traits": [
+      "落叶灌木，叶片对生，边缘有锯齿",
+      "花序可呈圆球形，也可较扁平、外围一圈花较大",
+      "显眼如花瓣的结构多为不育花扩大的萼片"
+    ],
+    "habitat": "邱园植物数据库记载其原产于日本。在园艺栽培中常见于半阴、土壤湿润且排水良好的位置。",
+    "season": "通常夏季开花。《中国植物志》记载原变种的花期为 6–8 月。",
+    "note": "本页介绍大叶绣球。民间也会把木绣球等球形花序的植物叫作绣球花，查资料时可用学名核对。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Hydrangea macrophylla (Thunb.) Ser.",
+        "url": "https://powo.science.kew.org/taxon/791637-1"
+      },
+      {
+        "publisher": "植物智 · 中国植物志",
+        "title": "绣球（原变种）",
+        "url": "https://www.iplant.cn/z/frps/20123"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Hydrangea macrophylla",
+        "url": "https://plants.ces.ncsu.edu/plants/hydrangea-macrophylla/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "植物志",
+        "theme": "《日本植物志》里的蓝色绣球",
+        "creator": "菲利普·弗朗茨·冯·西博尔德、约瑟夫·格哈德·楚卡里尼",
+        "title": "Flora Japonica",
+        "publisher": "京都大学贵重资料数字档案",
+        "url": "https://rmda.kulib.kyoto-u.ac.jp/item/rb00000001/explanation/01",
+        "locator": "第 1 卷第 105 页、图版 52；Hydrangea otaksa 于 1839 年发表",
+        "our_summary": "这部十九世纪植物志用彩色图版记录了日本的绣球花。图版第 52 幅绘有一团蓝色花序，题名 Hydrangea Otaksa。",
+        "scope": "京都大学图版目录将它对应到大叶绣球，邱园将 Hydrangea otaksa 列为该种的异名。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "《日本植物志》绣球图版",
+      "title": "Hydrangea Otaksa · Flora Japonica, Tab. 52",
+      "creator": "西博尔德、楚卡里尼（著）",
+      "year": "19 世纪",
+      "publisher": "京都大学理学研究科藏",
+      "accession": "RB00000001 · 第 52 幅图版",
+      "url": "https://rmda.kulib.kyoto-u.ac.jp/item/rb00000001",
+      "image_source": "https://rmda.kulib.kyoto-u.ac.jp/iiif/3/RB00000001%2F01%2FRB00000001_00248_0.ptif/full/2000,/0/default.jpg",
+      "asset": "assets/folio/hydrangea.webp",
+      "width": 800,
+      "height": 1200,
+      "alt": "《日本植物志》的书页上，一团蓝紫色的圆形绣球花序生在宽大绿叶上方。",
+      "caption": "蓝色花序由许多小花组成，图版下方标有 Hydrangea Otaksa。原件由京都大学理学研究科收藏，网页图像经缩放并转为 WebP。",
+      "rights": "馆方允许标注来源后再利用",
+      "rights_url": "https://rmda.kulib.kyoto-u.ac.jp/license_icon/free-license"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 20,
+    "key": "plum-blossom",
+    "zh": "梅花",
+    "en": "Mume blossom",
+    "aliases": [
+      "梅",
+      "Prunus mume",
+      "Japanese flowering apricot"
+    ],
+    "latin": "Prunus mume",
+    "family": "蔷薇科",
+    "genus": "李属",
+    "traits": [
+      "落叶小乔木，常在裸枝上先开花",
+      "花有香气，园艺品种有白色、粉色等花色",
+      "花后长出卵形、有锯齿的叶"
+    ],
+    "habitat": "原产范围从中国中南部延伸到中南半岛北部，野生植株可见于疏林、溪边或山坡。",
+    "season": "多在冬末至早春开花，实际时间随地区和品种变化。",
+    "note": "本页介绍梅。冬季也开香花的蜡梅属于蜡梅科，和梅的分类不同。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Prunus mume",
+        "url": "https://powo.science.kew.org/taxon/730000-1/general-information"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Prunus mume",
+        "url": "https://plants.ces.ncsu.edu/plants/prunus-mume/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "宋诗",
+        "theme": "《山园小梅》里的疏影与暗香",
+        "creator": "林逋",
+        "title": "山园小梅",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/wiki/山園小梅_(林逋)",
+        "locator": "组诗第一首，颔联",
+        "our_summary": "诗人把梅枝的疏影映在清浅的水边，把梅香放在黄昏月色里来写。一联同时写出了枝姿和香气。",
+        "scope": "这是林逋诗中的写景方式，可和该物种的早春开花、花有香气一起阅读。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "墨梅图",
+      "title": "Fragrant Snow at Broken Bridge",
+      "creator": "王冕",
+      "year": "14 世纪",
+      "publisher": "大都会艺术博物馆",
+      "accession": "1973.121.9",
+      "url": "https://www.metmuseum.org/art/collection/search/40080",
+      "image_source": "https://images.metmuseum.org/CRDImages/as/original/DP258037.jpg",
+      "asset": "assets/folio/plum-blossom.webp",
+      "width": 798,
+      "height": 1500,
+      "alt": "绢本画面中，弯曲的墨梅枝从上方伸下，细枝间点缀浅色花朵。",
+      "caption": "王冕用绢本水墨描绘从高处垂下的梅枝。馆方解说将寒冬开花的梅与元代画中的坚韧意象相联系。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 21,
+    "key": "peach-blossom",
+    "zh": "桃花",
+    "en": "Peach blossom",
+    "aliases": [
+      "桃树",
+      "桃",
+      "Common peach"
+    ],
+    "latin": "Prunus persica",
+    "family": "蔷薇科",
+    "genus": "李属",
+    "traits": [
+      "落叶乔木，常见花为粉红色",
+      "单瓣花通常有五枚花瓣",
+      "叶片较狭长，叶缘有锯齿"
+    ],
+    "habitat": "邱园将桃记为源自中国中北部的栽培起源植物。果园栽培常选择阳光充足、土壤排水良好的位置。",
+    "season": "通常春季开花，果实随后在夏季成熟，时间因品种而异。",
+    "note": "本页以普通桃为代表。观赏桃的花色和重瓣程度会因品种而变。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Prunus persica",
+        "url": "https://powo.science.kew.org/taxon/1212858-2"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Prunus persica",
+        "url": "https://plants.ces.ncsu.edu/plants/prunus-persica/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "散文",
+        "theme": "《桃花源记》的溪岸桃林",
+        "creator": "陶渊明",
+        "title": "桃花源记",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/wiki/桃花源記",
+        "locator": "首段，渔人沿溪遇见桃花林到发现山口",
+        "our_summary": "武陵渔人循溪而行，遇见夹岸桃林，沿着花林走到水源，才发现通向另一处村落的山洞。桃林把日常行路引向了故事中的隐居世界。",
+        "scope": "桃林属于叙事场景，原文没有提供可核实的现代品种名。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "桃源胜概图（馆方图像节选）",
+      "title": "Peach Blossom Spring",
+      "creator": "张宏",
+      "year": "1638 年",
+      "publisher": "大都会艺术博物馆",
+      "accession": "2015.784.3",
+      "url": "https://www.metmuseum.org/art/collection/search/73650",
+      "image_source": "https://images.metmuseum.org/CRDImages/as/original/S_L_4_2007_1_1_sec02_crd.jpg",
+      "asset": "assets/folio/peach-blossom.webp",
+      "width": 1050,
+      "height": 459,
+      "alt": "长卷节选，青绿色山石和曲折水道间分布着树木、田地和村舍。",
+      "caption": "张宏以手卷重述陶渊明笔下的桃花源。此处展示馆方提供的局部图像，馆藏页可从右往左浏览全卷。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 22,
+    "key": "lotus",
+    "zh": "荷花",
+    "en": "Sacred lotus",
+    "aliases": [
+      "莲花",
+      "莲",
+      "芙蕖",
+      "菡萏"
+    ],
+    "latin": "Nelumbo nucifera",
+    "family": "莲科",
+    "genus": "莲属",
+    "traits": [
+      "圆叶的叶柄接近叶片中央，叶片可挺出水面",
+      "花常高出水面，花中央可见较大的花托",
+      "花后花托继续发育，形成常见的莲蓬"
+    ],
+    "habitat": "多年生水生植物，根状茎扎在泥中，常见于水面平静、有阳光的浅水环境。",
+    "season": "通常在夏季开花。",
+    "note": "本页的荷花是莲科的莲。它和常被一同观赏的睡莲分属不同科。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Nelumbo nucifera",
+        "url": "https://powo.science.kew.org/taxon/605422-1"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Nelumbo nucifera",
+        "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "散文",
+        "theme": "《爱莲说》里的花之君子",
+        "creator": "周敦颐",
+        "title": "爱莲说",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/zh-hant/愛蓮說",
+        "locator": "第一段写莲的形态，第二段以菊、牡丹和莲作对照",
+        "our_summary": "作者从莲生于泥中、挺立出水的姿态写起，再将莲比作君子。前段的形态描写为后段的品格比喻作铺垫。",
+        "scope": "君子是这篇文章赋予莲的寓意，植物档案记录的是可观察特征。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "莲塘戏禽图（馆方图像节选）",
+      "title": "Birds in a lotus pond",
+      "creator": "八大山人（朱耷）",
+      "year": "约 1690 年",
+      "publisher": "大都会艺术博物馆",
+      "accession": "1989.363.135",
+      "url": "https://www.metmuseum.org/art/collection/search/49143",
+      "image_source": "https://images.metmuseum.org/CRDImages/as/original/DP205836_CRD.jpg",
+      "asset": "assets/folio/lotus.webp",
+      "width": 1500,
+      "height": 709,
+      "alt": "墨色荷叶从画面边缘伸入，两只深色鸟蹲在荷塘岸边。",
+      "caption": "在这件手卷里，八大山人用深浅不同的墨色安排荷叶、岩石和禽鸟。此处展示馆方提供的一段图像。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 23,
+    "key": "osmanthus",
+    "zh": "桂花",
+    "en": "Sweet osmanthus",
+    "aliases": [
+      "木犀",
+      "木樨",
+      "Sweet olive"
+    ],
+    "latin": "Osmanthus fragrans",
+    "family": "木犀科",
+    "genus": "木犀属",
+    "traits": [
+      "常绿灌木或小乔木，叶通常对生",
+      "花小，多成簇长在叶腋处，香气明显",
+      "园艺品种有白色、淡黄或橙色等花色"
+    ],
+    "habitat": "邱园记载其原产范围从喜马拉雅延伸到东亚和中南半岛部分地区。栽培中常见于阳光充足或半阴、排水良好的位置。",
+    "season": "常在秋季开花。部分类型或地区也可在春季见到花。",
+    "note": "本页的桂花指木犀。古书单写「桂」时，仍需按具体作品核对所指。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Osmanthus fragrans",
+        "url": "https://powo.science.kew.org/taxon/610878-1"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Osmanthus fragrans",
+        "url": "https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "宋词",
+        "theme": "《鹧鸪天》如何写桂花的淡色与留香",
+        "creator": "李清照",
+        "title": "鹧鸪天（暗淡轻黄体性柔）",
+        "publisher": "香港教育大学图书馆收录文本",
+        "url": "https://www.lib.eduhk.hk/pure-data/pub/201721674/201721674_1.pdf",
+        "locator": "附录三，在同名词作的声韵分析表中可对照上下片",
+        "our_summary": "上片写桂花颜色浅淡，但香气留得住。下片让梅、菊与桂花相对照，抬高了桂花在秋日花木中的位置。",
+        "scope": "这首词以桂花的香气来写它的风致。不同品种的实际花色见上方植物档案。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "桂花花枝与花部结构",
+      "title": "Kwei plant (Osmanthus fragrans): flowering stem with floral segments",
+      "creator": "约翰·塞巴斯蒂安·米勒（Johann Sebastian Mueller）",
+      "year": "约 1771 年",
+      "publisher": "Wellcome Collection",
+      "accession": "24553i",
+      "url": "https://wellcomecollection.org/works/a6bjqw89",
+      "image_source": "https://iiif.wellcomecollection.org/image/V0044087/full/full/0/default.jpg",
+      "asset": "assets/folio/osmanthus.webp",
+      "width": 1177,
+      "height": 1500,
+      "alt": "旧纸上的桂花枝有对生深绿叶，小花聚在叶腋，右下角画有放大的花部。",
+      "caption": "米勒的彩色蚀刻版画把花枝与分解的花部分开画。图上沿用旧名 Olea fragrans，邱园将其列为木犀现用学名的异名。",
+      "rights": "公有领域 · Public Domain Mark",
+      "rights_url": "https://creativecommons.org/publicdomain/mark/1.0/"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 24,
+    "key": "tree-peony",
+    "zh": "牡丹",
+    "en": "Tree peony",
+    "aliases": [
+      "木本牡丹",
+      "Paeonia suffruticosa",
+      "Moutan"
+    ],
+    "latin": "Paeonia × suffruticosa",
+    "family": "芍药科",
+    "genus": "芍药属",
+    "traits": [
+      "落叶灌木，木质枝条越冬后仍留在地面以上",
+      "叶具分裂或分生的小叶，枝端开较大的花",
+      "园艺品种花瓣层数和花色差异明显"
+    ],
+    "habitat": "邱园将这一园艺牡丹代表名称列为杂交类群。木本牡丹栽培常选排水良好、日照充足或有轻度遮阴的场地。",
+    "season": "园艺资料记载多在春季中后期开花，时间随气候和品种而变。",
+    "note": "学名中的 × 标明杂交。园艺上「牡丹」可以泛指多个木本牡丹类群，本页采用一个代表学名。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Paeonia × suffruticosa",
+        "url": "https://powo.science.kew.org/taxon/711877-1"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Paeonia – Woody Types",
+        "url": "https://plants.ces.ncsu.edu/plants/paeonia-woody-types/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "唐诗",
+        "theme": "《赏牡丹》里的京城花事",
+        "creator": "刘禹锡",
+        "title": "赏牡丹",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/wiki/賞牡丹_(劉禹錫)",
+        "locator": "《全唐诗》卷 365，第三、四句",
+        "our_summary": "诗的前半以芍药和荷花作衬托，后半称赞牡丹的姿色，并让读者看到花开时京城赏花的热闹。",
+        "scope": "「国色」是诗中的赞语，和现代园艺分类各有语境。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "牡丹图",
+      "title": "Peonies",
+      "creator": "深江芦舟（Fukae Roshū）",
+      "year": "18 世纪前期至中期",
+      "publisher": "大都会艺术博物馆",
+      "accession": "2021.398.18",
+      "url": "https://www.metmuseum.org/art/collection/search/853208",
+      "image_source": "https://images.metmuseum.org/CRDImages/as/original/DP-24410-002.jpg",
+      "asset": "assets/folio/tree-peony.webp",
+      "width": 1124,
+      "height": 1500,
+      "alt": "画轴上白、粉与朱红色牡丹在枝叶之间错落开放。",
+      "caption": "这幅日本江户时期的牡丹原是屏风的一部分，后来改装成挂轴。画家在一处花丛里并置了多种花色。",
+      "rights": "公有领域 · CC0",
+      "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+    }
+  },
+  {
+    "class_id": null,
+    "order": 25,
+    "key": "wisteria",
+    "zh": "紫藤",
+    "en": "Chinese wisteria",
+    "aliases": [
+      "紫藤花"
+    ],
+    "latin": "Wisteria sinensis",
+    "family": "豆科",
+    "genus": "紫藤属",
+    "traits": [
+      "落叶木质藤本，茎缠绕在支撑物上",
+      "羽状复叶，蓝紫色蝶形花成串下垂",
+      "花后可见带绒毛的扁长荚果"
+    ],
+    "habitat": "原产中国，栽培资料记载它在阳光充足到部分遮阴、土壤排水良好的位置生长。",
+    "season": "春季开花，花串往往在叶片完全展开前出现。",
+    "note": "本页的代表种是中国紫藤。园艺中的日本紫藤等同属植物也有下垂花序，需要结合叶片和其他特征区分。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Wisteria sinensis",
+        "url": "https://powo.science.kew.org/taxon/60459148-2"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Wisteria sinensis",
+        "url": "https://plants.ces.ncsu.edu/plants/wisteria-sinensis/"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "唐诗",
+        "theme": "《紫藤树》里的花蔓、鸟声和香风",
+        "creator": "李白",
+        "title": "紫藤树",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/zh-hant/紫藤樹",
+        "locator": "《全唐诗》卷 183，全诗四句",
+        "our_summary": "春日花蔓攀在高树上。诗人先写攀援的藤，再从密叶里的鸟声和风里的花香写出人在树下的感受。",
+        "scope": "诗中紫藤的姿态可和植物档案对读，古诗也保留自己的文学语境。",
+        "checked_on": "2026-11-20"
+      }
+    ],
+    "artwork": {
+      "title_zh": "《百百世草》紫藤",
+      "title": "Flowers of a Hundred Worlds (Momoyogusa): Wisteria (Fuji)",
+      "creator": "神坂雪佳（Kamisaka Sekka）",
+      "year": "1909–1910 年",
+      "publisher": "克利夫兰艺术博物馆",
+      "accession": "1988.23.2.16",
+      "url": "https://www.clevelandart.org/art/1988.23.2.16",
+      "image_source": "https://openaccess-cdn.clevelandart.org/1988.23.2.16/1988.23.2.16_web.jpg",
+      "asset": "assets/folio/wisteria.webp",
+      "width": 900,
+      "height": 609,
+      "alt": "彩色木版画中，蓝紫色与浅色花串垂在密集的绿叶之间。",
+      "caption": "神坂雪佳用成片的蓝紫与绿色表现悬垂的花串和层叠的叶子。这张图作为紫藤题材的艺术作品收录。",
+      "rights": "开放图像 · CC0",
+      "rights_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
   }
 ] };
+FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null);
 FF.data.byKey = function (key) {
   return this.flowers.find(f => f.key === key) || null;
 };
 /* UI-only demo. This is not a trained flower classifier. */
 FF.data.demoIdentify = function (byteSum, byteMod) {
-  const idx = (byteSum * 7 + byteMod * 13) % this.flowers.length;
-  const primary = this.flowers[idx];
-  const second = this.flowers[(idx + 5 + byteMod % 4) % this.flowers.length];
-  const third = this.flowers[(idx + 11 + byteSum % 3) % this.flowers.length];
+  const flowers = this.recognizableFlowers;
+  const idx = (byteSum * 7 + byteMod * 13) % flowers.length;
+  const primary = flowers[idx];
+  const second = flowers[(idx + 5 + byteMod % 4) % flowers.length];
+  const third = flowers[(idx + 11 + byteSum % 3) % flowers.length];
   const p1 = 62 + (byteSum % 31);
   const rest = 100 - p1;
   const p2 = Math.max(2, Math.round(rest * ((byteMod % 5 + 3) / 10)));

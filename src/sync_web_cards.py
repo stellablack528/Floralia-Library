@@ -1,8 +1,9 @@
-"""Validate and export the Flower17 knowledge base for the Web library."""
+"""Validate and export the botanical folios for the Web library."""
 
 from __future__ import annotations
 
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -11,8 +12,11 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 classes = json.loads((KNOWLEDGE / "classes.json").read_text(encoding="utf-8"))
+extra_folios = json.loads((KNOWLEDGE / "extra_folios.json").read_text(encoding="utf-8"))
 profiles = json.loads((KNOWLEDGE / "botanical_profiles.json").read_text(encoding="utf-8"))
 sources = json.loads((KNOWLEDGE / "cultural_sources.json").read_text(encoding="utf-8"))
+artworks = json.loads((KNOWLEDGE / "classic_images.json").read_text(encoding="utf-8"))
+asset_root = ROOT / "web" if (ROOT / "web" / "assets").is_dir() else ROOT
 culture = defaultdict(list)
 for record in sources["verified_items"]:
     culture[record["class_key"]].append(record)
@@ -20,6 +24,11 @@ for record in sources["verified_items"]:
 class_keys = {item["key"] for item in classes}
 if [item["class_id"] for item in classes] != list(range(17)) or len(class_keys) != 17:
     raise ValueError("Expected all 17 Flower17 class IDs and unique keys in dataset order")
+folio_keys = class_keys | extra_folios.keys()
+if class_keys & extra_folios.keys() or any(not re.fullmatch(r"[a-z]+(?:-[a-z]+)*", key) for key in extra_folios):
+    raise ValueError("Additional folio keys must be unique and use lowercase words separated by hyphens")
+if artworks.keys() - folio_keys:
+    raise ValueError(f"Unexpected artwork keys: {sorted(artworks.keys() - folio_keys)}")
 for name, records in (("botanical profiles", profiles), ("cultural records", culture)):
     missing, unknown = class_keys - records.keys(), records.keys() - class_keys
     if missing or unknown:
@@ -32,17 +41,32 @@ def require_text(record: dict, fields: tuple[str, ...], context: str) -> None:
             raise ValueError(f"{context}: {field} must be nonempty text")
 
 
-def require_source(record: dict, context: str) -> None:
-    require_text(record, ("title", "publisher", "url"), context)
-    url = urlsplit(record["url"])
+def require_https(value: str, context: str) -> None:
+    url = urlsplit(value)
     if url.scheme != "https" or not url.hostname or url.username or url.password:
         raise ValueError(f"{context}: expected a public HTTPS source URL")
 
-cards = []
-for item in classes:
-    key = item["key"]
-    profile = profiles[key]
-    records = culture[key]
+
+def require_source(record: dict, context: str) -> None:
+    require_text(record, ("title", "publisher", "url"), context)
+    require_https(record["url"], context)
+
+
+for key, artwork in artworks.items():
+    require_source(artwork, key)
+    require_text(artwork, ("title_zh", "creator", "year", "accession", "asset", "image_source", "alt",
+                           "caption", "rights", "rights_url"), key)
+    for url_key in ("image_source", "rights_url"):
+        require_https(artwork[url_key], key)
+    path = asset_root / artwork["asset"]
+    if artwork["asset"] != f"assets/folio/{key}.webp" or not path.is_file():
+        raise ValueError(f"{key}: artwork must have the expected local WebP asset")
+    if any(type(artwork[field]) is not int or artwork[field] < 1 for field in ("width", "height")):
+        raise ValueError(f"{key}: artwork dimensions must be positive integers")
+
+
+def make_card(key: str, item: dict, profile: dict, records: list, order: int) -> dict:
+    require_text(item, ("name_zh", "name_en"), key)
     require_text(profile, ("representative_name", "family", "genus", "habitat", "flowering", "scope"), key)
     traits = profile["traits"]
     if len(traits) < 2 or not all(isinstance(trait, str) and trait.strip() for trait in traits):
@@ -51,42 +75,59 @@ for item in classes:
         raise ValueError(f"{key}: expected a botanical source")
     for source in profile["references"]:
         require_source(source, key)
+    if not records:
+        raise ValueError(f"{key}: expected a cultural record")
     for record in records:
         require_source(record, key)
         require_text(record, ("kind", "theme", "creator", "locator", "our_summary", "scope", "checked_on"), key)
-    cards.append(
-        {
-            "class_id": item["class_id"],
-            "order": item["class_id"] + 1,
-            "key": key,
-            "zh": item["name_zh"],
-            "en": item["name_en"],
-            "latin": profile["representative_name"],
-            "family": profile["family"],
-            "genus": profile["genus"],
-            "traits": traits,
-            "habitat": profile["habitat"],
-            "season": profile["flowering"],
-            "note": profile["scope"],
-            "sources": profile["references"],
-            "culture": [{field: value for field, value in record.items() if field != "class_key"} for record in records],
-        }
-    )
+    return {
+        "class_id": item.get("class_id"),
+        "order": order,
+        "key": key,
+        "zh": item["name_zh"],
+        "en": item["name_en"],
+        **({"aliases": item["aliases"]} if "aliases" in item else {}),
+        "latin": profile["representative_name"],
+        "family": profile["family"],
+        "genus": profile["genus"],
+        "traits": traits,
+        "habitat": profile["habitat"],
+        "season": profile["flowering"],
+        "note": profile["scope"],
+        "sources": profile["references"],
+        "culture": [{field: value for field, value in record.items() if field != "class_key"} for record in records],
+        **({"artwork": artworks[key]} if key in artworks else {}),
+    }
 
-prefix = """/* Generated from knowledge/classes.json, botanical_profiles.json and cultural_sources.json.
+
+cards = [
+    make_card(item["key"], item, profiles[item["key"]], culture[item["key"]], order)
+    for order, item in enumerate(classes, start=1)
+]
+for order, (key, item) in enumerate(extra_folios.items(), start=len(cards) + 1):
+    if "class_id" in item:
+        raise ValueError(f"{key}: a library-only folio must not declare a model class ID")
+    aliases = item.get("aliases", [])
+    if not isinstance(aliases, list) or any(not isinstance(alias, str) or not alias.strip() for alias in aliases):
+        raise ValueError(f"{key}: aliases must be a list of nonempty names")
+    cards.append(make_card(key, item, item["profile"], item["culture"], order))
+
+prefix = """/* Generated from knowledge files. See docs/knowledge.md for sources.
    Edit those source files, then run src/sync_web_cards.py. */
 window.FF = window.FF || {};
 FF.data = { flowers: """
 suffix = """ };
+FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null);
 FF.data.byKey = function (key) {
   return this.flowers.find(f => f.key === key) || null;
 };
 /* UI-only demo. This is not a trained flower classifier. */
 FF.data.demoIdentify = function (byteSum, byteMod) {
-  const idx = (byteSum * 7 + byteMod * 13) % this.flowers.length;
-  const primary = this.flowers[idx];
-  const second = this.flowers[(idx + 5 + byteMod % 4) % this.flowers.length];
-  const third = this.flowers[(idx + 11 + byteSum % 3) % this.flowers.length];
+  const flowers = this.recognizableFlowers;
+  const idx = (byteSum * 7 + byteMod * 13) % flowers.length;
+  const primary = flowers[idx];
+  const second = flowers[(idx + 5 + byteMod % 4) % flowers.length];
+  const third = flowers[(idx + 11 + byteSum % 3) % flowers.length];
   const p1 = 62 + (byteSum % 31);
   const rest = 100 - p1;
   const p2 = Math.max(2, Math.round(rest * ((byteMod % 5 + 3) / 10)));
@@ -101,4 +142,4 @@ FF.data.demoIdentify = function (byteSum, byteMod) {
 js_dir = ROOT / "web" / "js" if (ROOT / "web" / "js").is_dir() else ROOT / "js"
 output = js_dir / "data.js"
 output.write_text(prefix + json.dumps(cards, ensure_ascii=False, indent=2) + suffix, encoding="utf-8")
-print(f"Updated {output} with {len(cards)} classes")
+print(f"Updated {output} with {len(cards)} folios ({len(classes)} model classes)")

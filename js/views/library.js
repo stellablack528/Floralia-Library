@@ -16,12 +16,34 @@ FF.views.library = (function () {
   function cultureHTML(record) {
     return `
       <article class="folio-culture">
-        <h3>${escapeHTML(record.theme)}</h3>
+        <h4>${escapeHTML(record.theme)}</h4>
         <p class="folio-text">${escapeHTML(record.kind)} · ${escapeHTML(record.creator)} · ${escapeHTML(record.title)}</p>
         <p class="folio-text">${escapeHTML(record.our_summary)}</p>
         <p class="folio-text">${escapeHTML(record.scope)}</p>
         <p class="folio-text">${sourceLink(record)} · ${escapeHTML(record.locator)}</p>
       </article>`;
+  }
+
+  function artworkHTML(artwork, related) {
+    return `
+      <section class="folio-section" id="folio-art" tabindex="-1" aria-labelledby="folio-art-heading">
+        <h3 id="folio-art-heading">经典图像</h3>
+        <figure class="folio-artwork">
+          <img src="${escapeHTML(artwork.asset)}" width="${artwork.width}" height="${artwork.height}"
+            alt="${escapeHTML(artwork.alt)}" loading="lazy">
+          <figcaption>
+            <h4>${escapeHTML(artwork.title_zh)}</h4>
+            <p>${escapeHTML(artwork.creator)} · ${escapeHTML(artwork.year)}</p>
+            <p>${escapeHTML(artwork.caption)}</p>
+            <p class="artwork-credit">${escapeHTML(artwork.publisher)} · ${escapeHTML(artwork.accession)}</p>
+            <div class="artwork-links">
+              <a href="${escapeHTML(artwork.url)}" target="_blank" rel="noopener noreferrer">查看馆藏原页 ↗</a>
+              <a href="${escapeHTML(artwork.rights_url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(artwork.rights)}</a>
+            </div>
+          </figcaption>
+        </figure>
+        ${related.map(cultureHTML).join("")}
+      </section>`;
   }
 
   function evidenceHTML(record, status) {
@@ -169,6 +191,7 @@ FF.views.library = (function () {
         <div class="zh">${escapeHTML(f.zh)}</div>
         <div class="en">${escapeHTML(f.en)}</div>
         <div class="speak">${escapeHTML(f.culture[0].kind)} · ${escapeHTML(f.culture[0].theme)}</div>
+        ${f.class_id === null ? '<div class="speak">可查阅 · 暂未纳入拍照识别</div>' : ""}
       </a>`;
   }
 
@@ -176,8 +199,8 @@ FF.views.library = (function () {
     document.getElementById("view").innerHTML = `
       <div class="page">
         <div class="page-kicker">THE HERBARIUM · 花卉资料馆</div>
-        <h2>十七页花之书</h2>
-        <p class="lede">查阅 Oxford Flower17 各类的代表植物、辨识特征与花期，阅读有出处的文学、艺术和民俗记录。</p>
+        <h2>花之书</h2>
+        <p class="lede">查阅花卉档案，阅读有出处的文学、艺术和民俗记录。资料馆收录 ${FF.data.flowers.length} 页，其中 ${FF.data.recognizableFlowers.length} 类可拍照识别。</p>
         <div class="lib-toolbar">
           <div class="lib-search">
             <span class="glyph">&#9906;</span>
@@ -196,7 +219,8 @@ FF.views.library = (function () {
       const q = input.value.trim().toLowerCase();
       const list = FF.data.flowers.filter((f) => {
         const topics = f.culture.flatMap(record => [record.kind, record.theme, record.creator, record.title, record.our_summary]);
-        return !q || [f.zh, f.en, f.latin, f.family, f.genus, ...f.traits, ...topics].join(" ").toLowerCase().includes(q);
+        const artTitles = f.artwork ? [f.artwork.title, f.artwork.title_zh] : [];
+        return !q || [f.zh, f.en, f.latin, f.family, f.genus, ...(f.aliases || []), ...f.traits, ...topics, ...artTitles].join(" ").toLowerCase().includes(q);
       });
       grid.innerHTML = list.length
         ? list.map((f) => cardHTML(f)).join("")
@@ -212,6 +236,8 @@ FF.views.library = (function () {
   function renderDetail(params) {
     const f = FF.data.byKey(params.key);
     if (!f) { location.hash = "#/library"; return; }
+    const recognizable = f.class_id !== null;
+    const evidenceAvailable = window.FF_LOCAL_MODEL && recognizable;
 
     /* 浏览记录：同一朵花 10 分钟内不重复记录 */
     const hist = FF.store.history();
@@ -221,28 +247,41 @@ FF.views.library = (function () {
     }
 
     const favOn = FF.store.isFavorite(f.key);
+    const artwork = f.artwork;
+    const literature = artwork ? f.culture.filter(record => record.kind !== "绘画") : f.culture;
+    const relatedArt = artwork ? f.culture.filter(record => record.kind === "绘画" && record.url !== artwork.url) : [];
     document.getElementById("view").innerHTML = `
       <div class="page">
         <div class="folio-wrap">
           <div class="folio-card">
             <a class="back" href="#/library">&#8592; 返回资料馆</a>
-            <div class="folio-kicker page-kicker">FOLIO No.${String(f.order).padStart(2, "0")}</div>
-            <div class="folio-name">${escapeHTML(f.zh)}</div>
+            <h2 class="folio-name">${escapeHTML(f.zh)}</h2>
             <div class="folio-latin">代表植物 · ${escapeHTML(f.latin)}</div>
             <div class="folio-en">${escapeHTML(f.en)} · ${escapeHTML(f.family)} · ${escapeHTML(f.genus)}</div>
-            <div class="folio-rule"></div>
-            <div class="folio-label">辨识特征</div>
-            <div class="folio-traits">${f.traits.map(t => `<span>${escapeHTML(t)}</span>`).join("")}</div>
-            <div class="folio-label">生境与花期</div>
-            <div class="folio-text">${escapeHTML(f.habitat)} ${escapeHTML(f.season)}</div>
-            <div class="folio-label">类别说明</div>
-            <div class="folio-text">${escapeHTML(f.note)}</div>
-            <div class="folio-label">植物资料来源</div>
-            <div class="folio-text">${f.sources.map(sourceLink).join("<br>")}</div>
-            <div class="folio-label">文献与文学</div>
-            ${f.culture.map(cultureHTML).join("")}
-            ${window.FF_LOCAL_MODEL ? `
-              <div id="evidence-published" class="folio-text" aria-live="polite">正在读取已审核的摘录…</div>
+            ${recognizable ? "" : '<p class="folio-text">可查阅 · 暂未纳入拍照识别</p>'}
+            <nav class="folio-jump" aria-label="书页目录">
+              <button type="button" data-section="folio-botany">植物档案</button>
+              <button type="button" data-section="folio-literature">文学与文化</button>
+              ${artwork ? '<button type="button" data-section="folio-art">经典图像</button>' : ""}
+            </nav>
+            <section class="folio-section" id="folio-botany" tabindex="-1" aria-labelledby="folio-botany-heading">
+              <h3 id="folio-botany-heading">植物档案</h3>
+              <div class="folio-label">辨识特征</div>
+              <div class="folio-traits">${f.traits.map(t => `<span>${escapeHTML(t)}</span>`).join("")}</div>
+              <div class="folio-label">生境与花期</div>
+              <div class="folio-text">${escapeHTML(f.habitat)} ${escapeHTML(f.season)}</div>
+              <div class="folio-label">类别说明</div>
+              <div class="folio-text">${escapeHTML(f.note)}</div>
+              <div class="folio-label">植物资料来源</div>
+              <div class="folio-text">${f.sources.map(sourceLink).join("<br>")}</div>
+            </section>
+            <section class="folio-section" id="folio-literature" tabindex="-1" aria-labelledby="folio-literature-heading">
+              <h3 id="folio-literature-heading">文学与文化</h3>
+              ${literature.map(cultureHTML).join("")}
+              ${evidenceAvailable ? '<div id="evidence-published" class="folio-text" aria-live="polite">正在读取已审核的摘录…</div>' : ""}
+            </section>
+            ${artwork ? artworkHTML(artwork, relatedArt) : ""}
+            ${evidenceAvailable ? `
               <details id="evidence-review" class="evidence-review">
                 <summary>审核文献摘录</summary>
                 <p class="folio-text">打开原文，核对摘录、页码和中文整理后再提交。</p>
@@ -253,11 +292,19 @@ FF.views.library = (function () {
               </details>` : ""}
             <div class="folio-actions">
               <button class="fav-toggle ${favOn ? "on" : ""}" id="fav-btn">${favOn ? "&#10084; 已收藏 · 点击取消" : "&#9825; 收藏这页书"}</button>
-              <button class="btn-primary" id="identify-again">上传照片验证它<span class="arrow">&#8594;</span></button>
+              ${recognizable ? '<button class="btn-primary" id="identify-again">上传照片验证它<span class="arrow">&#8594;</span></button>' : ""}
             </div>
           </div>
         </div>
       </div>`;
+
+    for (const button of document.querySelectorAll(".folio-jump button")) {
+      button.addEventListener("click", () => {
+        const section = document.getElementById(button.dataset.section);
+        section.focus({preventScroll: true});
+        section.scrollIntoView({block: "start"});
+      });
+    }
 
     document.getElementById("fav-btn").addEventListener("click", (e) => {
       const on = FF.store.toggleFavorite(f.key, f.zh, f.en);
@@ -265,10 +312,10 @@ FF.views.library = (function () {
       e.currentTarget.innerHTML = on ? "&#10084; 已收藏 · 点击取消" : "&#9825; 收藏这页书";
       FF.toast(on ? `「${f.zh}」已加入收藏。` : `已取消收藏「${f.zh}」。`);
     });
-    document.getElementById("identify-again").addEventListener("click", () => {
+    document.getElementById("identify-again")?.addEventListener("click", () => {
       location.hash = "#/identify";
     });
-    if (window.FF_LOCAL_MODEL) bindEvidence(f.key);
+    if (evidenceAvailable) bindEvidence(f.key);
     window.scrollTo(0, 0);
   }
 
