@@ -5,6 +5,7 @@
 window.FF = window.FF || {};
 
 (function () {
+  const {text: t} = FF.language;
 
   /* ---- Toast ---- */
   let toastTimer = null;
@@ -24,9 +25,9 @@ window.FF = window.FF || {};
     nav.classList.remove("hidden");
 
     const links = [
-      { href: "#/identify", label: "识花台" },
-      { href: "#/library", label: "花卉资料馆" },
-      { href: "#/history", label: "我的足迹" }
+      { href: "#/identify", label: t("识花台", "Identify") },
+      { href: "#/library", label: t("花卉资料馆", "Flower Library") },
+      { href: "#/history", label: t("我的足迹", "History") }
     ];
     /* 路由高亮：#/library/xxx 也算资料馆 */
     const active = (l) => routePath === l.href || (l.href === "#/library" && routePath.startsWith("#/library/"));
@@ -41,14 +42,15 @@ window.FF = window.FF || {};
       </nav>
       <div class="nav-user">
         <div class="who"><strong></strong><small></small></div>
-        <button class="nav-exit" id="nav-exit">退出</button>
+        ${FF.language.button()}
+        <button class="nav-exit" id="nav-exit">${t("退出", "Sign out")}</button>
       </div>`;
 
-    nav.querySelector(".who strong").textContent = session.nickname;
-    nav.querySelector(".who small").textContent = session.guest ? "临时会话" : session.account;
+    nav.querySelector(".who strong").textContent = session.guest ? t("游客", "Guest") : session.nickname;
+    nav.querySelector(".who small").textContent = session.guest ? t("临时会话", "Temporary session") : session.account;
     document.getElementById("nav-exit").addEventListener("click", () => {
       FF.store.logout();
-      FF.toast("已退出阅览室。");
+      FF.toast(t("已退出阅览室。", "Signed out."));
       location.hash = "#/login";
     });
   }
@@ -57,6 +59,14 @@ window.FF = window.FF || {};
   window.addEventListener("ff:route", (e) => {
     const h = e.detail.hash.split("?")[0];
     if (h !== "#/login") renderNavbar(h);
+  });
+
+  document.addEventListener("click", event => {
+    if (event.target.closest("[data-language-toggle]")) {
+      FF.language.toggle();
+      FF.router.render();
+      document.querySelector("[data-language-toggle]")?.focus();
+    }
   });
 
   FF.router.start();

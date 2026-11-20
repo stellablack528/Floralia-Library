@@ -52,11 +52,15 @@ a { color: var(--forest); }
 .nav-user .who small { display: block; font-family: var(--latin); color: var(--gold-deep); font-size: .66rem; letter-spacing: .08em; }
 .nav-exit { border: 1px solid var(--line); background: transparent; color: var(--muted); font: 600 .82rem var(--sans); padding: .45rem 1rem; border-radius: 999px; cursor: pointer; transition: all .18s; }
 .nav-exit:hover { border-color: var(--brick); color: var(--brick); }
+.language-toggle { white-space: nowrap; }
+.login-card .language-toggle { margin-top: .7rem; }
 
 @media (max-width: 760px) {
   .navbar { flex-wrap: wrap; gap: .8rem; }
   .nav-links { order: 3; width: 100%; justify-content: center; margin-left: 0; }
   .nav-user .who { display: none; }
+  .nav-user { margin-left: auto; gap: .4rem; }
+  .nav-user .nav-exit { padding-inline: .65rem; }
 }
 
 /* ============ 登录页 ============ */
@@ -252,7 +256,8 @@ a { color: var(--forest); }
 .folio-artwork figcaption p { margin: .22rem 0; }
 .artwork-credit { color: var(--muted); }
 .artwork-links { display: flex; gap: .45rem 1rem; flex-wrap: wrap; font-size: .82rem; margin-top: .5rem; }
-.folio-evidence blockquote { margin: .4rem 0; color: var(--ink); font: italic 1rem/1.5 var(--latin); white-space: pre-line; }
+.folio-evidence blockquote, .folio-excerpt { margin: .4rem 0; color: var(--ink); white-space: pre-line; }
+.folio-evidence blockquote, .folio-excerpt[lang="fr"] { font: italic 1rem/1.5 var(--latin); }
 .folio-evidence-label { margin-top: .65rem; color: var(--gold-deep); font-size: .76rem; font-weight: 600; }
 .evidence-review { margin-top: 1rem; color: var(--forest); }
 .evidence-review summary { cursor: pointer; font-size: .88rem; width: fit-content; }
@@ -262,6 +267,18 @@ a { color: var(--forest); }
 .translation-review label { display: block; margin-top: .65rem; font-weight: 600; }
 .translation-review textarea { width: 100%; margin-top: .3rem; padding: .5rem; font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
 .evidence-translation { white-space: pre-line; }
+.import-link { display: inline-block; text-decoration: none; }
+.document-import { max-width: 940px; }
+.document-import .panel { margin-top: 1.2rem; }
+.import-form { display: grid; gap: .85rem; }
+.import-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: .75rem; }
+.import-form label { display: grid; gap: .35rem; font-size: .88rem; }
+.document-import input, .document-import select, .document-import textarea { width: 100%; font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: .55rem .7rem; }
+.document-import textarea { display: block; line-height: 1.65; margin: .4rem 0 .65rem; resize: vertical; }
+.document-import textarea[readonly] { background: var(--paper); }
+.document-import input[type="file"] { min-width: 0; }
+.document-import .btn-primary { width: fit-content; }
+.import-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
 .folio-traits { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
 .folio-traits span { background: #f2efe3; border: 1px solid var(--line); color: #5e6c60; font-size: .78rem; padding: .32rem .8rem; border-radius: 999px; }
 .folio-actions { display: flex; gap: .9rem; margin-top: 1.6rem; align-items: center; }

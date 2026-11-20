@@ -9,6 +9,7 @@ FF.views = FF.views || {};
 const BOOK_SVG = `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 5.2C10.4 3.9 8.2 3.2 5.6 3.2v13.2c2.6 0 4.8.7 6.4 2 1.6-1.3 3.8-2 6.4-2V3.2c-2.6 0-4.8.7-6.4 2z"/><path d="M12 5.2v13.2"/></svg>`;
 
 FF.views.login = (function () {
+  const {text: t} = FF.language;
 
   function shell(mode) {
     const isLogin = mode === "login";
@@ -16,52 +17,53 @@ FF.views.login = (function () {
       <div class="login-stage">
         <div class="login-card">
           <div class="emblem">${BOOK_SVG}</div>
+          ${FF.language.button()}
           <h1>Florentia Library</h1>
           <div class="motto">Where Stories Bloom</div>
           <p class="lead">${isLogin
-            ? "登录保存阅读记录，或以游客身份直接体验识花与书页。"
-            : "在 Florentia 办一张新借书证。你的查花记录与收藏，都会保存在这本手册里。"}</p>
+            ? t("登录保存阅读记录，或以游客身份直接体验识花与书页。", "Sign in to save your reading history, or continue as a guest to identify flowers and browse.")
+            : t("在 Florentia 办一张新借书证。你的查花记录与收藏，都会保存在这本手册里。", "Create a reader account to keep your identifications and bookmarks.")}</p>
           <div class="form-error hidden" id="form-error"></div>
           <form id="auth-form" autocomplete="off">
             <div class="field">
-              <label>账号 <span>/ ${isLogin ? "CARD NUMBER" : "ACCOUNT"}</span></label>
+              <label for="f-account">${t("账号", "Account")} ${t(`<span>/ ${isLogin ? "CARD NUMBER" : "ACCOUNT"}</span>`, "")}</label>
               <div class="box">
                 <span class="glyph">&#9878;</span>
-                <input id="f-account" type="text" placeholder="${isLogin ? "FL-1874-0231 或你注册的账号" : "想一个好记的账号"}" required>
+                <input id="f-account" type="text" placeholder="${isLogin ? t("FL-1874-0231 或你注册的账号", "Your account name") : t("想一个好记的账号", "Choose an account name")}" required>
               </div>
             </div>
             ${isLogin ? "" : `
             <div class="field">
-              <label>昵称 <span>/ NAME</span></label>
+              <label for="f-nick">${t("昵称 <span>/ NAME</span>", "Display name")}</label>
               <div class="box">
                 <span class="glyph">&#10048;</span>
-                <input id="f-nick" type="text" placeholder="扉页上署这个名字" required>
+                <input id="f-nick" type="text" placeholder="${t("扉页上署这个名字", "Your display name")}" required>
               </div>
             </div>`}
             <div class="field">
-              <label>密码 <span>/ PASSWORD</span></label>
+              <label for="f-pass">${t("密码 <span>/ PASSWORD</span>", "Password")}</label>
               <div class="box">
                 <span class="glyph">&#9919;</span>
-                <input id="f-pass" type="password" placeholder="至少 6 位" required>
-                <button type="button" class="eye" id="eye-btn" title="显示/隐藏密码">&#128065;</button>
+                <input id="f-pass" type="password" placeholder="${t("至少 6 位", "At least 6 characters")}" required>
+                <button type="button" class="eye" id="eye-btn" title="${t("显示/隐藏密码", "Show or hide password")}">&#128065;</button>
               </div>
             </div>
             ${isLogin ? `
             <div class="login-row">
-              <label><input type="checkbox" id="f-remember"> 记住这台设备</label>
-              <a href="#" id="forgot">忘记密码？</a>
+              <label><input type="checkbox" id="f-remember"> ${t("记住这台设备", "Remember this device")}</label>
+              <a href="#" id="forgot">${t("忘记密码？", "Forgot password?")}</a>
             </div>` : ""}
             <button type="submit" class="btn-primary" id="submit-btn">
-              ${isLogin ? "登录阅览室" : "办理借书证"}<span class="arrow">&#8594;</span>
+              ${isLogin ? t("登录阅览室", "Sign in") : t("办理借书证", "Create account")}<span class="arrow">&#8594;</span>
             </button>
           </form>
-          <button type="button" class="btn-ghost guest-entry" id="guest-btn">以游客身份进入</button>
+          <button type="button" class="btn-ghost guest-entry" id="guest-btn">${t("以游客身份进入", "Continue as a guest")}</button>
           <div class="login-switch">
             ${isLogin
-              ? `还没有借书证？<a href="#/login?mode=register">注册新读者</a>`
-              : `已有账号？<a href="#/login">返回登录</a>`}
+              ? `${t("还没有借书证？", "New here? ")}<a href="#/login?mode=register">${t("注册新读者", "Create an account")}</a>`
+              : `${t("已有账号？", "Already have an account? ")}<a href="#/login">${t("返回登录", "Sign in")}</a>`}
           </div>
-          <div class="login-foot">Florentia · 花与书页</div>
+          <div class="login-foot">${t("Florentia · 花与书页", "Florentia · Flower &amp; Folio")}</div>
         </div>
       </div>`;
   }
@@ -90,7 +92,7 @@ FF.views.login = (function () {
     if (forgot) {
       forgot.addEventListener("click", (e) => {
         e.preventDefault();
-        FF.toast("演示版暂未接入找回密码；请重新注册一个账号。");
+        FF.toast(t("演示版暂未接入找回密码；请重新注册一个账号。", "Password recovery is unavailable. You can create a new account."));
       });
     }
 
@@ -115,7 +117,7 @@ FF.views.login = (function () {
           }
           const remember = document.getElementById("f-remember").checked;
           FF.store.setSession(res.user, remember);
-          FF.toast(`欢迎回来，${res.user.nickname}。`);
+          FF.toast(t(`欢迎回来，${res.user.nickname}。`, `Welcome back, ${res.user.nickname}.`));
           FF.router.enter();
         } else {
           const nick = document.getElementById("f-nick").value;
@@ -127,7 +129,7 @@ FF.views.login = (function () {
             return;
           }
           FF.store.setSession({ account: account.trim(), nickname: nick.trim() }, false);
-          FF.toast("借书证已办好，欢迎加入 Florentia。");
+          FF.toast(t("借书证已办好，欢迎加入 Florentia。", "Your reader account is ready. Welcome to Florentia."));
           FF.router.enter();
         }
       }, 420);

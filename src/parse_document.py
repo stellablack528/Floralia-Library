@@ -20,7 +20,8 @@ OUTPUT = ROOT / "documents" / "parsed"
 ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp"}
 
 
-def parse(input_path: Path, tier: str, device: str, output_root: Path, page: int | None = None) -> Path:
+def parse(input_path: Path, tier: str, device: str, output_root: Path, page: int | None = None,
+          *, timeout: int | None = None) -> Path:
     if not input_path.is_file():
         raise ValueError(f"文档不存在：{input_path}")
     if input_path.suffix.lower() not in ALLOWED:
@@ -44,7 +45,8 @@ def parse(input_path: Path, tier: str, device: str, output_root: Path, page: int
     env = os.environ.copy()
     env["MINERU_MODEL_ONNX_DEVICE"] = device
     print(f"Parsing locally: {input_path.name} ({tier}, {device})", flush=True)
-    result = subprocess.run(command, cwd=ROOT, env=env, encoding="utf-8", errors="replace", capture_output=True)
+    result = subprocess.run(command, cwd=ROOT, env=env, encoding="utf-8", errors="replace",
+                            capture_output=True, timeout=timeout)
     if result.returncode != 0:
         detail = (result.stderr or result.stdout).strip()
         raise RuntimeError(f"MinerU 解析失败（退出码 {result.returncode}）：\n{detail[-3000:]}")

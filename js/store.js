@@ -44,12 +44,12 @@ FF.store = (function () {
     account = account.trim();
     nickname = nickname.trim();
     if (!/^[A-Za-z0-9_\u4e00-\u9fa5]{2,20}$/.test(account)) {
-      return { ok: false, msg: "账号需为 2—20 位字母、数字、下划线或中文。" };
+      return { ok: false, msg: FF.language.text("账号需为 2—20 位字母、数字、下划线或中文。", "Use 2–20 letters, digits, underscores, or Chinese characters for your account.") };
     }
-    if (!nickname) return { ok: false, msg: "请填写昵称，它会出现在书页的扉页。" };
-    if (password.length < 6) return { ok: false, msg: "密码至少 6 位。" };
+    if (!nickname) return { ok: false, msg: FF.language.text("请填写昵称，它会出现在书页的扉页。", "Enter a display name.") };
+    if (password.length < 6) return { ok: false, msg: FF.language.text("密码至少 6 位。", "Choose a password with at least six characters.") };
     const map = users();
-    if (map[account]) return { ok: false, msg: "这个账号已被注册，换一个试试。" };
+    if (map[account]) return { ok: false, msg: FF.language.text("这个账号已被注册，换一个试试。", "That account name is already taken.") };
     map[account] = { nickname, hash: demoHash(password), created: Date.now() };
     saveUsers(map);
     return { ok: true };
@@ -59,7 +59,7 @@ FF.store = (function () {
     const map = users();
     const u = map[account && account.trim()];
     if (!u || u.hash !== demoHash(password)) {
-      return { ok: false, msg: "账号或密码不正确。还记得你的借书证吗？" };
+      return { ok: false, msg: FF.language.text("账号或密码不正确。还记得你的借书证吗？", "The account name or password is incorrect.") };
     }
     return { ok: true, user: { account: account.trim(), nickname: u.nickname } };
   }

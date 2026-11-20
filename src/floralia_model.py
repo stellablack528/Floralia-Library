@@ -1,4 +1,4 @@
-"""Local Flower17 inference for Floralia Bloom 1.0."""
+"""Local inference for Floralia Bloom and its expanded flower classifier."""
 
 import hashlib
 import io
@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 import torch
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, ImageOps, UnidentifiedImageError
 from torch.nn import functional as F
 from torchvision.models import ResNet18_Weights, mobilenet_v3_small
 from torchvision.transforms import functional as VF
@@ -17,6 +17,7 @@ MODEL_ID = "floralia-bloom-v1"
 MODEL_NAME = "Floralia Bloom 1.0"
 CHECKPOINT = ROOT / "models/experiments/flower17-student-weight-blend-20261119/best.pt"
 CHECKPOINT_SHA256 = "a160718d2e5e0422614f72620fe2c7edaa7254a837de7491655792c045dd8884"
+EXPANDED_CHECKPOINT = ROOT / "models/experiments/floralia-bloom25/best.pt"
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 MAX_PIXELS = 24_000_000
 LOW_SCORE_THRESHOLD = .5
@@ -27,17 +28,43 @@ class InvalidPhoto(ValueError):
     pass
 
 
-def load_model(checkpoint=CHECKPOINT):
+def original_classes():
     classes = json.loads((ROOT / "knowledge/classes.json").read_text(encoding="utf-8"))
     if [item["class_id"] for item in classes] != list(range(17)):
         raise ValueError("Expected the 17 Flower17 classes in ID order.")
+    return classes
+
+
+def expanded_classes():
+    classes = original_classes()
+    extra = json.loads((ROOT / "knowledge/extra_folios.json").read_text(encoding="utf-8"))
+    keys = ("camellia", "hydrangea", "plum-blossom", "peach-blossom", "lotus", "osmanthus", "tree-peony", "wisteria")
+    for key in keys:
+        folio = extra[key]
+        classes.append({"class_id": len(classes), "key": key, "name_zh": folio["name_zh"],
+                        "name_en": folio["name_en"], "scientific_name": folio["profile"]["representative_name"]})
+    return classes
+
+
+def model_identity(classes):
+    return (MODEL_ID, MODEL_NAME) if len(classes) == 17 else ("floralia-bloom-25", "Floralia Bloom 25")
+
+
+def load_model(checkpoint=None):
+    if checkpoint is None:
+        checkpoint = EXPANDED_CHECKPOINT if EXPANDED_CHECKPOINT.is_file() else CHECKPOINT
     with checkpoint.open("rb") as file:
-        if hashlib.file_digest(file, "sha256").hexdigest() != CHECKPOINT_SHA256:
-            raise ValueError("Floralia Bloom 1.0 checkpoint checksum failed.")
+        checksum = hashlib.file_digest(file, "sha256").hexdigest()
+        original = checksum == CHECKPOINT_SHA256
+        if not original:
+            checksum_file = checkpoint.with_suffix(".sha256")
+            if not checksum_file.is_file() or checksum_file.read_text(encoding="ascii").strip() != checksum:
+                raise ValueError("Floralia Bloom checkpoint checksum failed.")
         file.seek(0)
         saved = torch.load(file, map_location="cpu", weights_only=True)
+    classes = original_classes() if original else expanded_classes()
     if saved["architecture"] != "mobilenet_v3_small" or saved["classes"] != classes:
-        raise ValueError("Floralia Bloom 1.0 checkpoint has a different architecture or class map.")
+        raise ValueError("Floralia Bloom checkpoint has a different architecture or class map.")
     torch.set_num_threads(4)
     model = mobilenet_v3_small(weights=None, num_classes=len(classes))
     model.load_state_dict(saved["state_dict"])
@@ -53,7 +80,7 @@ def read_photo(raw):
                 raise InvalidPhoto("请选择单张 JPG、PNG 或 WebP 照片。")
             if photo.width * photo.height > MAX_PIXELS:
                 raise InvalidPhoto("照片像素过多，请缩小后重试。")
-            return photo.convert("RGB")
+            return ImageOps.exif_transpose(photo).convert("RGB")
     except (UnidentifiedImageError, Image.DecompressionBombError, OSError, SyntaxError) as exc:
         raise InvalidPhoto("照片无法读取，请换一张图片。") from exc
 
@@ -67,7 +94,8 @@ def identify(raw, model, classes):
     candidates = [{"class_id": idx, "key": classes[idx]["key"], "name_zh": classes[idx]["name_zh"],
                    "name_en": classes[idx]["name_en"], "score": score}
                   for idx, score in zip(ids.tolist(), scores.tolist())]
-    return {"model_id": MODEL_ID, "model_name": MODEL_NAME, "class_count": len(classes),
+    model_id, model_name = model_identity(classes)
+    return {"model_id": model_id, "model_name": model_name, "class_count": len(classes),
             "candidates": candidates, "low_score": candidates[0]["score"] < LOW_SCORE_THRESHOLD}
 
 

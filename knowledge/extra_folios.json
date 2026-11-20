@@ -8,16 +8,18 @@
       "family": "山茶科",
       "genus": "山茶属",
       "traits": [
-        "常绿，叶片深绿有光泽，边缘有细齿",
-        "花常单生，可见白色、粉色、红色及斑色",
-        "园艺品种的花瓣层数和花形变化较大"
+        "常绿灌木或小乔木，叶片互生，深绿而有光泽，叶缘有细齿",
+        "花常单生，可见白、粉、红或带斑纹的花色",
+        "单瓣花的雄蕊较容易看见，栽培品种也有花瓣层数多的重瓣花"
       ],
       "habitat": "原产中国部分沿海地区、韩国济州岛，以及日本中南部至台湾一带。园艺栽培一般适合半阴、湿润而排水良好的环境。",
       "flowering": "北卡罗来纳州立大学推广资料记载多在冬末到早春开花，实际花期随品种和气候变化。",
       "scope": "山茶花和茶花在园艺语境中也可泛指其他山茶属花卉。本页介绍植物学上的山茶 Camellia japonica。",
+      "comparison": "和茶梅对照时，可以一起看开花时间、叶片和花朵大小。北卡罗来纳州立大学的资料记载，茶梅多在晚秋至冬季开花，花较小；山茶多在冬末至早春开花。两者花期可重叠，遇到园艺品种还要结合多项线索。",
       "references": [
         {"publisher": "英国皇家植物园邱园", "title": "Camellia japonica L.", "url": "https://powo.science.kew.org/taxon/828524-1"},
-        {"publisher": "北卡罗来纳州立大学推广服务", "title": "Camellia japonica", "url": "https://plants.ces.ncsu.edu/plants/camellia-japonica/"}
+        {"publisher": "北卡罗来纳州立大学推广服务", "title": "Camellia japonica", "url": "https://plants.ces.ncsu.edu/plants/camellia-japonica/"},
+        {"publisher": "北卡罗来纳州立大学推广服务", "title": "Camellia sasanqua（茶梅）", "url": "https://plants.ces.ncsu.edu/plants/camellia-sasanqua/"}
       ]
     },
     "culture": [
@@ -26,11 +28,26 @@
         "theme": "《茶花女》与剧院包厢里的花束",
         "creator": "小仲马（Alexandre Dumas fils）",
         "title": "La Dame aux camélias",
-        "publisher": "Project Gutenberg",
-        "url": "https://www.gutenberg.org/ebooks/2419",
-        "locator": "第二章，叙述玛格丽特在剧院包厢摆放茶花的段落（小说初版 1848 年）",
+        "publisher": "法语维基文库 · 1852 年版影印页",
+        "url": "https://fr.wikisource.org/wiki/Page:Dumas_fils_-_La_Dame_aux_cam%C3%A9lias,_1852.djvu/54",
+        "locator": "第二章，1852 年版扫描第 54 张，玛格丽特的剧院包厢一段",
+        "excerpt": "sa lorgnette, un sac de bonbons et un bouquet de camélias.",
+        "excerpt_language": "fr",
         "our_summary": "每逢新剧上演，玛格丽特的剧院包厢前总摆着三样随身物：望远镜、糖果袋和一束茶花。花店后来便以「茶花女」称呼她。",
         "scope": "这是小说中人物绰号的来历。原文只写 camélias，关联到山茶属的文学意象。",
+        "checked_on": "2026-11-20"
+      },
+      {
+        "kind": "宋诗",
+        "theme": "苏轼笔下雪中开花的山茶",
+        "creator": "苏轼",
+        "title": "邵伯梵行寺山茶",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/wiki/邵伯梵行寺山茶",
+        "locator": "末句，另见《苏诗补注》卷二十四",
+        "excerpt": "烂红如火雪中开。",
+        "our_summary": "诗从独自到寺中看花写起，最后用火红的花与雪色相映，写山茶在寒时开放的鲜明姿态。",
+        "scope": "诗中的雪与火色是文学意象。实际花期受地区和品种影响。",
         "checked_on": "2026-11-20"
       }
     ]
@@ -126,13 +143,17 @@
       "habitat": "多年生水生植物，根状茎扎在泥中，常见于水面平静、有阳光的浅水环境。",
       "flowering": "通常在夏季开花。",
       "scope": "本页的荷花是莲科的莲。它和常被一同观赏的睡莲分属不同科。",
+      "comparison": "在池边先看叶子。荷叶通常近圆形、没有深缺口，叶柄接近中央；常见睡莲的叶片从边缘向中心有一道缺口，且多浮在水面。荷花谢后留下的莲蓬也是辨识线索。",
       "references": [
         {"publisher": "英国皇家植物园邱园", "title": "Nelumbo nucifera", "url": "https://powo.science.kew.org/taxon/605422-1"},
-        {"publisher": "北卡罗来纳州立大学推广服务", "title": "Nelumbo nucifera", "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"}
+        {"publisher": "北卡罗来纳州立大学推广服务", "title": "Nelumbo nucifera", "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"},
+        {"publisher": "新加坡国家公园局", "title": "Nelumbo nucifera Cultivars（附睡莲对照）", "url": "https://www.nparks.gov.sg/florafaunaweb/flora/8/4/8471"}
       ]
     },
     "culture": [
-      {"kind": "散文", "theme": "《爱莲说》里的花之君子", "creator": "周敦颐", "title": "爱莲说", "publisher": "维基文库原文", "url": "https://zh.wikisource.org/zh-hant/愛蓮說", "locator": "第一段写莲的形态，第二段以菊、牡丹和莲作对照", "our_summary": "作者从莲生于泥中、挺立出水的姿态写起，再将莲比作君子。前段的形态描写为后段的品格比喻作铺垫。", "scope": "君子是这篇文章赋予莲的寓意，植物档案记录的是可观察特征。", "checked_on": "2026-11-20"}
+      {"kind": "散文", "theme": "《爱莲说》里的花之君子", "creator": "周敦颐", "title": "爱莲说", "publisher": "维基文库原文", "url": "https://zh.wikisource.org/zh-hant/愛蓮說", "locator": "第一段写莲的形态，第二段以菊、牡丹和莲作对照", "excerpt": "莲，花之君子者也。", "our_summary": "作者从莲生于泥中、挺立出水的姿态写起，再将莲比作君子。前段的形态描写为后段的品格比喻作铺垫。", "scope": "君子是这篇文章赋予莲的寓意，植物档案记录的是可观察特征。", "checked_on": "2026-11-20"},
+      {"kind": "宋诗", "theme": "杨万里笔下的西湖荷塘", "creator": "杨万里", "title": "晓出净慈寺送林子方", "publisher": "维基文库原文", "url": "https://zh.wikisource.org/zh-hant/晓出净慈寺送林子方", "locator": "第三、四句", "excerpt": "接天莲叶无穷碧，映日荷花别样红。", "our_summary": "诗把视线从铺到远处的荷叶拉回到阳光里的红花，用两种颜色写西湖夏日的光景。", "scope": "诗中的红花来自特定场景。栽培荷花还有其他花色。", "checked_on": "2026-11-20"},
+      {"kind": "绘画", "theme": "延伸观赏 · 八大山人笔下的荷叶与禽鸟", "creator": "八大山人（朱耷）", "title": "莲塘戏禽图", "publisher": "大都会艺术博物馆", "url": "https://www.metmuseum.org/art/collection/search/49143", "locator": "约 1690 年，馆藏 1989.363.135", "our_summary": "大块墨色的荷叶和留白处的石头交错，几只禽鸟让荷塘多了动静。馆藏页面可从右往左查看手卷。", "scope": "可与主图的设色对轴对照，看两件作品怎样描绘荷塘。", "checked_on": "2026-11-20"}
     ]
   },
   "osmanthus": {

@@ -1,6 +1,6 @@
-# Floralia Bloom 1.0 本机识花
+# Floralia Bloom 本机识花
 
-Floralia Bloom 1.0（花页识花）是项目的最终 17 类模型。它把 MobileNetV3 Small 的 S0 基线与 S2 末层微调权重按 25% / 75% 合成一份权重。客户端提交一张图片，本机服务返回 Top-3 类别、预测分数和低分提示，并用类别键关联花卉书页。
+Floralia Bloom 1.0（花页识花）是项目的 17 类基线。它把 MobileNetV3 Small 的 S0 基线与 S2 末层微调权重按 25% / 75% 合成一份权重。Floralia Bloom 25 沿用这份权重并训练 25 个类别输出，详见 [25 类实验报告](bloom25.md)。本机服务返回 Top-3 类别、预测分数和低分提示，并按类别键关联书页。
 
 在已有 PyTorch、Torchvision 和 Pillow 的项目虚拟环境中，从项目根目录启动。
 
@@ -8,7 +8,7 @@ Floralia Bloom 1.0（花页识花）是项目的最终 17 类模型。它把 Mob
 .\.venv\Scripts\python.exe -B src\serve_floralia.py
 ```
 
-打开 `http://127.0.0.1:8501/`。模型权重单独保存，默认路径为 `models/experiments/flower17-student-weight-blend-20261119/best.pt`。如果权重保存在其他位置，可用 `--checkpoint` 指定路径。服务启动时核对权重校验值和 17 类映射。上传处理在本机内存中完成，足迹由现有浏览器存储记录。
+打开 `http://127.0.0.1:8501/`。模型权重单独保存。服务优先加载 `models/experiments/floralia-bloom25/best.pt` 和其校验文件 `best.sha256`。只有原版权重时，从 `models/experiments/flower17-student-weight-blend-20261119/best.pt` 启动 17 类模式。也可用 `--checkpoint` 指定权重路径。服务启动时校验权重及对应的类别映射。上传处理在本机内存中完成，足迹保存在浏览器中。
 
 接受不大于 10 MB 的单张 JPG、PNG 和 WebP。第一候选模型分数低于 50% 时提示用户核对。服务的 `GET /api/model` 返回模型版本，`POST /api/identify` 接收图片的原始字节。静态托管版本使用带标注的演示数据。
 

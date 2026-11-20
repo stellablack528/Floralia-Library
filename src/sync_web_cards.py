@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 classes = json.loads((KNOWLEDGE / "classes.json").read_text(encoding="utf-8"))
 extra_folios = json.loads((KNOWLEDGE / "extra_folios.json").read_text(encoding="utf-8"))
+english_folios = json.loads((KNOWLEDGE / "folio_english.json").read_text(encoding="utf-8"))
 profiles = json.loads((KNOWLEDGE / "botanical_profiles.json").read_text(encoding="utf-8"))
 sources = json.loads((KNOWLEDGE / "cultural_sources.json").read_text(encoding="utf-8"))
 artworks = json.loads((KNOWLEDGE / "classic_images.json").read_text(encoding="utf-8"))
@@ -25,6 +26,8 @@ class_keys = {item["key"] for item in classes}
 if [item["class_id"] for item in classes] != list(range(17)) or len(class_keys) != 17:
     raise ValueError("Expected all 17 Flower17 class IDs and unique keys in dataset order")
 folio_keys = class_keys | extra_folios.keys()
+if english_folios.keys() != folio_keys:
+    raise ValueError("Every folio must have English content")
 if class_keys & extra_folios.keys() or any(not re.fullmatch(r"[a-z]+(?:-[a-z]+)*", key) for key in extra_folios):
     raise ValueError("Additional folio keys must be unique and use lowercase words separated by hyphens")
 if artworks.keys() - folio_keys:
@@ -75,11 +78,23 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         raise ValueError(f"{key}: expected a botanical source")
     for source in profile["references"]:
         require_source(source, key)
+    if "comparison" in profile:
+        require_text(profile, ("comparison",), key)
     if not records:
         raise ValueError(f"{key}: expected a cultural record")
+    english = english_folios[key]
+    require_text(english, ("family", "habitat", "season", "note"), key)
+    if len(english["culture"]) != len(records) or len(english["traits"]) != len(traits):
+        raise ValueError(f"{key}: English traits and cultural records must match the folio")
+    if key in artworks and len(english.get("art", [])) != 5:
+        raise ValueError(f"{key}: expected English artwork description, caption and credit")
     for record in records:
         require_source(record, key)
         require_text(record, ("kind", "theme", "creator", "locator", "our_summary", "scope", "checked_on"), key)
+        if "excerpt" in record or "excerpt_language" in record:
+            require_text(record, ("excerpt",), key)
+            if "excerpt_language" in record:
+                require_text(record, ("excerpt_language",), key)
     return {
         "class_id": item.get("class_id"),
         "order": order,
@@ -94,8 +109,10 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         "habitat": profile["habitat"],
         "season": profile["flowering"],
         "note": profile["scope"],
+        **({"comparison": profile["comparison"]} if "comparison" in profile else {}),
         "sources": profile["references"],
         "culture": [{field: value for field, value in record.items() if field != "class_key"} for record in records],
+        "english": english,
         **({"artwork": artworks[key]} if key in artworks else {}),
     }
 

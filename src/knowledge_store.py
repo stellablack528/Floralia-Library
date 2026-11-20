@@ -268,6 +268,9 @@ class KnowledgeStore:
         if not indices or any(type(index) is not int or index < 0 for index in indices) or len(indices) != len(set(indices)):
             raise ValueError("MinerU 页码必须为互不重复的非负整数")
         page_numbers = sorted(index + 1 for index in indices)
+        return self.register_parse(metadata, page_numbers, str(folder))
+
+    def register_parse(self, metadata: dict, page_numbers: list[int], output_ref: str) -> dict:
         digest = metadata["sha256"].lower()
         self.db.execute(
             """INSERT INTO documents (sha256, original_name, local_path) VALUES (?, ?, ?)
@@ -279,13 +282,13 @@ class KnowledgeStore:
             """INSERT INTO document_parses (document_id, parsed_at, mineru_version, tier, device, output_dir)
                VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(document_id, parsed_at, tier) DO NOTHING""",
             (document_id, metadata["parsed_at_utc"], metadata["mineru_version"], metadata["mineru_tier"],
-             metadata["onnx_device"], str(folder)),
+             metadata["onnx_device"], output_ref),
         )
         parse = self.db.execute(
             "SELECT parse_id, output_dir FROM document_parses WHERE document_id = ? AND parsed_at = ? AND tier = ?",
             (document_id, metadata["parsed_at_utc"], metadata["mineru_tier"]),
         ).fetchone()
-        if parse["output_dir"] != str(folder):
+        if parse["output_dir"] != output_ref:
             raise ValueError(f"同一次解析已从其它目录登记：{parse['output_dir']}")
         parse_id = parse["parse_id"]
         self.db.executemany(

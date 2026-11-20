@@ -12,7 +12,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-from floralia_model import ROOT, grad_cam, identify, load_model, read_photo
+from floralia_model import CHECKPOINT, ROOT, grad_cam, identify, load_model, read_photo
 from prepare_flower17 import IMAGES, SPLITS
 
 
@@ -58,7 +58,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("destination", type=Path, nargs="?", default=ROOT / "reports/figures/floralia_bloom_grad_cam.png")
     args = parser.parse_args()
-    model, classes = load_model()
+    model, classes = load_model(CHECKPOINT)
     cases = choose_cases(model, classes)
     font = Path("C:/Windows/Fonts/msyh.ttc")
     if font.is_file():

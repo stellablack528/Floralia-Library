@@ -48,12 +48,12 @@ Rather than ending with a classification label, Floralia aims to invite further 
 - **文学与艺术**：与花卉相关的诗歌、文学作品、神话及文化典故。
 - **个人收藏**：保存喜爱的花卉书页，回顾探索记录。
 
-本机 Web 识花台已接入最终模型 **Floralia Bloom 1.0（花页识花）**，支持 17 类花卉识别、Top-3、Grad-CAM 热力图和书页跳转。见[本机识花运行说明](docs/model.md)。
+资料馆收录 25 张中英双语书页。为本机配置 **Floralia Bloom 25** 后，识花台支持 25 类预测、Top-3、Grad-CAM 和书页跳转。见[本机识花运行说明](docs/model.md)和[扩展实验报告](docs/bloom25.md)。
 
 ### 当前开发状态（2026-11）
 
 - Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
-- 本机服务运行真实识别，静态托管提供带标注的演示模式。17 类均已有带出处的代表植物档案与文献文化条目，见 [知识库说明](docs/knowledge.md)。
+- 本机服务使用可用的 25 类或 17 类权重运行真实识别，静态托管提供带标注的演示模式。25 张书页均有带出处的植物档案与文学或文化条目，见 [知识库说明](docs/knowledge.md)。
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
 - Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
 - SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
@@ -73,7 +73,7 @@ Upload a flower photograph and explore its possible identity.
 - Top-1 prediction and Top-3 candidate display
 - Direct navigation to botanical records
 
-**Current status:** The local Web server runs Floralia Bloom 1.0, a MobileNetV3 Small model for Oxford Flower17. Static hosting shows a labelled demo. See the [local inference setup](docs/model.md).
+The app offers English and Simplified Chinese across 25 folios. With local weights, Floralia Bloom 25 extends the original MobileNetV3 Small classifier by eight categories. The static site shows a labelled demo. See the [local inference setup](docs/model.md) and [25-category evaluation](docs/bloom25.md).
 
 ### 🌿 Botanical Encyclopedia · 植物资料馆
 
@@ -358,7 +358,7 @@ Open your browser at:
 
 1. Continue as a guest or create a local demonstration account.
 2. Visit the identification page and upload a flower image.
-3. Compare the three candidates returned by Floralia Bloom 1.0.
+3. Compare the three candidates returned by the active Floralia Bloom model.
 4. Open the corresponding botanical records.
 5. Browse, search and bookmark flower entries.
 6. Review your history in the personal collection.

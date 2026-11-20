@@ -13,13 +13,15 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import parse_qs, unquote, urlsplit
 
+from document_import import MAX_PDF_BYTES, DocumentImports, ImportBusy
 from document_translation import DEFAULT_PORT, MAX_TRANSLATION, MODEL as TRANSLATION_MODEL, TranslationError, translate
-from floralia_model import CHECKPOINT, MAX_UPLOAD_BYTES, MODEL_ID, MODEL_NAME, ROOT, InvalidPhoto, grad_cam, identify, load_model
+from floralia_model import MAX_UPLOAD_BYTES, ROOT, InvalidPhoto, grad_cam, identify, load_model, model_identity, original_classes
 from knowledge_store import DEFAULT_DB, initialize, open_store
 
 
 MARKER = "<!-- floralia-local-model -->"
 EVIDENCE_PATH = "/api/evidence/"
+IMPORT_PATH = "/api/document-imports"
 
 
 def png_data_uri(image):
@@ -36,13 +38,15 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
     index = (web / "index.html").read_text(encoding="utf-8")
     if index.count(MARKER) != 1:
         raise ValueError("Local model configuration marker is missing from index.html.")
-    config = {"name": MODEL_NAME, "maxBytes": MAX_UPLOAD_BYTES}
+    model_id, model_name = model_identity(classes)
+    config = {"name": model_name, "maxBytes": MAX_UPLOAD_BYTES, "classKeys": [flower["key"] for flower in classes]}
     page = index.replace(MARKER, f"<script>window.FF_LOCAL_MODEL = {json.dumps(config)};</script>").encode("utf-8")
     lock = Lock()
     translation_lock = Lock()
+    imports = DocumentImports(knowledge_db)
     allowed_hosts = {f"127.0.0.1:{port}", f"localhost:{port}"}
     allowed_origins = {f"http://{host}" for host in allowed_hosts}
-    flower_keys = {flower["key"] for flower in classes}
+    flower_keys = {flower["key"] for flower in original_classes()}
 
     class Handler(BaseHTTPRequestHandler):
         def reply(self, code, body, content_type):
@@ -56,6 +60,69 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
 
         def json_reply(self, code, value):
             self.reply(code, json.dumps(value, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8")
+
+        def import_pdf(self, query):
+            options = parse_qs(query)
+            size = self.headers.get("Content-Length", "")
+            if not size.isascii() or not size.isdecimal() or len(size) > 9 or int(size) < 5:
+                self.json_reply(400, {"error": "请选择一份 PDF 文件。"})
+                return
+            if int(size) > MAX_PDF_BYTES:
+                self.json_reply(413, {"error": "请选择不超过 40 MB 的 PDF。"})
+                return
+            if self.headers.get_content_type() != "application/pdf":
+                self.json_reply(415, {"error": "请选择 PDF 文件。"})
+                return
+            filename, page, tier = (options.get(key, [""])[0] for key in ("filename", "page", "tier"))
+            if (not filename.casefold().endswith(".pdf") or len(filename) > 240
+                    or any(char in filename for char in "/\\") or not filename.isprintable()
+                    or not page.isascii() or not page.isdecimal() or len(page) > 5 or not 1 <= int(page) <= 10000
+                    or tier not in ("flash", "basic")):
+                self.json_reply(400, {"error": "请填写有效的 PDF 文件名、页码和解析方式。"})
+                return
+            self.connection.settimeout(15)
+            try:
+                job = imports.submit(self.rfile, int(size), filename, int(page), tier)
+            except ImportBusy as exc:
+                self.json_reply(429, {"error": str(exc)})
+                return
+            except ValueError as exc:
+                self.json_reply(400, {"error": str(exc)})
+                return
+            except OSError:
+                self.json_reply(503, {"error": "暂时无法接收上传，请重试。"})
+                return
+            self.json_reply(202, {"job": job})
+
+        def save_import(self, job):
+            length = self.headers.get("Content-Length", "")
+            if (self.headers.get_content_type() != "application/json" or not length.isascii()
+                    or not length.isdecimal() or len(length) > 5 or not 0 < int(length) <= 32768):
+                self.json_reply(400, {"error": "摘录数据格式有误。"})
+                return
+            self.connection.settimeout(15)
+            try:
+                raw = self.rfile.read(int(length))
+                payload = json.loads(raw)
+                keys = ("class_key", "topic", "excerpt", "summary", "source_url")
+                if (len(raw) != int(length) or not isinstance(payload, dict)
+                        or any(not isinstance(payload.get(key), str) for key in keys)):
+                    raise ValueError("请填写摘录资料。")
+                class_key, *fields = (payload[key].strip() for key in keys)
+                if class_key not in flower_keys:
+                    raise ValueError("请选择有效的花卉书页。")
+                result = imports.save(job, class_key, *fields)
+            except (json.JSONDecodeError, UnicodeError, TimeoutError):
+                self.json_reply(400, {"error": "摘录数据格式有误。"})
+                return
+            except ValueError as exc:
+                self.json_reply(400, {"error": str(exc)})
+                return
+            except sqlite3.Error:
+                logging.exception("Could not save imported excerpt")
+                self.json_reply(503, {"error": "暂时无法将摘录入库。"})
+                return
+            self.json_reply(200, result)
 
         def get_evidence(self, class_key, query):
             if class_key not in flower_keys:
@@ -208,10 +275,17 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
                 self.reply(200, page, "text/html; charset=utf-8")
                 return
             if path == "/api/model":
-                self.json_reply(200, {"model_id": MODEL_ID, "model_name": MODEL_NAME, "class_count": len(classes)})
+                self.json_reply(200, {"model_id": model_id, "model_name": model_name, "class_count": len(classes)})
                 return
             if path.startswith(EVIDENCE_PATH):
                 self.get_evidence(path.removeprefix(EVIDENCE_PATH), route.query)
+                return
+            if path.startswith(IMPORT_PATH + "/"):
+                job = imports.status(path.removeprefix(IMPORT_PATH + "/"))
+                if job is None:
+                    self.json_reply(404, {"error": "解析预览已过期，请重新上传。"})
+                else:
+                    self.json_reply(200, job)
                 return
             parts = path.removeprefix("/").split("/")
             if not parts or parts[0] not in {"assets", "css", "js"} or any(not p or p in {".", ".."} or "\\" in p or ":" in p for p in parts):
@@ -230,12 +304,26 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
         def do_POST(self):
             route = urlsplit(self.path)
             evidence_path = unquote(route.path)
-            if route.path not in {"/api/identify", "/api/grad-cam"} and not evidence_path.startswith(EVIDENCE_PATH):
+            import_path = evidence_path == IMPORT_PATH or evidence_path.startswith(IMPORT_PATH + "/")
+            if (route.path not in {"/api/identify", "/api/grad-cam"}
+                    and not evidence_path.startswith(EVIDENCE_PATH) and not import_path):
                 self.send_error(404)
                 return
             origin = self.headers.get("Origin")
             if self.headers.get("Host") not in allowed_hosts or (origin and origin not in allowed_origins):
                 self.json_reply(403, {"error": "识别服务仅限本机访问。"})
+                return
+            if import_path:
+                if origin != f"http://{self.headers.get('Host')}":
+                    self.json_reply(403, {"error": "请从本机网页提交 PDF。"})
+                elif evidence_path == IMPORT_PATH:
+                    self.import_pdf(route.query)
+                else:
+                    job, _, action = evidence_path.removeprefix(IMPORT_PATH + "/").partition("/")
+                    if action == "evidence":
+                        self.save_import(job)
+                    else:
+                        self.json_reply(404, {"error": "找不到此操作。"})
                 return
             if evidence_path.startswith(EVIDENCE_PATH):
                 key, _, action = evidence_path.removeprefix(EVIDENCE_PATH).partition("/")
@@ -274,7 +362,7 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
                     else:
                         crop, overlay = grad_cam(raw, model, class_id)
                 if class_id is not None:
-                    result = {"model_id": MODEL_ID, "class_id": class_id, "name_zh": classes[class_id]["name_zh"],
+                    result = {"model_id": model_id, "class_id": class_id, "name_zh": classes[class_id]["name_zh"],
                               "input_image": png_data_uri(crop), "overlay_image": png_data_uri(overlay)}
             except TimeoutError:
                 self.json_reply(408, {"error": "读取照片超时，请重试。"})
@@ -295,7 +383,7 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8501)
-    parser.add_argument("--checkpoint", type=Path, default=CHECKPOINT)
+    parser.add_argument("--checkpoint", type=Path)
     parser.add_argument("--knowledge-db", type=Path, default=DEFAULT_DB)
     parser.add_argument("--translation-port", type=int, default=DEFAULT_PORT)
     args = parser.parse_args()
@@ -305,11 +393,12 @@ def main():
         parser.error("翻译服务需要独立的有效端口。")
     web = ROOT / "web" if (ROOT / "web/index.html").is_file() else ROOT
     model, classes = load_model(args.checkpoint)
-    if args.knowledge_db.is_file():
-        initialize(args.knowledge_db)
+    initialize(args.knowledge_db)
+    with open_store(args.knowledge_db) as store:
+        store.seed()
     with ThreadingHTTPServer(("127.0.0.1", args.port),
                              handler_for(web, model, classes, args.port, args.knowledge_db, args.translation_port)) as server:
-        print(f"{MODEL_NAME} · http://127.0.0.1:{args.port}/", flush=True)
+        print(f"{model_identity(classes)[1]} · http://127.0.0.1:{args.port}/", flush=True)
         server.serve_forever()
 
 

@@ -40,6 +40,31 @@ FF.data = { flowers: [
         "checked_on": "2026-11-18"
       }
     ],
+    "english": {
+      "family": "Amaryllidaceae",
+      "traits": [
+        "Pale-yellow outer tepals",
+        "Darker trumpet-shaped corona",
+        "Narrow grey-green leaves"
+      ],
+      "habitat": "Moist meadows, woods and woodland edges in Britain.",
+      "season": "Usually March to April in Britain.",
+      "note": "Daffodil is a broad name. This folio uses the wild daffodil as its example.",
+      "culture": [
+        [
+          "Poetry",
+          "Daffodils by the lake",
+          "Wordsworth remembers golden daffodils moving in the breeze. The memory lifts his spirits when he is alone."
+        ]
+      ],
+      "art": [
+        "Daffodils and calla lilies mirror each other on pale paper.",
+        "Yellow trumpet-shaped flowers and white calla lilies form a symmetrical decorative pattern.",
+        "Unidentified French artist",
+        "19th century",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "黄水仙与马蹄莲花卉图案",
       "title": "Flower Design: Daffodils and Calla Lilies",
@@ -95,7 +120,25 @@ FF.data = { flowers: [
         "scope": "这里依据博物馆对童话情节的介绍。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Amaryllidaceae",
+      "traits": [
+        "Usually a single nodding flower",
+        "Three longer white outer tepals",
+        "Shorter inner tepals often marked green"
+      ],
+      "habitat": "Moist, well-drained ground in partial shade, often under deciduous trees.",
+      "season": "Late winter to early spring in British garden records.",
+      "note": "Snowdrop refers to several species. This page describes the common snowdrop.",
+      "culture": [
+        [
+          "Fairy tale",
+          "A flower that opens ahead of spring",
+          "Andersen's snowdrop opens while the weather is still cold. The wind and cold tease it for blooming so early."
+        ]
+      ]
+    }
   },
   {
     "class_id": 2,
@@ -134,7 +177,25 @@ FF.data = { flowers: [
         "scope": "此处的寓意限定于文章所述的法国节日传统。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Asparagaceae",
+      "traits": [
+        "Small white bells along an arching stalk",
+        "Oval to narrowly ovate leaves wider than the stalk",
+        "Underground stems can form colonies"
+      ],
+      "habitat": "Cool, shaded places with moist, humus-rich soil.",
+      "season": "Usually late spring in Britain.",
+      "note": "Lily of the valley belongs to the asparagus family.",
+      "culture": [
+        [
+          "Festival tradition",
+          "May Day good luck in France",
+          "Giving lily of the valley on 1 May expresses a wish for good luck in this French tradition."
+        ]
+      ]
+    }
   },
   {
     "class_id": 3,
@@ -173,7 +234,25 @@ FF.data = { flowers: [
         "scope": "这是 Woodland Trust 收录的民间传说。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Asparagaceae",
+      "traits": [
+        "Blue-violet bells often hang to one side",
+        "Tips of the tepals curl outward",
+        "Long narrow leaves emerge near ground level"
+      ],
+      "habitat": "Native to western Europe. In Britain it grows in woods and along hedges and grassland.",
+      "season": "Usually April to May in Britain.",
+      "note": "This page describes the English bluebell. Spanish bluebells and their hybrids are separate taxa.",
+      "culture": [
+        [
+          "Folklore",
+          "Fairy bells in the woods",
+          "Woodland Trust records stories in which hearing bells in a bluebell wood signals the presence of fairies."
+        ]
+      ]
+    }
   },
   {
     "class_id": 4,
@@ -212,7 +291,25 @@ FF.data = { flowers: [
         "scope": "这条记录涉及同属近缘种 Crocus sativus，植物栏的代表种为 C. vernus。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Iridaceae",
+      "traits": [
+        "Narrow leaves grow from a corm",
+        "Cup-shaped flowers",
+        "The representative species comes in white and shades of purple"
+      ],
+      "habitat": "Well-drained open ground including lawns, where it may naturalise.",
+      "season": "Mainly spring, sometimes into early summer in RHS records.",
+      "note": "The genus includes autumn and spring flowerers. This folio describes the spring crocus.",
+      "culture": [
+        [
+          "Material culture",
+          "A spice and a dye",
+          "Cambridge traces the cultivation and uses of dried saffron stigmas. The spice comes from Crocus sativus, a relative of the spring crocus."
+        ]
+      ]
+    }
   },
   {
     "class_id": 5,
@@ -264,6 +361,36 @@ FF.data = { flowers: [
         "checked_on": "2026-11-19"
       }
     ],
+    "english": {
+      "family": "Iridaceae",
+      "traits": [
+        "Sword-shaped grey-green leaves",
+        "Large flowers with colours that vary by cultivar",
+        "Bearded irises often have a fuzzy strip on the outer tepals"
+      ],
+      "habitat": "Sunny planting beds with good drainage.",
+      "season": "May to June in British horticultural records.",
+      "note": "The representative plant is a bearded iris listed by the RHS.",
+      "culture": [
+        [
+          "Painting",
+          "Irises at Saint-Rémy",
+          "Van Gogh painted a flowerbed of blue-violet irises, a white bloom and intersecting leaves."
+        ],
+        [
+          "Epic and names",
+          "Iris brings Helen a message",
+          "In the Iliad, Iris appears as Laodice and calls Helen to watch the duel between Menelaus and Paris. The association suggests Iris as a name for a messenger."
+        ]
+      ],
+      "art": [
+        "Blue-violet irises fill a flowerbed, with one white bloom at left.",
+        "Van Gogh painted this garden at Saint-Rémy in 1889. The blue-violet flowers make the single white iris easy to spot.",
+        "Vincent van Gogh",
+        "1889",
+        "J. Paul Getty Museum"
+      ]
+    },
     "artwork": {
       "title_zh": "鸢尾花",
       "title": "Irises",
@@ -319,7 +446,25 @@ FF.data = { flowers: [
         "scope": "小说使用俗名 Tiger-lily。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Liliaceae",
+      "traits": [
+        "Orange tepals with dark spots",
+        "Nodding flowers with strongly recurved tepals",
+        "Dark bulbils can form in the leaf axils"
+      ],
+      "habitat": "Often grown in sun and moist soil.",
+      "season": "Usually summer.",
+      "note": "Tiger lily can refer to several lilies. The example here is Lilium lancifolium.",
+      "culture": [
+        [
+          "Novel",
+          "The tiger lily that talks",
+          "Alice wishes the Tiger-lily would speak and the flower immediately replies, opening a conversation with the garden."
+        ]
+      ]
+    }
   },
   {
     "class_id": 7,
@@ -370,7 +515,30 @@ FF.data = { flowers: [
         "scope": "名字灵感：可以沿用这段情节的构思，从两个人的名字各取一字，为作品或纪念物命名。",
         "checked_on": "2026-11-19"
       }
-    ]
+    ],
+    "english": {
+      "family": "Liliaceae",
+      "traits": [
+        "Broad lance-shaped leaves",
+        "The representative plant usually has a single layer of tepals",
+        "Colours include yellow, orange, red and purple-red"
+      ],
+      "habitat": "Sunny, well-drained beds for this ornamental bulb.",
+      "season": "Usually late spring in Britain.",
+      "note": "Garden tulips include several species and hybrids. Cultivated bulbs under this name may have hybrid parents.",
+      "culture": [
+        [
+          "Art and horticulture",
+          "A seventeenth-century tulip album",
+          "Judith Leyster painted the named tulip Vroege Brabantsson in watercolour during the Dutch tulip trade."
+        ],
+        [
+          "Novel and names",
+          "A black tulip and two names",
+          "Cornelius proposes naming the black tulip Rosa Barlœnsis, combining Rosa's name with his own."
+        ]
+      ]
+    }
   },
   {
     "class_id": 8,
@@ -414,7 +582,25 @@ FF.data = { flowers: [
         "scope": "地点和传统对应 Fritillaria meleagris。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Liliaceae",
+      "traits": [
+        "Nodding bell-shaped flowers",
+        "A pink and purple checkerboard pattern is common",
+        "Slender grey-green leaves"
+      ],
+      "habitat": "Moist meadows, including a documented Oxford college meadow.",
+      "season": "Spring.",
+      "note": "Fritillary names several species. This folio uses the snake's-head fritillary with its checkerboard markings.",
+      "culture": [
+        [
+          "Local tradition",
+          "Fritillary Sunday in Oxfordshire",
+          "Kew records a local Fritillary Sunday in Ducklington, where the plant grows in nearby meadows."
+        ]
+      ]
+    }
   },
   {
     "class_id": 9,
@@ -466,6 +652,36 @@ FF.data = { flowers: [
         "checked_on": "2026-11-19"
       }
     ],
+    "english": {
+      "family": "Asteraceae",
+      "traits": [
+        "A single head contains many small flowers",
+        "Usually yellow ray florets around the edge",
+        "Often darker disc florets in the centre"
+      ],
+      "habitat": "Native to North America and widely grown in open, sunny gardens.",
+      "season": "Mid to late summer in North Carolina horticultural records.",
+      "note": "This page describes the familiar annual sunflower.",
+      "culture": [
+        [
+          "Painting",
+          "Sunflowers in a vase",
+          "Van Gogh used different yellows for the flowers, vase and background in the Amsterdam version."
+        ],
+        [
+          "Poetry and names",
+          "The sunflower measures the sun's steps",
+          "Blake's sunflower counts the steps of the sun and yearns for the golden end of its journey."
+        ]
+      ],
+      "art": [
+        "Two cut sunflower heads lie at different angles against a blue ground.",
+        "This Paris still life shows two cut sunflowers, with the seed heads and curling petals filling much of the frame.",
+        "Vincent van Gogh",
+        "1887",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "向日葵",
       "title": "Sunflowers",
@@ -521,7 +737,25 @@ FF.data = { flowers: [
         "scope": "诗歌使用俗名 daisy，条目保留该用法。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Asteraceae",
+      "traits": [
+        "White rays around a yellow centre",
+        "Ray tips sometimes blush pink",
+        "Low rosette of spoon-shaped leaves"
+      ],
+      "habitat": "Lawns and short turf in Britain. It tolerates regular mowing.",
+      "season": "Can flower through much of the year in Britain.",
+      "note": "Daisy is a broad name. This folio describes the common daisy.",
+      "culture": [
+        [
+          "Poetry",
+          "The flower beneath the plough",
+          "Robert Burns starts with a small daisy crushed during ploughing and connects the accidental damage to human fortunes."
+        ]
+      ]
+    }
   },
   {
     "class_id": 11,
@@ -565,7 +799,25 @@ FF.data = { flowers: [
         "scope": "此处讨论俗名的历史。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Asteraceae",
+      "traits": [
+        "Yellow flower heads appear before the conspicuous leaves",
+        "Short, scaly flower stalks",
+        "Broad, toothed leaves and underground rhizomes"
+      ],
+      "habitat": "Open disturbed ground and gardens, where the rhizomes spread.",
+      "season": "Usually early spring.",
+      "note": "The scaly stalk and flowers appearing before the leaves help distinguish coltsfoot from a dandelion.",
+      "culture": [
+        [
+          "Name history",
+          "A colt's hoofprint",
+          "The Met records old names likening the leaf to a horse's foot. The English name preserves the association."
+        ]
+      ]
+    }
   },
   {
     "class_id": 12,
@@ -609,7 +861,25 @@ FF.data = { flowers: [
         "scope": "小说素材属于文化记录。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Asteraceae",
+      "traits": [
+        "Flower heads made up of yellow ray florets",
+        "Often deeply lobed leaves in a basal rosette",
+        "Ripe seed head forms a white puffball"
+      ],
+      "habitat": "Lawns, flower beds and cracks in paving in Britain.",
+      "season": "Flowers over a long season and is especially common in spring.",
+      "note": "Dandelions include many closely related forms. The RHS representative profile supplies the scientific name here.",
+      "culture": [
+        [
+          "Novel",
+          "Bottling summer",
+          "In Bradbury's novel, dandelion wine preserves something of summer and becomes a way to write about childhood and the seasons."
+        ]
+      ]
+    }
   },
   {
     "class_id": 13,
@@ -648,7 +918,25 @@ FF.data = { flowers: [
         "scope": "植物名对应英文剧本的 cowslip。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Primulaceae",
+      "traits": [
+        "Wrinkled leaves in a basal rosette",
+        "Nodding yellow flowers clustered at the top of a thin stem",
+        "Tubular flowers often marked orange at the mouth"
+      ],
+      "habitat": "Grassland, woodland edges and hedgerows in Britain, often on calcareous soil.",
+      "season": "Usually April to May in Britain.",
+      "note": "Cowslip can resemble its relative the primrose and their hybrids.",
+      "culture": [
+        [
+          "Play",
+          "Ariel's bed in the flower bell",
+          "Ariel sings about lying in a cowslip's bell in The Tempest. The tiny flower gives the audience a sense of the spirit's scale."
+        ]
+      ]
+    }
   },
   {
     "class_id": 14,
@@ -687,7 +975,25 @@ FF.data = { flowers: [
         "scope": "游戏使用 buttercup 这一俗名。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Ranunculaceae",
+      "traits": [
+        "Glossy yellow petals in a shallow cup",
+        "Upright, hairy growth",
+        "Palmately divided leaves"
+      ],
+      "habitat": "Meadows and other grassy ground, including moist, moderately drained soils.",
+      "season": "Early to midsummer in British horticultural records.",
+      "note": "Buttercup includes several species. The representative plant here is meadow buttercup.",
+      "culture": [
+        [
+          "Children's folklore",
+          "A yellow reflection under the chin",
+          "Newell records a children's game in which a yellow reflection from a buttercup supposedly indicates a fondness for butter."
+        ]
+      ]
+    }
   },
   {
     "class_id": 15,
@@ -726,7 +1032,25 @@ FF.data = { flowers: [
         "scope": "这一关联指银莲花的文学意象，植物栏另列林地银莲花作为代表。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Ranunculaceae",
+      "traits": [
+        "Often a single white star-shaped flower, sometimes tinted pink",
+        "Petal-like sepals",
+        "Deeply divided leaves that can carpet woodland"
+      ],
+      "habitat": "Deciduous woods, where it flowers before the tree canopy closes.",
+      "season": "Usually March to May in Britain.",
+      "note": "This folio uses wood anemone. The name Anemone nemorosa is also used for it.",
+      "culture": [
+        [
+          "Myth",
+          "Adonis and the flower in the wind",
+          "Venus brings a flower forth from Adonis's blood in Ovid. An English translation calls it an anemone and describes the wind carrying its petals away."
+        ]
+      ]
+    }
   },
   {
     "class_id": 16,
@@ -770,7 +1094,25 @@ FF.data = { flowers: [
         "scope": "剧本的 pansies 是历史俗名，现代园艺杂交类型仅为植物栏的代表。",
         "checked_on": "2026-11-18"
       }
-    ]
+    ],
+    "english": {
+      "family": "Violaceae",
+      "traits": [
+        "Overlapping rounded petals",
+        "Many cultivars have dark blotches near the centre",
+        "Wide variation in colour and pattern"
+      ],
+      "habitat": "A cool-season plant for beds and containers in sun or partial shade.",
+      "season": "Depends on variety and sowing time. Some garden varieties flower from autumn into spring.",
+      "note": "This profile describes a modern garden hybrid. Historical pansies may refer to older forms or relatives.",
+      "culture": [
+        [
+          "Play and symbolism",
+          "Ophelia's pansies",
+          "Ophelia links pansies with thoughts when distributing flowers in Hamlet. The association comes from this scene."
+        ]
+      ]
+    }
   },
   {
     "class_id": null,
@@ -788,13 +1130,14 @@ FF.data = { flowers: [
     "family": "山茶科",
     "genus": "山茶属",
     "traits": [
-      "常绿，叶片深绿有光泽，边缘有细齿",
-      "花常单生，可见白色、粉色、红色及斑色",
-      "园艺品种的花瓣层数和花形变化较大"
+      "常绿灌木或小乔木，叶片互生，深绿而有光泽，叶缘有细齿",
+      "花常单生，可见白、粉、红或带斑纹的花色",
+      "单瓣花的雄蕊较容易看见，栽培品种也有花瓣层数多的重瓣花"
     ],
     "habitat": "原产中国部分沿海地区、韩国济州岛，以及日本中南部至台湾一带。园艺栽培一般适合半阴、湿润而排水良好的环境。",
     "season": "北卡罗来纳州立大学推广资料记载多在冬末到早春开花，实际花期随品种和气候变化。",
     "note": "山茶花和茶花在园艺语境中也可泛指其他山茶属花卉。本页介绍植物学上的山茶 Camellia japonica。",
+    "comparison": "和茶梅对照时，可以一起看开花时间、叶片和花朵大小。北卡罗来纳州立大学的资料记载，茶梅多在晚秋至冬季开花，花较小；山茶多在冬末至早春开花。两者花期可重叠，遇到园艺品种还要结合多项线索。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -805,6 +1148,11 @@ FF.data = { flowers: [
         "publisher": "北卡罗来纳州立大学推广服务",
         "title": "Camellia japonica",
         "url": "https://plants.ces.ncsu.edu/plants/camellia-japonica/"
+      },
+      {
+        "publisher": "北卡罗来纳州立大学推广服务",
+        "title": "Camellia sasanqua（茶梅）",
+        "url": "https://plants.ces.ncsu.edu/plants/camellia-sasanqua/"
       }
     ],
     "culture": [
@@ -813,14 +1161,62 @@ FF.data = { flowers: [
         "theme": "《茶花女》与剧院包厢里的花束",
         "creator": "小仲马（Alexandre Dumas fils）",
         "title": "La Dame aux camélias",
-        "publisher": "Project Gutenberg",
-        "url": "https://www.gutenberg.org/ebooks/2419",
-        "locator": "第二章，叙述玛格丽特在剧院包厢摆放茶花的段落（小说初版 1848 年）",
+        "publisher": "法语维基文库 · 1852 年版影印页",
+        "url": "https://fr.wikisource.org/wiki/Page:Dumas_fils_-_La_Dame_aux_cam%C3%A9lias,_1852.djvu/54",
+        "locator": "第二章，1852 年版扫描第 54 张，玛格丽特的剧院包厢一段",
+        "excerpt": "sa lorgnette, un sac de bonbons et un bouquet de camélias.",
+        "excerpt_language": "fr",
         "our_summary": "每逢新剧上演，玛格丽特的剧院包厢前总摆着三样随身物：望远镜、糖果袋和一束茶花。花店后来便以「茶花女」称呼她。",
         "scope": "这是小说中人物绰号的来历。原文只写 camélias，关联到山茶属的文学意象。",
         "checked_on": "2026-11-20"
+      },
+      {
+        "kind": "宋诗",
+        "theme": "苏轼笔下雪中开花的山茶",
+        "creator": "苏轼",
+        "title": "邵伯梵行寺山茶",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/wiki/邵伯梵行寺山茶",
+        "locator": "末句，另见《苏诗补注》卷二十四",
+        "excerpt": "烂红如火雪中开。",
+        "our_summary": "诗从独自到寺中看花写起，最后用火红的花与雪色相映，写山茶在寒时开放的鲜明姿态。",
+        "scope": "诗中的雪与火色是文学意象。实际花期受地区和品种影响。",
+        "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Theaceae",
+      "traits": [
+        "Evergreen shrub or small tree with alternate, glossy, finely toothed leaves",
+        "Often solitary flowers in white, pink, red or variegated colours",
+        "Single flowers expose their stamens. Cultivars can be densely double."
+      ],
+      "habitat": "Native to parts of eastern China, Korea, Japan and Taiwan. Often grown in partial shade with moist, well-drained soil.",
+      "season": "Usually late winter to early spring, with regional and cultivar variation.",
+      "note": "Gardeners may use camellia for several species. This page describes Camellia japonica.",
+      "comparison": "Compare bloom time and leaf and flower size with sasanqua camellia. Sasanquas usually flower from late autumn into winter and have smaller flowers. The seasons overlap, so use several clues together.",
+      "culture": [
+        [
+          "Novel",
+          "The bouquet in the theatre box",
+          "Marguerite brings opera glasses, sweets and camellias to the theatre. Her florist starts calling her the Lady of the Camellias."
+        ],
+        [
+          "Song dynasty poetry",
+          "Su Shi's camellias in the snow",
+          "Su Shi visits the temple alone and ends with flame-red flowers against snow. The image belongs to the poem, while flowering dates vary by garden.",
+          "Camellias at Shaobo Fanxing Temple",
+          "Su Shi"
+        ]
+      ],
+      "art": [
+        "Red-and-white striped camellias open along a leafy branch.",
+        "Look for the red streaks on the petals, the glossy leaves and the unopened bud in Kazumasa Ogawa's print.",
+        "Kazumasa Ogawa",
+        "ca. 1890-1895",
+        "Rijksmuseum"
+      ]
+    },
     "artwork": {
       "title_zh": "山茶花",
       "title": "Camelia japonica of Japanse roos",
@@ -834,7 +1230,7 @@ FF.data = { flowers: [
       "width": 876,
       "height": 1200,
       "alt": "浅色纸面中央，数朵红白条纹山茶沿带叶枝条开放。",
-      "caption": "小川一真将带有红白条纹的山茶收入《Some Japanese Flowers》。馆方将这张图版著录为珂罗版与彩色石印。",
+      "caption": "小川一真将带有红白条纹的山茶收入《Some Japanese Flowers》。看图时可以先找花瓣上的红纹，再看深绿叶片和同一枝上的花苞。馆方将这张图版著录为珂罗版与彩色石印。",
       "rights": "公有领域",
       "rights_url": "https://creativecommons.org/publicdomain/mark/1.0/"
     }
@@ -894,6 +1290,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Hydrangeaceae",
+      "traits": [
+        "Deciduous shrub with opposite, toothed leaves",
+        "Round mopheads or flatter lacecaps with larger outer flowers",
+        "Large, petal-like parts are usually the sepals of sterile flowers"
+      ],
+      "habitat": "Native to Japan according to Kew. In gardens it is often found in partial shade and moist, well-drained soil.",
+      "season": "Usually summer. Flora of China records June to August for the typical variety.",
+      "note": "This folio describes bigleaf hydrangea. Similar common names can also refer to unrelated shrubs with rounded flower clusters.",
+      "culture": [
+        [
+          "Botanical history",
+          "The blue hydrangea in Flora Japonica",
+          "Plate 52 shows a blue flower head under the name Hydrangea Otaksa. The Kyoto catalogue and Kew connect that historical name to bigleaf hydrangea.",
+          "Flora Japonica",
+          "Philipp Franz von Siebold and Joseph Gerhard Zuccarini"
+        ]
+      ],
+      "art": [
+        "A blue hydrangea flower head sits above broad green leaves on an illustration from Flora Japonica.",
+        "The plate is captioned Hydrangea Otaksa. Courtesy of the Graduate School of Science, Kyoto University. The image was resized and converted to WebP.",
+        "Philipp Franz von Siebold and Joseph Gerhard Zuccarini (authors)",
+        "19th century",
+        "Graduate School of Science, Kyoto University"
+      ]
+    },
     "artwork": {
       "title_zh": "《日本植物志》绣球图版",
       "title": "Hydrangea Otaksa · Flora Japonica, Tab. 52",
@@ -960,6 +1383,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Rosaceae",
+      "traits": [
+        "Deciduous small tree that often flowers on bare branches",
+        "Fragrant flowers can be white or pink",
+        "Ovate, toothed leaves appear after the flowers"
+      ],
+      "habitat": "Native from south-central China to northern Indochina, including open woods, stream sides and slopes.",
+      "season": "Often late winter to early spring.",
+      "note": "Wintersweet belongs to a different family, although it also has fragrant winter flowers.",
+      "culture": [
+        [
+          "Song dynasty poetry",
+          "Shadows and fragrance in the garden",
+          "Lin Bu places the shadow of the plum branches above shallow water and its fragrance in the dusk.",
+          "Little Plum Trees in the Hill Garden",
+          "Lin Bu"
+        ]
+      ],
+      "art": [
+        "A curving ink branch hangs down, with pale blossoms on its smaller twigs.",
+        "Wang Mian painted plum branches on silk. The Met associates winter-flowering plum with endurance in the Yuan period.",
+        "Wang Mian",
+        "14th century",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "墨梅图",
       "title": "Fragrant Snow at Broken Bridge",
@@ -1026,6 +1476,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Rosaceae",
+      "traits": [
+        "Deciduous tree, often with pink flowers",
+        "Single flowers typically have five petals",
+        "Narrow, toothed leaves"
+      ],
+      "habitat": "Kew treats peach as a cultivated plant originating in north-central China. Orchards generally provide sun and drainage.",
+      "season": "Usually spring, with fruit ripening in summer.",
+      "note": "Ornamental peach cultivars vary in flower colour and can have double flowers.",
+      "culture": [
+        [
+          "Prose",
+          "Peach trees beside the stream",
+          "Tao Yuanming's fisherman follows a stream through blossoming peach trees to the entrance of a secluded village.",
+          "Peach Blossom Spring",
+          "Tao Yuanming"
+        ]
+      ],
+      "art": [
+        "A section of a handscroll shows green cliffs, a winding stream, fields and houses.",
+        "Zhang Hong retells Peach Blossom Spring in a handscroll. The museum page shows the work from right to left.",
+        "Zhang Hong",
+        "1638",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "桃源胜概图（馆方图像节选）",
       "title": "Peach Blossom Spring",
@@ -1067,6 +1544,7 @@ FF.data = { flowers: [
     "habitat": "多年生水生植物，根状茎扎在泥中，常见于水面平静、有阳光的浅水环境。",
     "season": "通常在夏季开花。",
     "note": "本页的荷花是莲科的莲。它和常被一同观赏的睡莲分属不同科。",
+    "comparison": "在池边先看叶子。荷叶通常近圆形、没有深缺口，叶柄接近中央；常见睡莲的叶片从边缘向中心有一道缺口，且多浮在水面。荷花谢后留下的莲蓬也是辨识线索。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -1077,6 +1555,11 @@ FF.data = { flowers: [
         "publisher": "北卡罗来纳州立大学推广服务",
         "title": "Nelumbo nucifera",
         "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+      },
+      {
+        "publisher": "新加坡国家公园局",
+        "title": "Nelumbo nucifera Cultivars（附睡莲对照）",
+        "url": "https://www.nparks.gov.sg/florafaunaweb/flora/8/4/8471"
       }
     ],
     "culture": [
@@ -1088,25 +1571,93 @@ FF.data = { flowers: [
         "publisher": "维基文库原文",
         "url": "https://zh.wikisource.org/zh-hant/愛蓮說",
         "locator": "第一段写莲的形态，第二段以菊、牡丹和莲作对照",
+        "excerpt": "莲，花之君子者也。",
         "our_summary": "作者从莲生于泥中、挺立出水的姿态写起，再将莲比作君子。前段的形态描写为后段的品格比喻作铺垫。",
         "scope": "君子是这篇文章赋予莲的寓意，植物档案记录的是可观察特征。",
         "checked_on": "2026-11-20"
+      },
+      {
+        "kind": "宋诗",
+        "theme": "杨万里笔下的西湖荷塘",
+        "creator": "杨万里",
+        "title": "晓出净慈寺送林子方",
+        "publisher": "维基文库原文",
+        "url": "https://zh.wikisource.org/zh-hant/晓出净慈寺送林子方",
+        "locator": "第三、四句",
+        "excerpt": "接天莲叶无穷碧，映日荷花别样红。",
+        "our_summary": "诗把视线从铺到远处的荷叶拉回到阳光里的红花，用两种颜色写西湖夏日的光景。",
+        "scope": "诗中的红花来自特定场景。栽培荷花还有其他花色。",
+        "checked_on": "2026-11-20"
+      },
+      {
+        "kind": "绘画",
+        "theme": "延伸观赏 · 八大山人笔下的荷叶与禽鸟",
+        "creator": "八大山人（朱耷）",
+        "title": "莲塘戏禽图",
+        "publisher": "大都会艺术博物馆",
+        "url": "https://www.metmuseum.org/art/collection/search/49143",
+        "locator": "约 1690 年，馆藏 1989.363.135",
+        "our_summary": "大块墨色的荷叶和留白处的石头交错，几只禽鸟让荷塘多了动静。馆藏页面可从右往左查看手卷。",
+        "scope": "可与主图的设色对轴对照，看两件作品怎样描绘荷塘。",
+        "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Nelumbonaceae",
+      "traits": [
+        "Round leaves with stalks attached near the centre",
+        "Flowers are held above the water and have a prominent central receptacle",
+        "The receptacle develops into the familiar lotus seed head"
+      ],
+      "habitat": "A perennial of calm, sunny, shallow water, with rhizomes anchored in mud.",
+      "season": "Typically summer.",
+      "note": "This is the sacred lotus, a member of the lotus family.",
+      "comparison": "Look for an unbroken, round lotus leaf with a stalk near the centre. Common water lilies usually have floating leaves with a notch toward the centre. A lotus seed head is another useful clue.",
+      "culture": [
+        [
+          "Prose",
+          "The noble flower",
+          "Zhou Dunyi describes how the lotus rises out of mud, then uses its upright bearing as an image of moral character.",
+          "On Loving the Lotus",
+          "Zhou Dunyi"
+        ],
+        [
+          "Song dynasty poetry",
+          "Lotus flowers on West Lake",
+          "Yang Wanli moves from distant green lotus leaves to pink-red flowers bright in the summer sun.",
+          "Leaving Jingci Temple at Dawn to See Off Lin Zifang",
+          "Yang Wanli"
+        ],
+        [
+          "Painting",
+          "Lotus leaves and birds in ink",
+          "Compare the ink washes and birds in this handscroll with the coloured pair of lotus paintings.",
+          "Birds in a Lotus Pond",
+          "Bada Shanren"
+        ]
+      ],
+      "art": [
+        "A pair of silk hanging scrolls with pink lotus flowers, green leaves and waterbirds.",
+        "Look for buds and open flowers. On the museum's page you can zoom in on fallen petals, older leaves and ripening seed heads.",
+        "Unidentified Yuan dynasty artist",
+        "ca. 1300",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
-      "title_zh": "莲塘戏禽图（馆方图像节选）",
-      "title": "Birds in a lotus pond",
-      "creator": "八大山人（朱耷）",
-      "year": "约 1690 年",
+      "title_zh": "莲花图（对轴）",
+      "title": "Lotus and waterbirds",
+      "creator": "元代佚名",
+      "year": "约 1300 年",
       "publisher": "大都会艺术博物馆",
-      "accession": "1989.363.135",
-      "url": "https://www.metmuseum.org/art/collection/search/49143",
-      "image_source": "https://images.metmuseum.org/CRDImages/as/original/DP205836_CRD.jpg",
+      "accession": "1988.155a, b",
+      "url": "https://www.metmuseum.org/art/collection/search/36437",
+      "image_source": "https://images.metmuseum.org/CRDImages/as/original/DP-36424-001.jpg",
       "asset": "assets/folio/lotus.webp",
-      "width": 1500,
-      "height": 709,
-      "alt": "墨色荷叶从画面边缘伸入，两只深色鸟蹲在荷塘岸边。",
-      "caption": "在这件手卷里，八大山人用深浅不同的墨色安排荷叶、岩石和禽鸟。此处展示馆方提供的一段图像。",
+      "width": 882,
+      "height": 1500,
+      "alt": "两幅绢本画轴并列，粉红荷花和青绿荷叶从池中挺立，近水处有水禽。",
+      "caption": "这对画轴画出了荷塘从盛夏开花到入秋结实的变化。先在画面中找花苞和展开的荷花，再到馆藏页放大查看残瓣、老叶与莲蓬。",
       "rights": "公有领域 · CC0",
       "rights_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
     }
@@ -1159,6 +1710,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Oleaceae",
+      "traits": [
+        "Evergreen shrub or small tree with opposite leaves",
+        "Tiny fragrant flowers cluster in the leaf axils",
+        "Cultivars come in white, pale yellow and orange"
+      ],
+      "habitat": "Native from the Himalayas into parts of East Asia and Indochina. Often grown in sun or partial shade with good drainage.",
+      "season": "Often autumn. Some forms or climates also produce spring flowers.",
+      "note": "Here the common name refers to sweet osmanthus. The single character gui can have other meanings in historical texts.",
+      "culture": [
+        [
+          "Song dynasty lyric",
+          "Pale flowers and lingering scent",
+          "Li Qingzhao praises the flower's quiet colour and persistent fragrance, comparing it with plum and chrysanthemum.",
+          "Partridge Sky · Pale Yellow and Gentle",
+          "Li Qingzhao"
+        ]
+      ],
+      "art": [
+        "An old print of an osmanthus branch with paired leaves, tiny flower clusters and enlarged flower parts.",
+        "Miller illustrates the branch and enlarged flower parts separately. Olea fragrans is a historic name that Kew lists as a synonym.",
+        "Johann Sebastian Mueller",
+        "ca. 1771",
+        "Wellcome Collection"
+      ]
+    },
     "artwork": {
       "title_zh": "桂花花枝与花部结构",
       "title": "Kwei plant (Osmanthus fragrans): flowering stem with floral segments",
@@ -1225,6 +1803,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Paeoniaceae",
+      "traits": [
+        "Deciduous shrub with persistent woody stems",
+        "Divided leaves and large flowers at branch tips",
+        "Cultivars vary widely in colour and petal count"
+      ],
+      "habitat": "Kew accepts this representative name as a hybrid. Woody peonies are often grown with good drainage and sun or light shade.",
+      "season": "Typically mid to late spring.",
+      "note": "The multiplication sign in the scientific name indicates a hybrid. Garden tree peonies include several groups.",
+      "culture": [
+        [
+          "Tang dynasty poetry",
+          "The flower that stirs the capital",
+          "Liu Yuxi contrasts the flowers in a courtyard and pond with the tree peony that draws the city out when it blooms.",
+          "Admiring Peonies",
+          "Liu Yuxi"
+        ]
+      ],
+      "art": [
+        "White, pink and scarlet peonies bloom among leaves on a hanging scroll.",
+        "This Edo-period painting originally formed part of a folding screen and was later mounted as a hanging scroll.",
+        "Fukae Roshū",
+        "Early to mid-18th century",
+        "The Metropolitan Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "牡丹图",
       "title": "Peonies",
@@ -1289,6 +1894,33 @@ FF.data = { flowers: [
         "checked_on": "2026-11-20"
       }
     ],
+    "english": {
+      "family": "Fabaceae",
+      "traits": [
+        "A deciduous woody vine that twines around supports",
+        "Pinnate leaves and drooping clusters of blue-violet pea flowers",
+        "Long, velvety pods after flowering"
+      ],
+      "habitat": "Native to China. In cultivation it grows in sun to partial shade and well-drained ground.",
+      "season": "Spring, often before the leaves have fully opened.",
+      "note": "This page represents Chinese wisteria. Japanese wisteria and other relatives can also have drooping flower clusters.",
+      "culture": [
+        [
+          "Tang dynasty poetry",
+          "Flowering vines, birdsong and fragrance",
+          "Li Bai starts with vines climbing into a tree, then describes birds hidden in leaves and scent carried on the wind.",
+          "Wisteria Tree",
+          "Li Bai"
+        ]
+      ],
+      "art": [
+        "Blue-violet and pale flower clusters hang among green leaves in a woodblock print.",
+        "Kamisaka Sekka uses blocks of violet and green to describe the cascading flower clusters.",
+        "Kamisaka Sekka",
+        "1909-1910",
+        "Cleveland Museum of Art"
+      ]
+    },
     "artwork": {
       "title_zh": "《百百世草》紫藤",
       "title": "Flowers of a Hundred Worlds (Momoyogusa): Wisteria (Fuji)",
