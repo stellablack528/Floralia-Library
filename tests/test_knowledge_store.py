@@ -72,8 +72,11 @@ class KnowledgeStoreTest(unittest.TestCase):
                 store.add("document_evidence", **values, page_number=2, origin="source_statement")
             fact = store.add("document_evidence", **values, page_number=3, origin="source_statement")
             inference = store.add("document_evidence", **values, page_number=1, origin="inference", review_status="verified")
+            self.assertEqual([fact], [entry["evidence_id"] for entry in store.source_evidence("snowdrop", "pending")])
+            self.assertEqual("植物图鉴", store.source_evidence("snowdrop", "pending")[0]["title"])
             self.assertEqual([], store.flower("snowdrop")["document_evidence"])
             self.assertTrue(store.update("document_evidence", fact, review_status="verified"))
+            self.assertEqual([], store.source_evidence("snowdrop", "pending"))
             self.assertEqual([fact], [entry["evidence_id"] for entry in store.flower("snowdrop")["document_evidence"]])
             self.assertEqual("inference", store.get("document_evidence", inference)["origin"])
             self.assertTrue(store.update("document_evidence", fact, content="修订后的整理结果"))
@@ -92,6 +95,30 @@ class KnowledgeStoreTest(unittest.TestCase):
         with open_store(self.path) as store:
             self.assertNotEqual("应回滚的内容", store.flower("snowdrop")["botanical_profile"]["habitat"])
             self.assertFalse(store.rows("PRAGMA foreign_key_check"))
+
+    def test_translation_migration_and_independent_review(self):
+        parse_dir = self.make_parse("translate", "2026-11-19T00:00:00+00:00")
+        with open_store(self.path) as store:
+            page = store.import_mineru(parse_dir)
+            evidence = store.add("document_evidence", class_key="snowdrop", parse_id=page["parse_id"],
+                                 page_number=1, topic="garden", excerpt="garden variety", content="整理",
+                                 origin="source_statement", review_status="verified")
+            store.db.execute("DROP TABLE evidence_translations")
+            store.db.execute("PRAGMA user_version = 1")
+        initialize(self.path)
+        initialize(self.path)
+        with open_store(self.path) as store:
+            store.save_translation_draft(evidence, "garden variety", "机器初稿", "Hy-MT2")
+            self.assertIsNone(store.source_evidence("snowdrop")[0]["translation"])
+            self.assertEqual("机器初稿", store.source_evidence("snowdrop", "translations")[0]["translation"])
+            store.review_translation(evidence, "verified", "园艺品种")
+            self.assertEqual("园艺品种", store.source_evidence("snowdrop")[0]["translation"])
+            store.save_translation_draft(evidence, "garden variety", "重复草稿", "Hy-MT2")
+            self.assertEqual([], store.source_evidence("snowdrop", "translations"))
+            store.update("document_evidence", evidence, excerpt="other excerpt", review_status="verified")
+            self.assertIsNone(store.source_evidence("snowdrop")[0]["translation"])
+            store.delete("document_evidence", evidence)
+            self.assertEqual([], store.rows("SELECT * FROM evidence_translations"))
 
 
 if __name__ == "__main__":

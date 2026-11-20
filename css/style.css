@@ -238,6 +238,16 @@ a { color: var(--forest); }
 .folio-culture { border-inline-start: 2px solid var(--line); margin-top: .65rem; padding-inline-start: 1rem; }
 .folio-culture h3 { color: var(--forest); font-size: 1.05rem; margin: 0; }
 .folio-culture p { margin-bottom: 0; }
+.folio-evidence blockquote { margin: .4rem 0; color: var(--ink); font: italic 1rem/1.5 var(--latin); white-space: pre-line; }
+.folio-evidence-label { margin-top: .65rem; color: var(--gold-deep); font-size: .76rem; font-weight: 600; }
+.evidence-review { margin-top: 1rem; color: var(--forest); }
+.evidence-review summary { cursor: pointer; font-size: .88rem; width: fit-content; }
+.evidence-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.evidence-actions button { width: auto; font-size: .82rem; padding: .4rem .8rem; }
+.translate-evidence { margin-top: .6rem; padding: .4rem .75rem; }
+.translation-review label { display: block; margin-top: .65rem; font-weight: 600; }
+.translation-review textarea { width: 100%; margin-top: .3rem; padding: .5rem; font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.evidence-translation { white-space: pre-line; }
 .folio-traits { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
 .folio-traits span { background: #f2efe3; border: 1px solid var(--line); color: #5e6c60; font-size: .78rem; padding: .32rem .8rem; border-radius: 999px; }
 .folio-actions { display: flex; gap: .9rem; margin-top: 1.6rem; align-items: center; }

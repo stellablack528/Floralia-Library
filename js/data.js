@@ -233,6 +233,18 @@ FF.data = { flowers: [
         "our_summary": "梵高在圣雷米时期画下这片花圃。大片蓝紫色鸢尾、突出的白花和纵横交错的叶片构成了画面的节奏。",
         "scope": "馆藏作品的主题为鸢尾花。",
         "checked_on": "2026-11-18"
+      },
+      {
+        "kind": "史诗与名字",
+        "theme": "伊里斯给海伦带来消息",
+        "creator": "Homer",
+        "title": "Iliad, Book III",
+        "publisher": "Theoi Classical Texts Library",
+        "url": "https://www.theoi.com/Text/HomerIliad3.html",
+        "locator": "第三卷第 121–138 行，A. T. Murray 英译",
+        "our_summary": "伊里斯化作拉奥狄刻去见海伦，邀她观看墨涅拉俄斯与帕里斯的决斗。在这段史诗里，Iris 是传信者的名字。",
+        "scope": "名字灵感：Iris 可以直接用作英文名，也可借传信意象给角色取名「花信」。",
+        "checked_on": "2026-11-19"
       }
     ]
   },
@@ -311,6 +323,18 @@ FF.data = { flowers: [
         "our_summary": "莱斯特以水彩描绘一株名为 Vroege Brabantsson 的郁金香。博物馆把这张画放在荷兰郁金香交易风潮的背景中介绍。",
         "scope": "艺术条目记录的是一个具名的园艺品种。",
         "checked_on": "2026-11-18"
+      },
+      {
+        "kind": "小说与名字",
+        "theme": "一朵黑郁金香，两个名字",
+        "creator": "Alexandre Dumas",
+        "title": "The Black Tulip",
+        "publisher": "Project Gutenberg",
+        "url": "https://www.gutenberg.org/files/965/old/965-h.htm.2018-05-11",
+        "locator": "科尔内利乌斯向罗莎托付花名的一段，可检索 Rosa Barlœnsis",
+        "our_summary": "科尔内利乌斯希望把小说中的黑郁金香叫作 Rosa Barlœnsis，把罗莎和自己的名字合在一起。",
+        "scope": "名字灵感：可以沿用这段情节的构思，从两个人的名字各取一字，为作品或纪念物命名。",
+        "checked_on": "2026-11-19"
       }
     ]
   },
@@ -394,6 +418,18 @@ FF.data = { flowers: [
         "our_summary": "不同开放阶段的向日葵挤在同一只花瓶中。梵高以深浅不同的黄色组织花朵、花瓶和背景。",
         "scope": "此处指阿姆斯特丹梵高博物馆的这一版本。",
         "checked_on": "2026-11-18"
+      },
+      {
+        "kind": "诗歌与名字",
+        "theme": "数着太阳脚步的向日葵",
+        "creator": "William Blake",
+        "title": "Ah! Sunflower",
+        "publisher": "Academy of American Poets",
+        "url": "https://poets.org/poem/ah-sunflower",
+        "locator": "首节第 1–4 行",
+        "our_summary": "布莱克笔下的向日葵数着太阳的脚步，寻找旅程尽头的金色国度。诗里写出了它的倦意和向往。",
+        "scope": "名字灵感：「向晴」可用作昵称或角色名，借的是诗中朝向光亮的意象。",
+        "checked_on": "2026-11-19"
       }
     ]
   },

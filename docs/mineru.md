@@ -26,7 +26,7 @@
 - `result.zip`：MinerU 原始结果包，可能还含图片。
 - `metadata.json`：原文件名、原路径、SHA-256、解析档位、设备和时间；`fact_review_status=unreviewed` 表示解析内容未经知识核对。
 
-MinerU 的解析是**文字与版面提取**，不是花卉事实核验，更不是文学出处推理。后续知识抽取需另建审核流程、逐条记录来源和页码。Qt 可以用 `QProcess` 启动 `src/parse_document.py`，读取标准输出和退出码；进程在后台运行，界面可持续响应。
+MinerU 提取文字和版面结构。我们根据原书校对摘录，再把原文、页码、中文整理和审核状态写进 SQLite。Qt 可以用 `QProcess` 启动 `src/parse_document.py`，读取标准输出和退出码；进程在后台运行，界面可持续响应。
 
 ## 安装或重建独立环境
 
@@ -45,4 +45,8 @@ uv pip install --python .venv-mineru\Scripts\python.exe -r requirements-mineru.t
 - `flower_scan.png`：图片输入，Basic + CPU 成功；OCR 读出标题和正文。
 - 自动化复核：`.\.venv-mineru\Scripts\python.exe -m unittest discover -s tests -p test_mineru.py`。
 
-这是文档解析的最小闭环；尚未接入 Qt、SQLite 知识抽取或花卉识别卡片。样例文件只有测试文字，不是植物学事实来源。
+## 雪滴花的真实文献样例
+
+我们用 Basic 档在 CPU 上对 Jane Loudon 的原书扫描页做 OCR。命令指定 PDF 第 20 页，`middle_json.json` 中对应 `page_idx = 19`，数据库将它换算为读者看到的 PDF 第 20 页。书上印的第 180 页属于原书页码。我们从 `markdown.md` 找到候选段落，并对照扫描页核实摘录，再录入带审核状态的记录。[雪滴花样例与复现命令](database.md#雪滴花样例)
+
+官方入口包括 [GitHub 源代码](https://github.com/opendatalab/MinerU)、[中文文档](https://opendatalab.github.io/MinerU/zh/)、[PyPI 的项目版本 4.2.3](https://pypi.org/project/mineru/4.2.3/)、[命令行说明](https://opendatalab.github.io/MinerU/usage/cli_tools/)和[输出格式](https://opendatalab.github.io/MinerU/reference/output_files/)。

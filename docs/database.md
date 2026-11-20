@@ -1,6 +1,6 @@
 # Floralia SQLite 数据库
 
-数据库文件为 `data/knowledge/floralia.sqlite3`，用 `src/knowledge_schema.sql` 创建。目前版本为 1，依赖 Python 3.12 自带的 `sqlite3`，新建连接开启外键检查，库启用 WAL。本地运行库放在 Git 忽略目录。建表文件、导入脚本和原始知识 JSON 可用于从头重建，数据库内后续录入的文献和修改需要保留本地库。表用 SQLite 的 STRICT 模式，并校验 JSON 数组。未来 Qt 如直接连接，请选择 SQLite 3.38 或更新版并在每个连接执行 `PRAGMA foreign_keys = ON`。参考 [外键](https://sqlite.org/foreignkeys.html)、[STRICT 表](https://sqlite.org/stricttables.html)和 [WAL](https://sqlite.org/wal.html)。
+数据库文件为 `data/knowledge/floralia.sqlite3`，基础表由 `src/knowledge_schema.sql` 创建。版本 2 通过 `src/evidence_translations.sql` 增加译文表，本机服务启动时自动升级已有版本 1 的数据库。依赖 Python 3.12 自带的 `sqlite3`，新建连接开启外键检查，库启用 WAL。本地运行库放在 Git 忽略目录。建表文件、导入脚本和原始知识 JSON 可用于从头重建，数据库内后续录入的文献和修改需要保留本地库。表用 SQLite 的 STRICT 模式，并校验 JSON 数组。未来 Qt 如直接连接，请选择 SQLite 3.38 或更新版并在每个连接执行 `PRAGMA foreign_keys = ON`。参考 [外键](https://sqlite.org/foreignkeys.html)、[STRICT 表](https://sqlite.org/stricttables.html)和 [WAL](https://sqlite.org/wal.html)。
 
 ## 表名和关系
 
@@ -15,6 +15,7 @@
 | `document_parses` | `parse_id` | 一份文献可以多次解析，分别保存时间、MinerU 版本、档位和结果目录。 |
 | `document_pages` | `parse_id` + `page_number` | 一次解析找到的原文页码。由 MinerU 的 `page_idx` 加一得到，可保留跳页。 |
 | `document_evidence` | `evidence_id` | 类别、解析记录和页码关联到原文摘录及整理内容，保留出处和审核状态。 |
+| `evidence_translations` | `evidence_id` | 每条摘录的简体中文译文、原文快照、模型和译文审核状态。 |
 
 ## 增删改查
 
@@ -44,4 +45,14 @@ CRUD 支持表为 `botanical_profiles`、`sources`、`cultural_entries`、`docum
 
 `init` 首次导入 17 类、植物档案和文化记录。重复运行会检查类别映射，保留已经产生的编辑。`--db` 支持在子命令前指定其它 SQLite 文件，适合测试。
 
-静态 Web 书页目前继续从生成的 JS 读取，网页和 SQLite 的初始数据源均为 `knowledge/` 的 JSON。后续 Qt 或本地服务可以调用本模块。数据库开通了证据入库与审核数据结构，知识自动提取和网页实时读库是后续集成工作。
+本机书页的「文献与文学」从 SQLite 读取已审核的原文陈述。「审核文献摘录」可查看待审核原文和中文整理，保存通过或不通过的决定。审核按打开时读到的证据版本保存，证据若已变更需要重新核对。静态 Web 保留由 `knowledge/` 生成的书页内容。
+
+## 雪滴花样例
+
+Jane Loudon（1841）的《The Ladies’ Flower-Garden of Ornamental Bulbous Plants》在印刷第 180 页讨论普通雪滴花（*Galanthus nivalis*）；馆藏 PDF 对应第 20 页。演示从该页录入两条原文陈述，初始状态为一条已审核、一条待审核。 [查看馆藏 PDF 第 20 页](https://dafflibrary.org/wp-content/uploads/Narcissus-The-ladies-flower-garden-of-oramental-bulbous-plants-Mrs.-Loudon-1841.pdf#page=20)
+
+在 D 盘项目根目录可用 MinerU Basic 复现扫描页的文字提取。
+
+~~~powershell
+.\.venv-mineru\Scripts\python.exe src\parse_document.py documents\sources\Loudon-1841-Narcissus-and-Snowdrop.pdf --tier basic --device cpu --page 20
+~~~

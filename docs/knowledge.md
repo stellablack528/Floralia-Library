@@ -18,7 +18,26 @@
 - 参考 Plantfolio 将来源数据与生成供界面使用的数据分开，并提供校验脚本的做法。[Plantfolio GitHub 仓库](https://github.com/Luminoid/plantfolio-common-plants)
 - 参考 FloraaDB 将学名、俗名和来源记录分别建模的做法。[FloraaDB 数据字典](https://github.com/FloraaDB/houseplants-botanical-floradb/blob/main/DATA_DICTIONARY.md)
 
-每条档案链接到实际参考的园艺机构、博物馆、原典或机构资料。中文内容为项目整理的摘要。核对日期记录在文化条目里。
+每条档案链接到实际参考的园艺机构、博物馆、原典或机构资料。书页的「原文摘录」保留出处里的措辞，「中文整理」由项目根据上下文撰写和核对。MinerU 用于扫描文字识别和版面、页码提取。应用直接读取已整理好的中文字段。文学记录中的「名字灵感」是项目从作品意象延伸出的取名提议。核对日期记录在文化条目里。
+
+## 花语原书
+
+鸢尾、向日葵、郁金香和雪滴花的补充花语来自 Kate Greenaway 的《Language of Flowers》（1884）。每条花语保留原书的具体限定，例如红色郁金香，或矮秆和高秆向日葵，便于核对该书的用法。[馆藏目录](https://www.biodiversitylibrary.org/item/269449) · [公版扫描 PDF](https://archive.org/download/languageflowers00gree/languageflowers00gree.pdf)
+
+| 花卉 | 印刷页 | PDF 页 | 原书所载 |
+| --- | ---: | ---: | --- |
+| 鸢尾 | 23 | 27 | 消息 |
+| 雪滴花 | 39 | 43 | 希望 |
+| 向日葵 | 39 | 43 | 矮秆为爱慕，高秆为傲慢 |
+| 红色郁金香 | 41 | 45 | 爱的告白 |
+
+本机将扫描件放在 `documents/sources/Greenaway-1884-Language-of-Flowers.pdf`。用下面的命令分别解析 PDF 第 27、43、45 页，再对照扫描件核对文字和花语的对应行。
+
+```powershell
+foreach ($page in 27, 43, 45) {
+    .\.venv-mineru\Scripts\python.exe src\parse_document.py documents\sources\Greenaway-1884-Language-of-Flowers.pdf --tier basic --device cpu --page $page
+}
+```
 
 ## 与毕业设计大纲的关系
 

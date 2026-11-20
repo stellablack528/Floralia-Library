@@ -57,6 +57,7 @@ Rather than ending with a classification label, Floralia aims to invite further 
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
 - Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
 - SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
+- 本机书页可以用 Hy-MT2 生成英译中初稿，独立审核后展示。见 [本机翻译启动说明](docs/translation.md)。
 
 ---
 

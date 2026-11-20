@@ -14,7 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "knowledge" / "floralia.sqlite3"
 KNOWLEDGE_DIR = ROOT / "knowledge"
 SCHEMA = Path(__file__).with_name("knowledge_schema.sql")
-SCHEMA_VERSION = 1
+TRANSLATION_SCHEMA = Path(__file__).with_name("evidence_translations.sql")
+SCHEMA_VERSION = 2
 
 # SQL identifiers only come from these definitions. Values are bound separately.
 # Primary keys stay stable when records are edited.
@@ -50,6 +51,9 @@ def initialize(path: Path = DEFAULT_DB) -> None:
                 raise ValueError("当前文件已有 SQLite 表，请使用 Floralia 知识库专用的数据库路径")
             db.execute("PRAGMA journal_mode = WAL")
             db.executescript(SCHEMA.read_text(encoding="utf-8"))
+            version = 1
+        if version == 1:
+            db.executescript(TRANSLATION_SCHEMA.read_text(encoding="utf-8"))
         elif version != SCHEMA_VERSION:
             raise ValueError(f"当前数据库版本 {version}，需要版本 {SCHEMA_VERSION}")
 
@@ -146,15 +150,47 @@ class KnowledgeStore:
                FROM cultural_entries e JOIN sources s USING (source_id)
                WHERE e.class_key = ? ORDER BY e.entry_id""", (class_key,)
         )
-        flower["document_evidence"] = self.rows(
+        flower["document_evidence"] = self.source_evidence(class_key)
+        return flower
+
+    def source_evidence(self, class_key: str, review_status: str = "verified") -> list[dict]:
+        return self.rows(
             """SELECT e.*, d.document_id, d.original_name, d.title, d.author,
-                      d.publication_year, d.source_url
+                      d.publication_year, d.source_url,
+                      CASE WHEN t.status = 'verified' OR ? = 'translations' THEN t.translation END AS translation,
+                      CASE WHEN t.status = 'verified' OR ? = 'translations' THEN t.model_id END AS translation_model
                FROM document_evidence e JOIN document_parses p USING (parse_id)
                JOIN documents d USING (document_id)
-               WHERE e.class_key = ? AND e.review_status = 'verified' AND e.origin = 'source_statement'
-               ORDER BY e.evidence_id""", (class_key,)
+               LEFT JOIN evidence_translations t ON t.evidence_id = e.evidence_id AND t.source_excerpt = e.excerpt
+               WHERE e.class_key = ? AND e.origin = 'source_statement'
+                 AND (e.review_status = ? OR
+                      (? = 'translations' AND t.status = 'pending' AND e.review_status IN ('pending', 'verified')))
+               ORDER BY e.evidence_id""", (review_status, review_status, class_key, review_status, review_status)
         )
-        return flower
+
+    def translation_target(self, class_key, evidence_id):
+        return next(iter(self.rows(
+            """SELECT e.excerpt, t.status
+               FROM document_evidence e LEFT JOIN evidence_translations t
+                   ON t.evidence_id = e.evidence_id AND t.source_excerpt = e.excerpt
+               WHERE e.evidence_id = ? AND e.class_key = ? AND e.origin = 'source_statement'
+                 AND e.review_status IN ('pending', 'verified')""", (evidence_id, class_key)
+        )), None)
+
+    def save_translation_draft(self, evidence_id, excerpt, translation, model_id):
+        self.db.execute(
+            """INSERT INTO evidence_translations VALUES (?, ?, ?, ?, 'pending')
+               ON CONFLICT(evidence_id) DO UPDATE SET source_excerpt = excluded.source_excerpt,
+                   translation = excluded.translation, model_id = excluded.model_id, status = 'pending'
+               WHERE status = 'rejected' OR source_excerpt <> excluded.source_excerpt""",
+            (evidence_id, excerpt, translation, model_id)
+        )
+
+    def review_translation(self, evidence_id, decision, translation):
+        self.db.execute(
+            """UPDATE evidence_translations SET status = ?, translation = coalesce(?, translation)
+               WHERE evidence_id = ? AND status = 'pending'""", (decision, translation, evidence_id)
+        )
 
     def list_documents(self, query: str = "") -> list[dict]:
         return self.rows(

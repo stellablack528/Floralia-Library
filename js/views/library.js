@@ -24,6 +24,141 @@ FF.views.library = (function () {
       </article>`;
   }
 
+  function evidenceHTML(record, status) {
+    const citation = [record.author, record.title || record.original_name, record.publication_year,
+      `PDF 第 ${record.page_number} 页`].filter(Boolean).map(escapeHTML).join(" · ");
+    let link = "";
+    if (record.source_url) {
+      try {
+        const url = new URL(record.source_url);
+        if (url.protocol === "https:" || url.protocol === "http:") {
+          if (/\.pdf$/i.test(url.pathname)) url.hash = `page=${record.page_number}`;
+          link = ` · <a href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer">查看原文</a>`;
+        }
+      } catch {
+        // Keep the written citation if the source address is unavailable.
+      }
+    }
+    return `
+      <article class="folio-culture folio-evidence">
+        <h3>${escapeHTML(record.topic)}</h3>
+        <p class="folio-evidence-label">原文摘录</p>
+        <blockquote>${escapeHTML(record.excerpt)}</blockquote>
+        <p class="folio-evidence-label">中文整理</p>
+        <p class="folio-text">${escapeHTML(record.content)}</p>
+        <p class="folio-text">${citation}${link}</p>
+        ${status === "translations" ? `
+          <form class="translation-review" data-evidence-id="${escapeHTML(record.evidence_id)}" data-version="${escapeHTML(record.version)}">
+            <label for="translation-${escapeHTML(record.evidence_id)}">中文译文初稿 · ${escapeHTML(record.translation_model)}</label>
+            <textarea id="translation-${escapeHTML(record.evidence_id)}" name="translation" rows="4" maxlength="4000" required>${escapeHTML(record.translation)}</textarea>
+            <div class="evidence-actions">
+              <button class="btn-primary" type="submit" value="verified">通过译文</button>
+              <button class="btn-ghost" type="submit" value="rejected" formnovalidate>退回译文</button>
+            </div>
+          </form>` : record.translation ? `
+          <p class="folio-evidence-label">中文译文</p>
+          <p class="folio-text evidence-translation">${escapeHTML(record.translation)}</p>` : `
+          <button class="btn-ghost translate-evidence" type="button" data-evidence-id="${escapeHTML(record.evidence_id)}">生成中文译文</button>`}
+        ${status === "pending" ? `<form class="evidence-actions" data-evidence-id="${escapeHTML(record.evidence_id)}" data-version="${escapeHTML(record.version)}">
+          <button class="btn-primary" type="submit" value="verified">通过并显示在书页</button>
+          <button class="btn-ghost" type="submit" value="rejected">不通过</button>
+        </form>` : ""}
+      </article>`;
+  }
+
+  function bindEvidence(classKey) {
+    const published = document.getElementById("evidence-published");
+    const review = document.getElementById("evidence-review");
+    const pending = document.getElementById("evidence-pending");
+    const feedback = document.getElementById("evidence-feedback");
+    const translations = document.getElementById("translation-pending");
+    const url = `/api/evidence/${encodeURIComponent(classKey)}`;
+    const reads = new WeakMap();
+
+    async function loadRecords(container, status = "verified") {
+      const request = {};
+      reads.set(container, request);
+      const latest = () => container.isConnected && reads.get(container) === request;
+      try {
+        const response = await fetch(url + "?status=" + status);
+        if (!response.ok) throw new Error();
+        const { records } = await response.json();
+        if (latest()) {
+          const emptyMessages = { verified: "暂无已审核的文献摘录。", pending: "暂无待审核的摘录。",
+            translations: "暂无待审核的译文。" };
+          container.innerHTML = records.length ? records.map(record => evidenceHTML(record, status)).join("") : emptyMessages[status];
+        }
+      } catch {
+        if (latest()) container.textContent = "暂时无法读取文献摘录。";
+      }
+    }
+
+    function refreshReview() {
+      return Promise.all([loadRecords(pending, "pending"), loadRecords(translations, "translations")]);
+    }
+
+    async function post(action, data) {
+      const response = await fetch(url + action, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        if (response.status === 409) await refreshReview();
+        throw new Error(result.error || "暂时无法保存，请重试。");
+      }
+      return result;
+    }
+
+    loadRecords(published);
+    review.addEventListener("toggle", () => {
+      if (review.open) refreshReview();
+    });
+    async function generate(event) {
+      const button = event.target.closest(".translate-evidence");
+      if (!button) return;
+      button.disabled = true;
+      review.open = true;
+      feedback.textContent = "正在本机生成中文译文…";
+      feedback.scrollIntoView({ block: "nearest" });
+      try {
+        const result = await post("/translate", { evidence_id: Number(button.dataset.evidenceId) });
+        await refreshReview();
+        feedback.textContent = result.status === "verified" ? "这条译文已通过审核。" : "译文初稿已保存，请对照原文审核。";
+      } catch (error) {
+        feedback.textContent = error instanceof TypeError ? "无法连接本机服务，请重试。" : error.message;
+      } finally {
+        button.disabled = false;
+      }
+    }
+    published.addEventListener("click", generate);
+    pending.addEventListener("click", generate);
+
+    async function submitReview(event) {
+      event.preventDefault();
+      const form = event.target;
+      const decision = event.submitter?.value;
+      if (!decision) return;
+      const isTranslation = form.classList.contains("translation-review");
+      const buttons = [...form.querySelectorAll("button")];
+      buttons.forEach(button => { button.disabled = true; });
+      feedback.textContent = "正在保存审核结果…";
+      try {
+        await post(isTranslation ? "/review-translation" : "", {
+          evidence_id: Number(form.dataset.evidenceId), version: form.dataset.version, decision,
+          translation: isTranslation ? form.elements.translation.value : undefined
+        });
+        const item = isTranslation ? "译文" : "摘录";
+        feedback.textContent = decision === "verified" ? `${item}已通过审核。` : `${item}已退回。`;
+        await Promise.all([loadRecords(published), refreshReview()]);
+      } catch (error) {
+        feedback.textContent = error instanceof TypeError ? "无法连接本机服务，请重试。" : error.message;
+        buttons.forEach(button => { button.disabled = false; });
+      }
+    }
+    pending.addEventListener("submit", submitReview);
+    translations.addEventListener("submit", submitReview);
+  }
+
   /* ---------- 列表 ---------- */
   function cardHTML(f) {
     const fav = FF.store.isFavorite(f.key) ? '<span class="fav">&#10084;</span>' : "";
@@ -106,6 +241,16 @@ FF.views.library = (function () {
             <div class="folio-text">${f.sources.map(sourceLink).join("<br>")}</div>
             <div class="folio-label">文献与文学</div>
             ${f.culture.map(cultureHTML).join("")}
+            ${window.FF_LOCAL_MODEL ? `
+              <div id="evidence-published" class="folio-text" aria-live="polite">正在读取已审核的摘录…</div>
+              <details id="evidence-review" class="evidence-review">
+                <summary>审核文献摘录</summary>
+                <p class="folio-text">打开原文，核对摘录、页码和中文整理后再提交。</p>
+                <p id="evidence-feedback" class="folio-text" role="status"></p>
+                <div id="evidence-pending" class="folio-text">正在读取待审核的摘录…</div>
+                <div class="folio-label">待审核译文</div>
+                <div id="translation-pending" class="folio-text">正在读取待审核的译文…</div>
+              </details>` : ""}
             <div class="folio-actions">
               <button class="fav-toggle ${favOn ? "on" : ""}" id="fav-btn">${favOn ? "&#10084; 已收藏 · 点击取消" : "&#9825; 收藏这页书"}</button>
               <button class="btn-primary" id="identify-again">上传照片验证它<span class="arrow">&#8594;</span></button>
@@ -123,6 +268,7 @@ FF.views.library = (function () {
     document.getElementById("identify-again").addEventListener("click", () => {
       location.hash = "#/identify";
     });
+    if (window.FF_LOCAL_MODEL) bindEvidence(f.key);
     window.scrollTo(0, 0);
   }
 

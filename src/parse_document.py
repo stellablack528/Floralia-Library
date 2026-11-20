@@ -20,11 +20,13 @@ OUTPUT = ROOT / "documents" / "parsed"
 ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp"}
 
 
-def parse(input_path: Path, tier: str, device: str, output_root: Path) -> Path:
+def parse(input_path: Path, tier: str, device: str, output_root: Path, page: int | None = None) -> Path:
     if not input_path.is_file():
         raise ValueError(f"文档不存在：{input_path}")
     if input_path.suffix.lower() not in ALLOWED:
         raise ValueError(f"不支持的格式：{input_path.suffix}")
+    if page is not None and (page < 1 or input_path.suffix.lower() != ".pdf"):
+        raise ValueError("--page 仅接受 PDF 的正整数页码。")
     if not CLI.is_file():
         raise RuntimeError("MinerU 尚未安装；请先按 docs/mineru.md 建立 .venv-mineru。")
 
@@ -37,6 +39,8 @@ def parse(input_path: Path, tier: str, device: str, output_root: Path) -> Path:
     dest = Path(tempfile.mkdtemp(prefix=f"{input_path.stem}-{digest[:10]}-{tier}-", dir=output_root.resolve()))
     archive = dest / "result.zip"
     command = [str(CLI), "parse", str(input_path), "-o", str(archive), "--format", "zip", "--tier", tier]
+    if page is not None:
+        command.extend(("--pages", str(page)))
     env = os.environ.copy()
     env["MINERU_MODEL_ONNX_DEVICE"] = device
     print(f"Parsing locally: {input_path.name} ({tier}, {device})", flush=True)
@@ -57,6 +61,11 @@ def parse(input_path: Path, tier: str, device: str, output_root: Path) -> Path:
                 raise RuntimeError("结果包包含不安全路径。")
         package.extractall(dest)
 
+    if page is not None:
+        pages = json.loads((dest / "middle_json.json").read_text(encoding="utf-8"))["pages"]
+        if [entry["page_idx"] for entry in pages] != [page - 1]:
+            raise RuntimeError("MinerU 返回的页码与请求页码不一致。")
+
     metadata = {
         "original_name": input_path.name,
         "source_path": str(input_path.resolve()),
@@ -69,6 +78,8 @@ def parse(input_path: Path, tier: str, device: str, output_root: Path) -> Path:
         "ai_inference": False,
         "files": names,
     }
+    if page is not None:
+        metadata["selected_pdf_page"] = page
     (dest / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Parsed: {dest}", flush=True)
     return dest
@@ -79,10 +90,11 @@ def main() -> int:
     parser.add_argument("input", type=Path, help="PDF 或文档图片路径")
     parser.add_argument("--tier", choices=("flash", "basic"), default="flash")
     parser.add_argument("--device", choices=("cpu", "gpu", "auto"), default="cpu")
+    parser.add_argument("--page", type=int, help="仅解析指定的 PDF 页（从 1 开始）")
     parser.add_argument("--output-root", type=Path, default=OUTPUT)
     args = parser.parse_args()
     try:
-        parse(args.input, args.tier, args.device, args.output_root)
+        parse(args.input, args.tier, args.device, args.output_root, args.page)
     except (ValueError, RuntimeError, OSError, zipfile.BadZipFile) as exc:
         print(f"错误：{exc}", file=sys.stderr, flush=True)
         return 1
