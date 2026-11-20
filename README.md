@@ -403,6 +403,8 @@ The long-term vision is a personal botanical library where users can discover a 
 
 Created and maintained by [@stellablack528](https://github.com/stellablack528).
 
+OpenAI Codex assisted with code implementation, testing, and documentation.
+
 Feedback, suggestions, and code reviews are welcome.
 
 ---
