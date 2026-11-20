@@ -53,13 +53,13 @@ Rather than ending with a classification label, Floralia aims to invite further 
 
 ## 实机截图 · Screenshots
 
-**从一张照片到三个候选。** 本机运行 Floralia Bloom 25，从留出集的一张梅花实拍图得到首选「梅花」，预测分数为 91.8%。图中也可看到模型实际使用的裁剪和所选类别的 Grad-CAM。[实拍图 iNaturalist 观测记录](https://www.inaturalist.org/observations/201540541) · [照片 CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+**从一张铃兰照片到三个候选。** 本机运行 Floralia Bloom 25，首选为「铃兰」，预测分数为 97.2%。图中可看到模型的输入裁剪和针对铃兰生成的 Grad-CAM。照片由 Troi Perkins 拍摄，截图展示了原照及模型裁剪后的视图。[iNaturalist 观测记录](https://www.inaturalist.org/observations/367568082) · [照片许可 CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-![Floralia Bloom 25 本机实拍识别、前三候选及 Grad-CAM](assets/readme/recognition.png)
+![Floralia Bloom 25 识别铃兰照片后的前三候选和 Grad-CAM](assets/readme/recognition.png)
 
-**从候选翻到书页。** 梅花页开头有一句花语，下方可读林逋的宋诗和中国用梅果调味的用物史。
+**从候选翻到书页。** 点「查看铃兰书页」，可以读到花语「愿幸福归来」，并核对向下垂的小铃形花等辨识特征。
 
-![梅花书页里的一句花语、植物档案、宋诗和青梅用物史](assets/readme/plum-folio.png)
+![铃兰书页的一句花语和植物档案](assets/readme/lily-of-the-valley-folio.png)
 
 ### 当前开发状态（2026-11）
 
@@ -107,7 +107,7 @@ Scientific names, flowering periods and other botanical details are subject to f
 
 ### 📜 Flowers in Literature · 花与文学
 
-书页的阅读栏收录中国和西方的文学典故与用物史。读者可以在梅花页读宋诗与青梅的饮食史，也可以在蓝铃花页读英国林地传说与旧书装订的历史。条目附出处、定位与相关植物部位。[资料收录裁定](docs/knowledge.md#资料收录裁定)
+书页的阅读栏收录中国和西方的文学典故与用物史。读者可以在蓝铃花页读英国林地传说与旧书装订的历史，在桂花页读宋词与桂花为茶和糖果添香的记载。条目附出处、定位与相关植物部位。[资料收录裁定](docs/knowledge.md#资料收录裁定)
 
 ### 📚 Personal Library · 我的花之书页
 
@@ -231,7 +231,7 @@ A backend and secure account system will be required before production deploymen
 | 同一批 Oxford 原图 | Bloom 25 | 323/340（95.0%） | 336/340（98.8%） |
 | iNaturalist 留出集，新增 8 类 111 张 | Bloom 25 | 90/111（81.1%） | 105/111（94.6%） |
 
-**本机复核。** 上传两张留出集梅花照片，样本一的首选为梅花（91.8%），并走通 Top-3、Grad-CAM 和书页跳转。样本二的首选是牡丹（34.6%），梅花排第二（26.6%），界面显示低分提示。梅花留出集总共 8 张，首选正确 4 张。Grad-CAM 对应模型实际看到的 224 × 224 裁剪区域，便于核对它对指定候选使用的图像线索。[样本一](https://www.inaturalist.org/observations/201540541) · [样本二](https://www.inaturalist.org/observations/19411279) · [逐类结果](docs/bloom25.md)
+**本机复核。** 另用 6 张 iNaturalist 铃兰照片复核，铃兰排第一 4 张，进入前三 5 张。截图使用的样本排第一（97.2%），走通了 Top-3、Grad-CAM 和书页跳转。另一张样本的第一候选是牡丹（89.1%），铃兰未进入前三。Grad-CAM 对应模型实际看到的 224 × 224 裁剪区域，便于核对它对指定候选使用的图像线索。[截图样本](https://www.inaturalist.org/observations/367568082) · [错例](https://www.inaturalist.org/observations/370312433) · [正式测试逐类结果](docs/bloom25.md)
 
 ### 参考论文与用途
 
