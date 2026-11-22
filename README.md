@@ -296,9 +296,7 @@ Place the verified model checkpoint as described in [local inference setup](docs
 
 **Windows**
 
-```powershell
-.\.venv\Scripts\python.exe -B src\serve_floralia.py
-```
+See the [Windows CPU guide](docs/windows-cpu.md) for the tested dependencies, setup commands and the lily-of-the-valley walkthrough. The guide also includes a browser preview of the folios. [Clean-environment validation results](reports/windows-cpu-beta-validation.md)
 
 **macOS / Linux**
 
