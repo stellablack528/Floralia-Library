@@ -49,7 +49,7 @@ Rather than ending with a classification label, Floralia aims to invite further 
 - **用物史**：了解花、果实等植物部位在饮食、香料和日常工艺中的用途。
 - **个人收藏**：保存喜爱的花卉书页，回顾探索记录。
 
-资料馆收录 25 张中英双语书页。为本机配置 **Floralia Bloom 25** 后，识花台支持 25 类预测、Top-3、Grad-CAM 和书页跳转。见[本机识花运行说明](docs/model.md)和[扩展实验报告](docs/bloom25.md)。
+资料馆收录 30 张中英双语书页。**Floralia Bloom 25** 是本机识花基线，提供 Top-3、Grad-CAM 和书页跳转。**Bloom 30** 可使用实验权重在本机单独试用。[本机识花说明](docs/model.md) · [30 类扩展报告](docs/bloom30.md)
 
 ## 实机截图 · Screenshots
 
@@ -64,7 +64,7 @@ Rather than ending with a classification label, Floralia aims to invite further 
 ### 当前开发状态（2026-11）
 
 - Oxford Flowers17 的 0–16 类映射已统一，第一组官方划分已在本地核对；映射和生成脚本见 [`knowledge/classes.json`](knowledge/classes.json)、[`src/prepare_flower17.py`](src/prepare_flower17.py)。原始图片与划分文件不提交到仓库。
-- 本机服务使用可用的 25 类或 17 类权重运行真实识别，静态托管提供带标注的演示模式。25 张书页均有植物档案，文学典故与用物史按来源逐条收录。[资料收录裁定](docs/knowledge.md#资料收录裁定)
+- 本机服务按已加载权重支持 17、25 或 30 类真实识别。静态托管提供带标注的演示模式，30 张书页均有植物档案，文学典故与用物史按来源逐条收录。[资料收录裁定](docs/knowledge.md#资料收录裁定)
 - MinerU 4.2.3 文献解析最小闭环已完成：文本 PDF、扫描 PDF、PNG 图片在本机验证，可输出 Markdown、Middle JSON、Structured Content JSON 和来源元数据。用法见 [`docs/mineru.md`](docs/mineru.md)。
 - Qt6/QML 文献界面、知识自动提取、识花联动和 RAG 检索仍属于后续阶段。
 - SQLite 知识库已具备建表、初始资料导入、CRUD 和 MinerU 解析登记入口。见 [数据库设计](docs/database.md)。
@@ -84,7 +84,7 @@ Upload a flower photograph and explore its possible identity.
 - Top-1 prediction and Top-3 candidate display
 - Direct navigation to botanical records
 
-The app offers English and Simplified Chinese across 25 folios. With local weights, Floralia Bloom 25 extends the original MobileNetV3 Small classifier by eight categories. The static site shows a labelled demo. See the [local inference setup](docs/model.md) and [25-category evaluation](docs/bloom25.md).
+The app offers 30 folios in English and Simplified Chinese. Bloom 25 is the local inference baseline, and Bloom 30 is available for local evaluation with a separate checkpoint. The static site shows a labelled demo. See the [local inference setup](docs/model.md) and [30-category evaluation](docs/bloom30.md).
 
 ### 🌿 Botanical Encyclopedia · 植物资料馆
 
@@ -101,7 +101,7 @@ Each flower entry may contain:
 | History of Use | Documented uses in food, fragrance and everyday crafts |
 | Personal Collection | Bookmarks and browsing records |
 
-The collection contains **25 bilingual folios** covering all 17 Oxford Flowers17 categories and eight additional flowers.
+The collection contains **30 bilingual folios** covering all 17 Oxford Flowers17 categories and 13 additional flowers.
 
 Scientific names, flowering periods and other botanical details are subject to further source verification.
 
@@ -223,10 +223,10 @@ A backend and secure account system will be required before production deploymen
 
 ## 算法与测试 · Models and Evaluation
 
-1. **迁移学习。** 从 ImageNet 预训练的 ResNet18 出发，用 Oxford Flowers17 官方第一组划分（训练 680、验证 340、测试 340）。A 组只训练分类头并固定主干 BatchNorm 的运行统计量，B 组再解冻最后一个残差阶段。验证集原图 Top-1 分别为 **90.9%** 和 **93.2%**。
+1. **迁移学习。** 从 ImageNet 预训练的 ResNet18 出发，用 Oxford Flowers17 官方第一组划分（训练 680、验证 340、测试 340）。A 组只训练分类头，B 组额外训练最后一个残差块的第二个卷积层（`layer4.1.conv2`）。两组都固定主干 BatchNorm 的运行统计量。验证集原图 Top-1 分别为 **90.9%** 和 **93.2%**。
 2. **蒸馏对照。** S0 用真实标签训练 MobileNetV3-Small 的分类层。S1 在同样的训练起点增加 B 组教师的软标签，温度为 3，教师损失权重为 0.3。五个随机种子成对重跑后，原图验证集的平均 Macro-F1 为 S0 **0.9446**、S1 **0.9367**，S1 五对中有一对提高。
-3. **微调与部署。** S2 让学生模型末段的一部分参与微调。Floralia Bloom 1.0 用 **25% S0 + 75% S2** 合并参数，一次前向计算即可推理。官方第一组测试原图上，混合模型与 S0 的 Top-1 均为 321/340，混合模型的 Top-3 多命中一张。低光、强光、模糊、遮挡和紧裁由同批照片生成，按条件分别统计。[17 类模型与评估说明](docs/model.md)
-4. **扩展到 25 类。** Bloom 25 沿用原模型特征提取层，训练 25 类输出层。训练回放旧类样本并使用旧模型的软标签。新类照片从 iNaturalist 筛选，按摄影者分组后分成 435 张训练、109 张验证、111 张留出测试。以验证集各类别等权的首选准确率选中第 20 轮，再报告留出集成绩。[重跑命令和逐类结果](docs/bloom25.md)
+3. **微调与部署。** S2 用真实标签微调学生模型末尾的 1×1 卷积和分类头。Floralia Bloom 1.0 用 **25% S0 + 75% S2** 合并参数，一次前向计算即可推理。官方第一组测试原图上，混合模型与 S0 的 Top-1 均为 321/340，混合模型的 Top-3 多命中一张。低光、强光、模糊、遮挡和紧裁由同批照片生成，按条件分别统计。[17 类模型与评估说明](docs/model.md)
+4. **扩展到 25 类。** Bloom 25 冻结 Bloom 1.0 的特征提取层，只训练新的 25 类输出层。训练混合新旧类别的图片，对所有样本计算按类别加权的交叉熵，并对旧类样本额外计算与旧模型预测分布的 KL 散度。新类照片从 iNaturalist 筛选，按摄影者分组后分成 435 张训练、109 张验证、111 张留出测试。以验证集各类别等权的首选准确率选中第 20 轮，再报告留出集成绩。[重跑命令和逐类结果](docs/bloom25.md)
 
 | 测试集 | 模型 | Top-1 · 首选正确 | Top-3 · 前三命中 |
 |---|---|---:|---:|
@@ -238,17 +238,27 @@ A backend and secure account system will be required before production deploymen
 
 ### 参考论文与用途
 
-| 论文或数据来源 | 在项目中的用途 |
-|---|---|
-| He 等，2016，[Deep Residual Learning for Image Recognition](https://doi.org/10.1109/CVPR.2016.90) | ResNet18 教师的主干，迁移学习 A/B 的共同起点。 |
-| Howard 等，2019，[Searching for MobileNetV3](https://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) | 通过 torchvision 使用 MobileNetV3-Small 作为学生与部署模型。 |
-| Hinton 等，2015，[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) | 用温度软化教师分数，比较学生有无教师项的效果。 |
-| Lakshminarayanan 等，2017，[Deep Ensembles](https://arxiv.org/abs/1612.01474) | 参考预测集成思路，做过候选概率和原始分数加权的单独对照。 |
-| Wortsman 等，2022，[Model Soups](https://proceedings.mlr.press/v162/wortsman22a.html) | 参考同结构模型的权重平均思路，试验 S0 与 S2 的混合权重。 |
-| Selvaraju 等，2017，[Grad-CAM](https://openaccess.thecvf.com/content_ICCV_2017/html/Selvaraju_Grad-CAM_Visual_Explanations_ICCV_2017_paper.html) | 为指定识别候选显示类别响应热力图。 |
-| Borsch 等，2020，[World Flora Online](https://doi.org/10.1002/tax.12373) | 参考学名、分类与来源的组织方式。 |
-| Joly 等，2014，[Interactive Plant Identification Based on Social Image Data](https://www.documentation.ird.fr/hor/PAR00012198) | 参考 Pl@ntNet 用实地观察照片辅助植物辨识的做法。 |
-| Garcin 等，2021，[Pl@ntNet-300K](https://datasets-benchmarks-proceedings.neurips.cc/paper_files/paper/2021/hash/7e7757b1e12abcb736ab9a754ffb617a-Abstract-round2.html) | 参考逐类报告样本量与相似类别问题。项目实际训练数据来自 [Oxford Flowers17](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) 和 [iNaturalist](https://github.com/inaturalist/inaturalist-open-data)。 |
+#### 识花模型与实验
+
+| 方法 | 在 Floralia 中的实现 | 原论文 |
+|---|---|---|
+| ResNet18 与迁移学习 | 通过 torchvision 加载 ImageNet 预训练模型，换成 17 类分类头。比较只训练分类头的 A 组与额外微调一个卷积层的 B 组，B 组提供教师预测。 | He 等，2016，[Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385) |
+| MobileNetV3-Small | 通过 torchvision 加载轻量网络。S0 只训练分类头，S2 额外微调末尾的 1×1 卷积。本地识花使用基于此结构的 Bloom 系列模型。 | Howard 等，2019，[Searching for MobileNetV3](https://arxiv.org/abs/1905.02244) |
+| 知识蒸馏 | S1 的损失由真实标签的交叉熵和教师预测分布的 KL 散度构成。Bloom 25 扩类时也使用旧模型的预测分布，蒸馏项只计算旧类样本的 17 个原有输出。 | Hinton 等，2015，[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) |
+| AdamW | 训练时根据损失的梯度更新可训练参数，权重衰减与梯度更新分开处理。 | Loshchilov 与 Hutter，2019，[Decoupled Weight Decay Regularization](https://arxiv.org/abs/1711.05101) |
+| 预测集成 | 早期对照时分别加权多个模型输出的概率或原始分类分数，检查验证集表现。 | Lakshminarayanan 等，2017，[Deep Ensembles](https://arxiv.org/abs/1612.01474) |
+| 参数加权平均 | 在同结构的 S0 与 S2 之间按 25% 和 75% 合并权重，形成一次推理即可运行的 Bloom 1.0。权重比例来自项目自己的对照。 | Wortsman 等，2022，[Model Soups](https://proceedings.mlr.press/v162/wortsman22a.html) |
+| Grad-CAM | 针对用户所选候选类别，计算其原始分类分数对末层空间特征图的梯度，用梯度的空间均值为各通道加权并生成热力图。 | Selvaraju 等，2017，[Grad-CAM](https://arxiv.org/abs/1610.02391) |
+
+#### 文献处理、数据集与资料馆
+
+| 模块 | 在 Floralia 中的用途 | 论文或官方资料 |
+|---|---|---|
+| MinerU 文档解析 | 调用本地 MinerU 4.2.3，将 PDF 或扫描图片解析为 Markdown 和 JSON，供按页预览及选择摘录。 | [MinerU 技术报告](https://arxiv.org/abs/2409.18839) · [运行说明](docs/mineru.md) |
+| Hy-MT2 摘录翻译 | 通过 llama.cpp 在本地运行 Hy-MT2-1.8B 的 GGUF 权重，生成英文摘录的中文译文，供审核。 | 腾讯混元，2026，[Hy-MT2 技术报告](https://arxiv.org/abs/2605.22064) · [运行说明](docs/translation.md) |
+| 花卉分类数据 | 17 类基线使用 Oxford Flowers17 及其官方第一组划分。新增 8 类使用从 iNaturalist 筛选的实拍照片。 | Nilsback 与 Zisserman，2006，[A Visual Vocabulary for Flower Classification](https://robots.ox.ac.uk/~vgg/publications/2006/Nilsback06/) · [iNaturalist Open Data](https://github.com/inaturalist/inaturalist-open-data) |
+| 植物学名与来源 | 参考学名、分类和来源的组织方式。 | Borsch 等，2020，[World Flora Online](https://doi.org/10.1002/tax.12373) |
+| 实拍环境与逐类评估 | 参考用自然环境观察照片开展植物辨识，以及按类别报告样本量与识别难点。 | Joly 等，2014，[Interactive Plant Identification Based on Social Image Data](https://www.documentation.ird.fr/hor/PAR00012198) · Garcin 等，2021，[Pl@ntNet-300K](https://datasets-benchmarks-proceedings.neurips.cc/paper_files/paper/2021/hash/7e7757b1e12abcb736ab9a754ffb617a-Abstract-round2.html) |
 
 蒸馏与参数混合是将论文方法应用于花卉识别的对照实验。逐轮、逐种子与逐图日志保存在本机。[训练脚本](src/train_bloom25.py) · [数据审计](reports/data_audit.md) · [测试汇总](docs/bloom25.md)
 
@@ -317,7 +327,7 @@ Open your browser at:
 5. Browse, search and bookmark flower entries.
 6. Review your history in the personal collection.
 
-> The local service supports 25 or 17 categories according to the loaded checkpoint. Static hosting shows a labelled demo.
+> The local service supports 17, 25 or 30 categories, depending on the loaded checkpoint. Static hosting shows a labelled demo.
 
 ---
 
@@ -332,7 +342,7 @@ Open your browser at:
 - [x] Drag-and-drop image upload and preview
 - [x] Deterministic demonstration recognition
 - [x] Top-1 and Top-3 result presentation
-- [x] Botanical library covering 25 flower categories
+- [x] Botanical library covering 30 flower categories
 - [x] Source-linked literary and historical-use entries
 - [x] Searchable botanical records
 - [x] Personal history and favourites

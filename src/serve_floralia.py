@@ -15,7 +15,8 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 from document_import import MAX_PDF_BYTES, DocumentImports, ImportBusy
 from document_translation import DEFAULT_PORT, MAX_TRANSLATION, MODEL as TRANSLATION_MODEL, TranslationError, translate
-from floralia_model import MAX_UPLOAD_BYTES, ROOT, InvalidPhoto, grad_cam, identify, load_model, model_identity, original_classes
+from flower_catalog import catalog
+from floralia_model import MAX_UPLOAD_BYTES, ROOT, InvalidPhoto, grad_cam, identify, load_model, model_identity
 from knowledge_store import DEFAULT_DB, initialize, open_store
 
 
@@ -46,7 +47,7 @@ def handler_for(web, model, classes, port, knowledge_db=DEFAULT_DB, translation_
     imports = DocumentImports(knowledge_db)
     allowed_hosts = {f"127.0.0.1:{port}", f"localhost:{port}"}
     allowed_origins = {f"http://{host}" for host in allowed_hosts}
-    flower_keys = {flower["key"] for flower in original_classes()}
+    flower_keys = {flower["key"] for flower in catalog()}
 
     class Handler(BaseHTTPRequestHandler):
         def reply(self, code, body, content_type):

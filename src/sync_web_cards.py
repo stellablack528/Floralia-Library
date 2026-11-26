@@ -8,6 +8,8 @@ from collections import defaultdict
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from flower_catalog import catalog
+
 
 ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
@@ -82,6 +84,8 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         require_text(profile, ("comparison",), key)
     english = english_folios[key]
     require_text(english, ("family", "habitat", "season", "note"), key)
+    if "comparison" in english:
+        require_text(english, ("comparison",), key)
     if len(english["culture"]) != len(records) or len(english["traits"]) != len(traits):
         raise ValueError(f"{key}: English traits and cultural records must match the folio")
     published = []
@@ -118,6 +122,7 @@ def make_card(key: str, item: dict, profile: dict, records: list, order: int) ->
         "flower_language": {**meaning, "source": flower_language["sources"][meaning["source"]]},
         "english": {
             **{field: english[field] for field in ("family", "habitat", "season", "note", "traits")},
+            **({"comparison": english["comparison"]} if "comparison" in english else {}),
             "culture": english_culture,
         },
     }
@@ -135,12 +140,16 @@ for order, (key, item) in enumerate(extra_folios.items(), start=len(cards) + 1):
         raise ValueError(f"{key}: aliases must be a list of nonempty names")
     cards.append(make_card(key, item, item["profile"], item["culture"], order))
 
+class_ids = {item["key"]: item["class_id"] for item in catalog()}
+for card in cards:
+    card["class_id"] = class_ids.get(card["key"])
+
 prefix = """/* Generated from knowledge files. See docs/knowledge.md for sources.
    Edit those source files, then run src/sync_web_cards.py. */
 window.FF = window.FF || {};
 FF.data = { flowers: """
 suffix = """ };
-FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null);
+FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null && f.class_id < 17);
 FF.data.byKey = function (key) {
   return this.flowers.find(f => f.key === key) || null;
 };
@@ -165,4 +174,4 @@ FF.data.demoIdentify = function (byteSum, byteMod) {
 js_dir = ROOT / "web" / "js" if (ROOT / "web" / "js").is_dir() else ROOT / "js"
 output = js_dir / "data.js"
 output.write_text(prefix + json.dumps(cards, ensure_ascii=False, indent=2) + suffix, encoding="utf-8")
-print(f"Updated {output} with {len(cards)} folios ({len(classes)} model classes)")
+print(f"Updated {output} with {len(cards)} folios ({len(class_ids)} model classes)")

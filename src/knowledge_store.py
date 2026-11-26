@@ -9,13 +9,14 @@ import sys
 from contextlib import closing, contextmanager
 from pathlib import Path
 
+from flower_catalog import catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "knowledge" / "floralia.sqlite3"
 KNOWLEDGE_DIR = ROOT / "knowledge"
 SCHEMA = Path(__file__).with_name("knowledge_schema.sql")
 TRANSLATION_SCHEMA = Path(__file__).with_name("evidence_translations.sql")
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 # SQL identifiers only come from these definitions. Values are bound separately.
 # Primary keys stay stable when records are edited.
@@ -54,8 +55,36 @@ def initialize(path: Path = DEFAULT_DB) -> None:
             version = 1
         if version == 1:
             db.executescript(TRANSLATION_SCHEMA.read_text(encoding="utf-8"))
+            version = 2
+        if version == 2:
+            expand_flower_classes(db)
         elif version != SCHEMA_VERSION:
             raise ValueError(f"当前数据库版本 {version}，需要版本 {SCHEMA_VERSION}")
+
+
+def expand_flower_classes(db: sqlite3.Connection) -> None:
+    db.execute("PRAGMA foreign_keys = OFF")
+    try:
+        with db:
+            db.execute("BEGIN IMMEDIATE")
+            if db.execute("PRAGMA user_version").fetchone()[0] == SCHEMA_VERSION:
+                return
+            db.execute("""CREATE TABLE flower_classes_next (
+                class_key TEXT PRIMARY KEY,
+                class_id INTEGER NOT NULL UNIQUE CHECK (class_id >= 0),
+                name_zh TEXT NOT NULL,
+                name_en TEXT NOT NULL,
+                scientific_name TEXT,
+                scientific_name_note TEXT NOT NULL
+            ) STRICT""")
+            db.execute("INSERT INTO flower_classes_next SELECT * FROM flower_classes")
+            db.execute("DROP TABLE flower_classes")
+            db.execute("ALTER TABLE flower_classes_next RENAME TO flower_classes")
+            if db.execute("PRAGMA foreign_key_check").fetchone():
+                raise ValueError("花卉类别迁移后发现无效的数据库关联")
+            db.execute("PRAGMA user_version = 3")
+    finally:
+        db.execute("PRAGMA foreign_keys = ON")
 
 
 @contextmanager
@@ -216,34 +245,43 @@ class KnowledgeStore:
         )
 
     def seed(self, folder: Path = KNOWLEDGE_DIR) -> bool:
-        classes = load_json(folder / "classes.json")
+        classes = catalog(folder=folder)
         expected = [(item["class_id"], item["key"]) for item in classes]
-        class_keys = {key for _, key in expected}
-        if [number for number, _ in expected] != list(range(17)) or len(class_keys) != 17:
-            raise ValueError("初始化数据必须包含 Flower17 的 17 个固定类别")
         if not self.db.in_transaction:
             self.db.execute("BEGIN IMMEDIATE")
         existing = self.rows("SELECT class_id, class_key FROM flower_classes ORDER BY class_id")
-        if existing:
-            if [(row["class_id"], row["class_key"]) for row in existing] != expected:
-                raise ValueError("数据库的类别映射与初始化数据不一致")
+        if [(row["class_id"], row["class_key"]) for row in existing] != expected[:len(existing)]:
+            raise ValueError("数据库的类别映射与初始化数据不一致")
+        pending = classes[len(existing):]
+        if not pending:
             return False
 
         profiles = load_json(folder / "botanical_profiles.json")
         culture = load_json(folder / "cultural_sources.json")["verified_items"]
+        folios = load_json(folder / "extra_folios.json")
+        for item in classes[17:]:
+            key = item["key"]
+            profiles[key] = folios[key]["profile"]
+            item["scientific_name_note"] = profiles[key]["scope"]
+            culture.extend({**entry, "class_key": key} for entry in folios[key]["culture"])
+        class_keys = {key for _, key in expected}
         if profiles.keys() != class_keys or {entry["class_key"] for entry in culture} != class_keys:
-            raise ValueError("初始档案和文化资料必须覆盖全部 17 类")
+            raise ValueError("初始档案和文化资料必须覆盖全部类别")
         self.db.executemany(
             """INSERT INTO flower_classes
                (class_id, class_key, name_zh, name_en, scientific_name, scientific_name_note)
                VALUES (:class_id, :key, :name_zh, :name_en, :scientific_name, :scientific_name_note)""",
-            classes,
+            pending,
         )
-        for class_key, profile in profiles.items():
+        pending_keys = {row["key"] for row in pending}
+        for class_key in pending_keys:
+            profile = profiles[class_key]
             values = {key: profile[key] for key in EDITABLE["botanical_profiles"][1].split() if key != "traits_json"}
             self.add("botanical_profiles", class_key=class_key, traits_json=json.dumps(profile["traits"], ensure_ascii=False), **values)
             self.set_botanical_sources(class_key, [self._source_id(ref) for ref in profile["references"]])
         for entry in culture:
+            if entry["class_key"] not in pending_keys:
+                continue
             self.add(
                 "cultural_entries", class_key=entry["class_key"], source_id=self._source_id(entry),
                 kind=entry["kind"], theme=entry["theme"], creator=entry["creator"],
@@ -309,7 +347,7 @@ def main() -> None:
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("init", help="创建数据库并首次导入现有知识库")
-    commands.add_parser("flowers", help="列出所有 Flower17 类别").add_argument("--query", default="")
+    commands.add_parser("flowers", help="列出所有花卉类别").add_argument("--query", default="")
     commands.add_parser("flower", help="读取已关联的书页内容").add_argument("class_key")
     commands.add_parser("documents", help="列出已入库文献").add_argument("--query", default="")
     commands.add_parser("import-mineru", help="登记一次已完成的 MinerU 解析").add_argument("folder", type=Path)

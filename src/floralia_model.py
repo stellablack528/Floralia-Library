@@ -2,7 +2,6 @@
 
 import hashlib
 import io
-import json
 from pathlib import Path
 
 import torch
@@ -10,6 +9,8 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 from torch.nn import functional as F
 from torchvision.models import ResNet18_Weights, mobilenet_v3_small
 from torchvision.transforms import functional as VF
+
+from flower_catalog import catalog
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,25 +30,16 @@ class InvalidPhoto(ValueError):
 
 
 def original_classes():
-    classes = json.loads((ROOT / "knowledge/classes.json").read_text(encoding="utf-8"))
-    if [item["class_id"] for item in classes] != list(range(17)):
-        raise ValueError("Expected the 17 Flower17 classes in ID order.")
-    return classes
+    return catalog(17)
 
 
 def expanded_classes():
-    classes = original_classes()
-    extra = json.loads((ROOT / "knowledge/extra_folios.json").read_text(encoding="utf-8"))
-    keys = ("camellia", "hydrangea", "plum-blossom", "peach-blossom", "lotus", "osmanthus", "tree-peony", "wisteria")
-    for key in keys:
-        folio = extra[key]
-        classes.append({"class_id": len(classes), "key": key, "name_zh": folio["name_zh"],
-                        "name_en": folio["name_en"], "scientific_name": folio["profile"]["representative_name"]})
-    return classes
+    return catalog(25)
 
 
 def model_identity(classes):
-    return (MODEL_ID, MODEL_NAME) if len(classes) == 17 else ("floralia-bloom-25", "Floralia Bloom 25")
+    count = len(classes)
+    return (MODEL_ID, MODEL_NAME) if count == 17 else (f"floralia-bloom-{count}", f"Floralia Bloom {count}")
 
 
 def load_model(checkpoint=None):
@@ -62,7 +54,10 @@ def load_model(checkpoint=None):
                 raise ValueError("Floralia Bloom checkpoint checksum failed.")
         file.seek(0)
         saved = torch.load(file, map_location="cpu", weights_only=True)
-    classes = original_classes() if original else expanded_classes()
+    count = len(saved["classes"])
+    if (count == 17) != original:
+        raise ValueError("Floralia Bloom checkpoint has an unexpected class count.")
+    classes = catalog(count)
     if saved["architecture"] != "mobilenet_v3_small" or saved["classes"] != classes:
         raise ValueError("Floralia Bloom checkpoint has a different architecture or class map.")
     torch.set_num_threads(4)

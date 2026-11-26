@@ -238,6 +238,56 @@
         "zh": "Wistaria 是原书拼写，其条目指紫藤通名。",
         "en": "Wistaria is the spelling in the book, which uses a common name."
       }
+    },
+    "china-rose": {
+      "zh": "美好常新。",
+      "en": "Beauty renewed.",
+      "source": "greenaway",
+      "locator": "China Rose",
+      "note": {
+        "zh": "原书使用英文园艺通名。",
+        "en": "The source uses the English horticultural name."
+      }
+    },
+    "florist-chrysanthemum": {
+      "zh": "白菊寄意真诚。",
+      "en": "White chrysanthemums convey truth.",
+      "source": "greenaway",
+      "locator": "Chrysanthemum, White",
+      "note": {
+        "zh": "原书记述限于白色。",
+        "en": "The meaning in the source is for white chrysanthemums."
+      }
+    },
+    "arabian-jasmine": {
+      "zh": "把牵挂寄给你。",
+      "en": "I attach myself to you.",
+      "source": "greenaway",
+      "locator": "Jasmine, Indian",
+      "note": {
+        "zh": "原书用 Indian jasmine，属于历史通名。",
+        "en": "The book uses the historical common name Indian jasmine."
+      }
+    },
+    "gardenia": {
+      "zh": "欢喜得难以言说。",
+      "en": "Joy beyond words.",
+      "source": "greenaway",
+      "locator": "Jasmine, Cape",
+      "note": {
+        "zh": "Cape jasmine 的历史花语用在栀子书页。",
+        "en": "The historical entry uses Cape jasmine, a common name for gardenia."
+      }
+    },
+    "ivy-leaved-morning-glory": {
+      "zh": "在旧花语里，牵牛也可以指故作姿态。",
+      "en": "In Victorian flower language, morning glory can suggest affectation.",
+      "source": "greenaway",
+      "locator": "Morning Glory",
+      "note": {
+        "zh": "这是原书英文通名的历史用法。",
+        "en": "This is the historical association of the broad English name."
+      }
     }
   }
 }

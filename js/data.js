@@ -1141,7 +1141,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 17,
     "order": 18,
     "key": "camellia",
     "zh": "山茶花",
@@ -1234,6 +1234,7 @@ FF.data = { flowers: [
         "Often solitary flowers in white, pink, red or variegated colours",
         "Single flowers expose their stamens. Cultivars can be densely double."
       ],
+      "comparison": "Compare bloom time and leaf and flower size with sasanqua camellia. Sasanquas usually flower from late autumn into winter and have smaller flowers. The seasons overlap, so use several clues together.",
       "culture": [
         [
           "Novel",
@@ -1251,7 +1252,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 18,
     "order": 19,
     "key": "hydrangea",
     "zh": "绣球花",
@@ -1274,6 +1275,7 @@ FF.data = { flowers: [
     "habitat": "邱园植物数据库记载其原产于日本。在园艺栽培中常见于半阴、土壤湿润且排水良好的位置。",
     "season": "通常夏季开花。《中国植物志》记载原变种的花期为 6–8 月。",
     "note": "本页介绍大叶绣球。民间也会把木绣球等球形花序的植物叫作绣球花，查资料时可用学名核对。",
+    "comparison": "和紫藤分辨时，拍下完整花序和邻近叶片。大叶绣球的花聚成圆团或较平的花序，叶片对生并有锯齿。紫藤的蝶形花沿长轴成串下垂，叶片由多枚小叶组成。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -1316,11 +1318,12 @@ FF.data = { flowers: [
         "Round mopheads or flatter lacecaps with larger outer flowers",
         "Large, petal-like parts are usually the sepals of sterile flowers"
       ],
+      "comparison": "Photograph the complete cluster and nearby leaves. Bigleaf hydrangea has rounded or flatter heads and opposite, toothed leaves. Wisteria has hanging chains of pea flowers and pinnate leaves.",
       "culture": []
     }
   },
   {
-    "class_id": null,
+    "class_id": 19,
     "order": 20,
     "key": "plum-blossom",
     "zh": "梅花",
@@ -1341,6 +1344,7 @@ FF.data = { flowers: [
     "habitat": "原产范围从中国中南部延伸到中南半岛北部，野生植株可见于疏林、溪边或山坡。",
     "season": "多在冬末至早春开花，实际时间随地区和品种变化。",
     "note": "本页介绍梅。冬季也开香花的蜡梅属于蜡梅科，和梅的分类不同。",
+    "comparison": "梅和桃都可能在裸枝上开粉色花。拍照时保留花着生的枝段和能看到的叶片。梅的叶多为卵形，桃叶通常较狭长。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -1401,6 +1405,7 @@ FF.data = { flowers: [
         "Fragrant flowers can be white or pink",
         "Ovate, toothed leaves appear after the flowers"
       ],
+      "comparison": "Mume and peach can both bloom pink on bare branches. Include the branch and any visible leaves. Mume commonly has ovate leaves, while peach leaves are usually narrower.",
       "culture": [
         [
           "Song dynasty poetry",
@@ -1420,7 +1425,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 20,
     "order": 21,
     "key": "peach-blossom",
     "zh": "桃花",
@@ -1441,6 +1446,7 @@ FF.data = { flowers: [
     "habitat": "邱园将桃记为源自中国中北部的栽培起源植物。果园栽培常选择阳光充足、土壤排水良好的位置。",
     "season": "通常春季开花，果实随后在夏季成熟，时间因品种而异。",
     "note": "本页以普通桃为代表。观赏桃的花色和重瓣程度会因品种而变。",
+    "comparison": "桃和梅都有白色或粉色的园艺品种。只拍一朵容易认混，最好一起拍到花、枝条和叶片。桃叶通常较狭长，梅的叶多为卵形。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -1487,6 +1493,7 @@ FF.data = { flowers: [
         "Single flowers typically have five petals",
         "Narrow, toothed leaves"
       ],
+      "comparison": "Both peach and mume can have pink or white cultivars. Include the flowers, branch and visible leaves. Peach leaves tend to be narrower, while mume commonly has ovate leaves.",
       "culture": [
         [
           "Prose",
@@ -1499,7 +1506,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 21,
     "order": 22,
     "key": "lotus",
     "zh": "荷花",
@@ -1587,6 +1594,7 @@ FF.data = { flowers: [
         "Flowers are held above the water and have a prominent central receptacle",
         "The receptacle develops into the familiar lotus seed head"
       ],
+      "comparison": "Look for an unbroken, round lotus leaf with a stalk near the centre. Common water lilies usually have floating leaves with a notch toward the centre. A lotus seed head is another useful clue.",
       "culture": [
         [
           "Prose",
@@ -1606,7 +1614,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 22,
     "order": 23,
     "key": "osmanthus",
     "zh": "桂花",
@@ -1708,7 +1716,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 23,
     "order": 24,
     "key": "tree-peony",
     "zh": "牡丹",
@@ -1787,7 +1795,7 @@ FF.data = { flowers: [
     }
   },
   {
-    "class_id": null,
+    "class_id": 24,
     "order": 25,
     "key": "wisteria",
     "zh": "紫藤",
@@ -1806,6 +1814,7 @@ FF.data = { flowers: [
     "habitat": "原产中国，栽培资料记载它在阳光充足到部分遮阴、土壤排水良好的位置生长。",
     "season": "春季开花，花串往往在叶片完全展开前出现。",
     "note": "本页的代表种是中国紫藤。园艺中的日本紫藤等同属植物也有下垂花序，需要结合叶片和其他特征区分。",
+    "comparison": "紫藤花和绣球花都能呈紫蓝色。拍下侧面的完整花序，紫藤的蝶形花沿长轴下垂成串，绣球通常聚成圆团或较平的花序。",
     "sources": [
       {
         "publisher": "英国皇家植物园邱园",
@@ -1856,6 +1865,7 @@ FF.data = { flowers: [
         "Pinnate leaves and drooping clusters of blue-violet pea flowers",
         "Long, velvety pods after flowering"
       ],
+      "comparison": "Both wisteria and hydrangea can look blue-purple. A side view of the complete cluster shows wisteria's hanging chains of pea flowers and hydrangea's rounded or flatter heads.",
       "culture": [
         [
           "Tang dynasty poetry",
@@ -1866,9 +1876,413 @@ FF.data = { flowers: [
         ]
       ]
     }
+  },
+  {
+    "class_id": 25,
+    "order": 26,
+    "key": "china-rose",
+    "zh": "月季",
+    "en": "China rose",
+    "aliases": [
+      "月季花",
+      "China rose"
+    ],
+    "latin": "Rosa chinensis",
+    "family": "蔷薇科",
+    "genus": "蔷薇属",
+    "traits": [
+      "小叶常具锯齿，数枚小叶组成羽状复叶。",
+      "枝条常有皮刺，花色和瓣数因栽培类型而异。"
+    ],
+    "habitat": "庭园中常见，多栽于光照充足、排水良好的位置。",
+    "season": "栽培条件适宜时可在生长季反复开花。",
+    "note": "拍照类别限定为有物种依据的月季。市售杂交月季及玫瑰 Rosa rugosa 有各自的分类范围。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Rosa chinensis",
+        "url": "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A732029-1"
+      },
+      {
+        "publisher": "英国皇家园艺学会",
+        "title": "Rosa chinensis",
+        "url": "https://www.rhs.org.uk/plants/33917/rosa-chinensis-jacq-s/details"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "戏剧",
+        "theme": "名字与香气",
+        "creator": "莎士比亚",
+        "title": "《罗密欧与朱丽叶》",
+        "publisher": "Folger Shakespeare Library",
+        "url": "https://www.folger.edu/explore/shakespeares-works/romeo-and-juliet/read/2/2/",
+        "locator": "第二幕第二场，朱丽叶谈名字的独白",
+        "our_summary": "朱丽叶借蔷薇改名后仍有香气来质问，家族的姓氏为何要决定他们的关系。",
+        "scope": "原文用 rose，按蔷薇属的文学意象收录。",
+        "checked_on": "2026-11-25"
+      }
+    ],
+    "flower_language": {
+      "zh": "美好常新。",
+      "en": "Beauty renewed.",
+      "source": {
+        "title": "Kate Greenaway · Language of Flowers (1884)",
+        "publisher": "Biodiversity Heritage Library",
+        "url": "https://www.biodiversitylibrary.org/item/269449"
+      },
+      "locator": "China Rose",
+      "note": {
+        "zh": "原书使用英文园艺通名。",
+        "en": "The source uses the English horticultural name."
+      }
+    },
+    "english": {
+      "family": "Rosaceae",
+      "habitat": "Widely grown in gardens, often in a sunny position with well-drained soil.",
+      "season": "Can flower repeatedly through the growing season in suitable conditions.",
+      "note": "Recognition is scoped to Rosa chinensis. Garden hybrids and Rosa rugosa have separate taxonomic scopes.",
+      "traits": [
+        "Several toothed leaflets form each pinnate leaf.",
+        "Stems often have prickles. Flower colour and petal count vary in cultivation."
+      ],
+      "culture": [
+        [
+          "Play",
+          "Names and fragrance",
+          "Juliet uses a rose's unchanged fragrance to question why a family name should determine their relationship. The play leaves the species unspecified.",
+          "Romeo and Juliet",
+          "William Shakespeare"
+        ]
+      ]
+    }
+  },
+  {
+    "class_id": 26,
+    "order": 27,
+    "key": "florist-chrysanthemum",
+    "zh": "菊花",
+    "en": "Garden chrysanthemum",
+    "aliases": [
+      "栽培菊",
+      "园艺菊",
+      "Garden mum"
+    ],
+    "latin": "Chrysanthemum × morifolium",
+    "family": "菊科",
+    "genus": "菊属",
+    "traits": [
+      "花头由许多小花组成，外围常有舌状花。",
+      "叶片通常分裂，栽培品种的花头可以是单瓣、重瓣或球形。"
+    ],
+    "habitat": "作为观赏花卉栽植于花坛、庭园及容器。",
+    "season": "庭园栽培常在夏末至秋季开花，品种和光照影响花期。",
+    "note": "邱园将其列为接受的杂交分类群。拍照类别面向栽培菊，野菊另作近似对象。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Chrysanthemum × morifolium",
+        "url": "https://powo.science.kew.org/taxon/77111328-1"
+      },
+      {
+        "publisher": "英国皇家园艺学会",
+        "title": "Chrysanthemum × morifolium",
+        "url": "https://www.rhs.org.uk/plants/chrysanthemum/growing-guide"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "诗歌",
+        "theme": "东篱采菊",
+        "creator": "陶渊明",
+        "title": "《饮酒（其五）》",
+        "publisher": "学习强国 · 原诗",
+        "url": "https://article.xuexi.cn/html/13395986728056917107.html",
+        "locator": "其五，东篱与南山两句",
+        "our_summary": "诗人从篱下采菊写到举目见南山，以这段日常动作表现闲居的自在。",
+        "scope": "诗中只称菊，品种及现代分类未详。",
+        "checked_on": "2026-11-25"
+      }
+    ],
+    "flower_language": {
+      "zh": "白菊寄意真诚。",
+      "en": "White chrysanthemums convey truth.",
+      "source": {
+        "title": "Kate Greenaway · Language of Flowers (1884)",
+        "publisher": "Biodiversity Heritage Library",
+        "url": "https://www.biodiversitylibrary.org/item/269449"
+      },
+      "locator": "Chrysanthemum, White",
+      "note": {
+        "zh": "原书记述限于白色。",
+        "en": "The meaning in the source is for white chrysanthemums."
+      }
+    },
+    "english": {
+      "family": "Asteraceae",
+      "habitat": "Grown in borders, gardens and containers as an ornamental.",
+      "season": "Often flowers from late summer through autumn. Timing varies with cultivar and light.",
+      "note": "Kew accepts this hybrid taxon. The category covers cultivated chrysanthemums, with wild chrysanthemums treated separately.",
+      "traits": [
+        "Each flower head contains many florets, often with ray florets around the edge.",
+        "Leaves are usually lobed. Cultivars bear single, double or pompon heads."
+      ],
+      "culture": [
+        [
+          "Poetry",
+          "Chrysanthemums by the eastern fence",
+          "Picking chrysanthemums and seeing the southern hills become part of a quiet moment in the poet's rural life. The poem uses the common name.",
+          "Drinking Wine V",
+          "Tao Yuanming"
+        ]
+      ]
+    }
+  },
+  {
+    "class_id": 27,
+    "order": 28,
+    "key": "arabian-jasmine",
+    "zh": "茉莉",
+    "en": "Arabian jasmine",
+    "aliases": [
+      "茉莉花",
+      "Sambac jasmine"
+    ],
+    "latin": "Jasminum sambac",
+    "family": "木犀科",
+    "genus": "素馨属",
+    "traits": [
+      "白花芳香，可见单瓣或重瓣栽培型。",
+      "叶较宽，通常对生，花常数朵聚在枝梢。"
+    ],
+    "habitat": "温暖地区广泛栽培，在庭园和花盆中都可见。",
+    "season": "植物志记载花期多在夏季，栽培地点和气候会影响开花。",
+    "note": "本页介绍茉莉 Jasminum sambac。英文俗名 jasmine 也用于其他种。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Jasminum sambac",
+        "url": "https://powo.science.kew.org/taxon/609755-1"
+      },
+      {
+        "publisher": "Flora of China",
+        "title": "Jasminum sambac",
+        "url": "https://efloras.org/florataxon.aspx?flora_id=2&taxon_id=200017788"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "用物史",
+        "theme": "一朵花怎样给茶叶添香",
+        "creator": "联合国粮农组织",
+        "title": "福州茉莉花与茶文化系统",
+        "publisher": "FAO 全球重要农业文化遗产",
+        "url": "https://www.fao.org/giahs/giahs-around-the-world/china-fuzhou-jasmine-tea/en",
+        "locator": "福州农业文化遗产介绍，茉莉花茶制作",
+        "our_summary": "福州的窨制工艺让茶叶吸收鲜茉莉花的香气。当地种花、制茶和用花窨香的技术连在一起。",
+        "scope": "条目讲述作为工艺原料的鲜花。",
+        "checked_on": "2026-11-25"
+      }
+    ],
+    "flower_language": {
+      "zh": "把牵挂寄给你。",
+      "en": "I attach myself to you.",
+      "source": {
+        "title": "Kate Greenaway · Language of Flowers (1884)",
+        "publisher": "Biodiversity Heritage Library",
+        "url": "https://www.biodiversitylibrary.org/item/269449"
+      },
+      "locator": "Jasmine, Indian",
+      "note": {
+        "zh": "原书用 Indian jasmine，属于历史通名。",
+        "en": "The book uses the historical common name Indian jasmine."
+      }
+    },
+    "english": {
+      "family": "Oleaceae",
+      "habitat": "Widely cultivated in warm regions, in both gardens and containers.",
+      "season": "The flora records flowering chiefly in summer. Climate and cultivation influence timing.",
+      "note": "This folio covers Jasminum sambac. The name jasmine is also used for other plants.",
+      "traits": [
+        "Fragrant white flowers occur in single and double cultivated forms.",
+        "Leaves are relatively broad and usually opposite. Flowers often occur in small terminal clusters."
+      ],
+      "culture": [
+        [
+          "Historical use",
+          "Scenting tea with fresh jasmine",
+          "Fuzhou jasmine tea is made by allowing tea leaves to absorb the scent of fresh jasmine blossoms. The process links cultivation and tea-making.",
+          "Fuzhou Jasmine and Tea Culture System",
+          "Food and Agriculture Organization"
+        ]
+      ]
+    }
+  },
+  {
+    "class_id": 28,
+    "order": 29,
+    "key": "gardenia",
+    "zh": "栀子",
+    "en": "Cape jasmine",
+    "aliases": [
+      "栀子花",
+      "Gardenia",
+      "Common gardenia"
+    ],
+    "latin": "Gardenia jasminoides",
+    "family": "茜草科",
+    "genus": "栀子属",
+    "traits": [
+      "白色花冠通常有香气，花常单生在枝端。",
+      "叶对生或轮生，革质而有光泽，果实可见纵向棱。"
+    ],
+    "habitat": "中国南方的灌丛、林地及庭园可见，亦广泛栽培。",
+    "season": "多在春末至夏季开花，栽培环境会影响花期。",
+    "note": "英文 Cape jasmine 指这里的栀子。栀子与木犀科茉莉是不同科的植物。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Gardenia jasminoides",
+        "url": "https://powo.science.kew.org/taxon/751073-1"
+      },
+      {
+        "publisher": "Flora of China",
+        "title": "Gardenia jasminoides",
+        "url": "https://efloras.org/florataxon.aspx?flora_id=2&taxon_id=200022091"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "唐诗",
+        "theme": "江边栀子的花与果",
+        "creator": "杜甫",
+        "title": "《江头四咏·栀子》",
+        "publisher": "《全唐诗》卷二二七",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%85%A8%E5%94%90%E8%A9%A9/%E5%8D%B7227#栀子",
+        "locator": "《全唐诗》卷227，《江头四咏》之《栀子》",
+        "our_summary": "杜甫从栀子的果与枝写到移栽江边的景象。一株栀子让视线从雨露中的枝叶转到江波。",
+        "scope": "诗中称栀子，使用历史名称。",
+        "checked_on": "2026-11-25"
+      }
+    ],
+    "flower_language": {
+      "zh": "欢喜得难以言说。",
+      "en": "Joy beyond words.",
+      "source": {
+        "title": "Kate Greenaway · Language of Flowers (1884)",
+        "publisher": "Biodiversity Heritage Library",
+        "url": "https://www.biodiversitylibrary.org/item/269449"
+      },
+      "locator": "Jasmine, Cape",
+      "note": {
+        "zh": "Cape jasmine 的历史花语用在栀子书页。",
+        "en": "The historical entry uses Cape jasmine, a common name for gardenia."
+      }
+    },
+    "english": {
+      "family": "Rubiaceae",
+      "habitat": "Found in shrublands, woodland and gardens in southern China, and widely cultivated.",
+      "season": "Usually flowers from late spring into summer, depending on growing conditions.",
+      "note": "Cape jasmine here refers to gardenia, in a different family from true jasmine.",
+      "traits": [
+        "Fragrant white flowers are typically solitary at the tips of branches.",
+        "Glossy leathery leaves are opposite or whorled, and fruits may show longitudinal ridges."
+      ],
+      "culture": [
+        [
+          "Tang poetry",
+          "A gardenia by the river",
+          "Du Fu describes fruit and rain-wet branches before imagining the plant reflected beside the river. The poem uses a historical plant name.",
+          "Gardenia from Four Poems at the River",
+          "Du Fu"
+        ]
+      ]
+    }
+  },
+  {
+    "class_id": 29,
+    "order": 30,
+    "key": "ivy-leaved-morning-glory",
+    "zh": "牵牛",
+    "en": "Ivy-leaved morning glory",
+    "aliases": [
+      "牵牛花",
+      "喇叭花",
+      "大花牵牛",
+      "Morning glory"
+    ],
+    "latin": "Ipomoea nil",
+    "family": "旋花科",
+    "genus": "番薯属",
+    "traits": [
+      "缠绕草本，叶片常有三个裂片。",
+      "花冠呈漏斗状，花萼常被长毛。"
+    ],
+    "habitat": "可见于路边、篱旁和庭园，茎攀缠于邻近植物或支架。",
+    "season": "常在夏秋开花，色彩和花期随栽培条件而变。",
+    "note": "拍照标签限定 Ipomoea nil。圆叶牵牛和其他被叫作喇叭花的植物另行辨认。",
+    "sources": [
+      {
+        "publisher": "英国皇家植物园邱园",
+        "title": "Ipomoea nil",
+        "url": "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A1071575-2/general-information"
+      },
+      {
+        "publisher": "植物智 · 中国植物志",
+        "title": "Ipomoea nil",
+        "url": "https://www.iplant.cn/info/Ipomoea%20nil?t=focn"
+      }
+    ],
+    "culture": [
+      {
+        "kind": "诗歌",
+        "theme": "只属于晨光的一朵花",
+        "creator": "弗洛伦斯·厄尔·科茨",
+        "title": "The Morning-Glory",
+        "publisher": "The Home Book of Verse · Project Gutenberg",
+        "url": "https://www.gutenberg.org/cache/epub/2621/pg2621-images.html",
+        "locator": "第三卷，Florence Earle Coates 的同名诗",
+        "our_summary": "诗以问答写牵牛花短暂的开放，让花说出为何愿为一个清晨尽力盛开。",
+        "scope": "原诗的 morning-glory 是通名，未指定物种。",
+        "checked_on": "2026-11-25"
+      }
+    ],
+    "flower_language": {
+      "zh": "在旧花语里，牵牛也可以指故作姿态。",
+      "en": "In Victorian flower language, morning glory can suggest affectation.",
+      "source": {
+        "title": "Kate Greenaway · Language of Flowers (1884)",
+        "publisher": "Biodiversity Heritage Library",
+        "url": "https://www.biodiversitylibrary.org/item/269449"
+      },
+      "locator": "Morning Glory",
+      "note": {
+        "zh": "这是原书英文通名的历史用法。",
+        "en": "This is the historical association of the broad English name."
+      }
+    },
+    "english": {
+      "family": "Convolvulaceae",
+      "habitat": "Found along roadsides, among fences and in gardens, twining around plants or supports.",
+      "season": "Commonly blooms in summer and autumn, with colour and timing varying in cultivation.",
+      "note": "Recognition is scoped to Ipomoea nil. Common morning glory and other trumpet-shaped flowers are separate plants.",
+      "traits": [
+        "A twining herb with leaves that are often three-lobed.",
+        "The corolla is funnel-shaped. The calyx often has long hairs."
+      ],
+      "culture": [
+        [
+          "Poetry",
+          "A flower that belongs to the morning",
+          "The poem uses a conversation with a short-lived flower to ask how a brief life can still be complete. The English common name is broader than the species here.",
+          "The Morning-Glory",
+          "Florence Earle Coates"
+        ]
+      ]
+    }
   }
 ] };
-FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null);
+FF.data.recognizableFlowers = FF.data.flowers.filter(f => f.class_id !== null && f.class_id < 17);
 FF.data.byKey = function (key) {
   return this.flowers.find(f => f.key === key) || null;
 };

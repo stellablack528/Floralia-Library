@@ -67,7 +67,9 @@ FF.views.documentImport = (function () {
     const status = document.getElementById("save-status");
     const book = document.getElementById("import-book");
     save.elements.flower.add(new Option(t("选择花卉", "Select a flower"), ""));
-    for (const entry of FF.data.recognizableFlowers) save.elements.flower.add(new Option(t(entry.zh, entry.en), entry.key));
+    for (const entry of FF.data.flowers.filter(flower => flower.class_id !== null)) {
+      save.elements.flower.add(new Option(t(entry.zh, entry.en), entry.key));
+    }
     let job;
 
     upload.addEventListener("submit", async event => {

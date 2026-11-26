@@ -17,11 +17,106 @@
   "windflower": {"family": "Ranunculaceae", "traits": ["Often a single white star-shaped flower, sometimes tinted pink", "Petal-like sepals", "Deeply divided leaves that can carpet woodland"], "habitat": "Deciduous woods, where it flowers before the tree canopy closes.", "season": "Usually March to May in Britain.", "note": "This folio uses wood anemone. The name Anemone nemorosa is also used for it.", "culture": [["Myth", "Adonis and the flower in the wind", "Venus brings a flower forth from Adonis's blood in Ovid. An English translation calls it an anemone and describes the wind carrying its petals away."]]},
   "pansy": {"family": "Violaceae", "traits": ["Overlapping rounded petals", "Many cultivars have dark blotches near the centre", "Wide variation in colour and pattern"], "habitat": "A cool-season plant for beds and containers in sun or partial shade.", "season": "Depends on variety and sowing time. Some garden varieties flower from autumn into spring.", "note": "This profile describes a modern garden hybrid. Historical pansies may refer to older forms or relatives.", "culture": [["Play and symbolism", "Ophelia's pansies", "Ophelia links pansies with thoughts when distributing flowers in Hamlet. The association comes from this scene."]]},
   "camellia": {"family": "Theaceae", "traits": ["Evergreen shrub or small tree with alternate, glossy, finely toothed leaves", "Often solitary flowers in white, pink, red or variegated colours", "Single flowers expose their stamens. Cultivars can be densely double."], "habitat": "Native to parts of eastern China, Korea, Japan and Taiwan. Often grown in partial shade with moist, well-drained soil.", "season": "Usually late winter to early spring, with regional and cultivar variation.", "note": "Gardeners may use camellia for several species. This page describes Camellia japonica.", "comparison": "Compare bloom time and leaf and flower size with sasanqua camellia. Sasanquas usually flower from late autumn into winter and have smaller flowers. The seasons overlap, so use several clues together.", "culture": [["Novel", "The bouquet in the theatre box", "Marguerite brings opera glasses, sweets and camellias to the theatre. Her florist starts calling her the Lady of the Camellias."], ["Song dynasty poetry", "Su Shi's camellias in the snow", "Su Shi visits the temple alone and ends with flame-red flowers against snow. The image belongs to the poem, while flowering dates vary by garden.", "Camellias at Shaobo Fanxing Temple", "Su Shi"]], "art": ["Red-and-white striped camellias open along a leafy branch.", "Look for the red streaks on the petals, the glossy leaves and the unopened bud in Kazumasa Ogawa's print.", "Kazumasa Ogawa", "ca. 1890-1895", "Rijksmuseum"]},
-  "hydrangea": {"family": "Hydrangeaceae", "traits": ["Deciduous shrub with opposite, toothed leaves", "Round mopheads or flatter lacecaps with larger outer flowers", "Large, petal-like parts are usually the sepals of sterile flowers"], "habitat": "Native to Japan according to Kew. In gardens it is often found in partial shade and moist, well-drained soil.", "season": "Usually summer. Flora of China records June to August for the typical variety.", "note": "This folio describes bigleaf hydrangea. Similar common names can also refer to unrelated shrubs with rounded flower clusters.", "culture": [["Botanical history", "The blue hydrangea in Flora Japonica", "Plate 52 shows a blue flower head under the name Hydrangea Otaksa. The Kyoto catalogue and Kew connect that historical name to bigleaf hydrangea.", "Flora Japonica", "Philipp Franz von Siebold and Joseph Gerhard Zuccarini"]], "art": ["A blue hydrangea flower head sits above broad green leaves on an illustration from Flora Japonica.", "The plate is captioned Hydrangea Otaksa. Courtesy of the Graduate School of Science, Kyoto University. The image was resized and converted to WebP.", "Philipp Franz von Siebold and Joseph Gerhard Zuccarini (authors)", "19th century", "Graduate School of Science, Kyoto University"]},
-  "plum-blossom": {"family": "Rosaceae", "traits": ["Deciduous small tree that often flowers on bare branches", "Fragrant flowers can be white or pink", "Ovate, toothed leaves appear after the flowers"], "habitat": "Native from south-central China to northern Indochina, including open woods, stream sides and slopes.", "season": "Often late winter to early spring.", "note": "Wintersweet belongs to a different family, although it also has fragrant winter flowers.", "culture": [["Song dynasty poetry", "Shadows and fragrance in the garden", "Lin Bu places the shadow of the plum branches above shallow water and its fragrance in the dusk.", "Little Plum Trees in the Hill Garden", "Lin Bu"], ["History of use", "Green and smoked mume fruit in Chinese food history", "The Palace Museum records mume fruit being used to add acidity. Historical accounts describe salting and drying green fruit for baimei and smoking riper fruit for wumei.", "Green plums and spring wine", "Cui Yuejiao"]], "art": ["A curving ink branch hangs down, with pale blossoms on its smaller twigs.", "Wang Mian painted plum branches on silk. The Met associates winter-flowering plum with endurance in the Yuan period.", "Wang Mian", "14th century", "The Metropolitan Museum of Art"]},
-  "peach-blossom": {"family": "Rosaceae", "traits": ["Deciduous tree, often with pink flowers", "Single flowers typically have five petals", "Narrow, toothed leaves"], "habitat": "Kew treats peach as a cultivated plant originating in north-central China. Orchards generally provide sun and drainage.", "season": "Usually spring, with fruit ripening in summer.", "note": "Ornamental peach cultivars vary in flower colour and can have double flowers.", "culture": [["Prose", "Peach trees beside the stream", "Tao Yuanming's fisherman follows a stream through blossoming peach trees to the entrance of a secluded village.", "Peach Blossom Spring", "Tao Yuanming"]], "art": ["A section of a handscroll shows green cliffs, a winding stream, fields and houses.", "Zhang Hong retells Peach Blossom Spring in a handscroll. The museum page shows the work from right to left.", "Zhang Hong", "1638", "The Metropolitan Museum of Art"]},
+  "hydrangea": {"family": "Hydrangeaceae", "traits": ["Deciduous shrub with opposite, toothed leaves", "Round mopheads or flatter lacecaps with larger outer flowers", "Large, petal-like parts are usually the sepals of sterile flowers"], "habitat": "Native to Japan according to Kew. In gardens it is often found in partial shade and moist, well-drained soil.", "season": "Usually summer. Flora of China records June to August for the typical variety.", "note": "This folio describes bigleaf hydrangea. Similar common names can also refer to unrelated shrubs with rounded flower clusters.", "comparison": "Photograph the complete cluster and nearby leaves. Bigleaf hydrangea has rounded or flatter heads and opposite, toothed leaves. Wisteria has hanging chains of pea flowers and pinnate leaves.", "culture": [["Botanical history", "The blue hydrangea in Flora Japonica", "Plate 52 shows a blue flower head under the name Hydrangea Otaksa. The Kyoto catalogue and Kew connect that historical name to bigleaf hydrangea.", "Flora Japonica", "Philipp Franz von Siebold and Joseph Gerhard Zuccarini"]], "art": ["A blue hydrangea flower head sits above broad green leaves on an illustration from Flora Japonica.", "The plate is captioned Hydrangea Otaksa. Courtesy of the Graduate School of Science, Kyoto University. The image was resized and converted to WebP.", "Philipp Franz von Siebold and Joseph Gerhard Zuccarini (authors)", "19th century", "Graduate School of Science, Kyoto University"]},
+  "plum-blossom": {"family": "Rosaceae", "traits": ["Deciduous small tree that often flowers on bare branches", "Fragrant flowers can be white or pink", "Ovate, toothed leaves appear after the flowers"], "habitat": "Native from south-central China to northern Indochina, including open woods, stream sides and slopes.", "season": "Often late winter to early spring.", "note": "Wintersweet belongs to a different family, although it also has fragrant winter flowers.", "comparison": "Mume and peach can both bloom pink on bare branches. Include the branch and any visible leaves. Mume commonly has ovate leaves, while peach leaves are usually narrower.", "culture": [["Song dynasty poetry", "Shadows and fragrance in the garden", "Lin Bu places the shadow of the plum branches above shallow water and its fragrance in the dusk.", "Little Plum Trees in the Hill Garden", "Lin Bu"], ["History of use", "Green and smoked mume fruit in Chinese food history", "The Palace Museum records mume fruit being used to add acidity. Historical accounts describe salting and drying green fruit for baimei and smoking riper fruit for wumei.", "Green plums and spring wine", "Cui Yuejiao"]], "art": ["A curving ink branch hangs down, with pale blossoms on its smaller twigs.", "Wang Mian painted plum branches on silk. The Met associates winter-flowering plum with endurance in the Yuan period.", "Wang Mian", "14th century", "The Metropolitan Museum of Art"]},
+  "peach-blossom": {"family": "Rosaceae", "traits": ["Deciduous tree, often with pink flowers", "Single flowers typically have five petals", "Narrow, toothed leaves"], "habitat": "Kew treats peach as a cultivated plant originating in north-central China. Orchards generally provide sun and drainage.", "season": "Usually spring, with fruit ripening in summer.", "note": "Ornamental peach cultivars vary in flower colour and can have double flowers.", "comparison": "Both peach and mume can have pink or white cultivars. Include the flowers, branch and visible leaves. Peach leaves tend to be narrower, while mume commonly has ovate leaves.", "culture": [["Prose", "Peach trees beside the stream", "Tao Yuanming's fisherman follows a stream through blossoming peach trees to the entrance of a secluded village.", "Peach Blossom Spring", "Tao Yuanming"]], "art": ["A section of a handscroll shows green cliffs, a winding stream, fields and houses.", "Zhang Hong retells Peach Blossom Spring in a handscroll. The museum page shows the work from right to left.", "Zhang Hong", "1638", "The Metropolitan Museum of Art"]},
   "lotus": {"family": "Nelumbonaceae", "traits": ["Round leaves with stalks attached near the centre", "Flowers are held above the water and have a prominent central receptacle", "The receptacle develops into the familiar lotus seed head"], "habitat": "A perennial of calm, sunny, shallow water, with rhizomes anchored in mud.", "season": "Typically summer.", "note": "This is the sacred lotus, a member of the lotus family.", "comparison": "Look for an unbroken, round lotus leaf with a stalk near the centre. Common water lilies usually have floating leaves with a notch toward the centre. A lotus seed head is another useful clue.", "culture": [["Prose", "The noble flower", "Zhou Dunyi describes how the lotus rises out of mud, then uses its upright bearing as an image of moral character.", "On Loving the Lotus", "Zhou Dunyi"], ["Song dynasty poetry", "Lotus flowers on West Lake", "Yang Wanli moves from distant green lotus leaves to pink-red flowers bright in the summer sun.", "Leaving Jingci Temple at Dawn to See Off Lin Zifang", "Yang Wanli"], ["Painting", "Lotus leaves and birds in ink", "Compare the ink washes and birds in this handscroll with the coloured pair of lotus paintings.", "Birds in a Lotus Pond", "Bada Shanren"]], "art": ["A pair of silk hanging scrolls with pink lotus flowers, green leaves and waterbirds.", "Look for buds and open flowers. On the museum's page you can zoom in on fallen petals, older leaves and ripening seed heads.", "Unidentified Yuan dynasty artist", "ca. 1300", "The Metropolitan Museum of Art"]},
   "osmanthus": {"family": "Oleaceae", "traits": ["Evergreen shrub or small tree with opposite leaves", "Tiny fragrant flowers cluster in the leaf axils", "Cultivars come in white, pale yellow and orange"], "habitat": "Native from the Himalayas into parts of East Asia and Indochina. Often grown in sun or partial shade with good drainage.", "season": "Often autumn. Some forms or climates also produce spring flowers.", "note": "Here the common name refers to sweet osmanthus. The single character gui can have other meanings in historical texts.", "culture": [["Song dynasty lyric", "Pale flowers and lingering scent", "Li Qingzhao praises the flower's quiet colour and persistent fragrance, comparing it with plum and chrysanthemum.", "Partridge Sky · Pale Yellow and Gentle", "Li Qingzhao"], ["History of use", "Scenting tea and sweets with osmanthus", "The Wellcome catalogue for an eighteenth-century print records the use of male osmanthus blossoms to scent tea and confectionery. The print uses the historical name Olea fragrans.", "Kwei plant (Osmanthus fragrans)", "Wellcome Collection"]], "art": ["An old print of an osmanthus branch with paired leaves, tiny flower clusters and enlarged flower parts.", "Miller illustrates the branch and enlarged flower parts separately. Olea fragrans is a historic name that Kew lists as a synonym.", "Johann Sebastian Mueller", "ca. 1771", "Wellcome Collection"]},
   "tree-peony": {"family": "Paeoniaceae", "traits": ["Deciduous shrub with persistent woody stems", "Divided leaves and large flowers at branch tips", "Cultivars vary widely in colour and petal count"], "habitat": "Kew accepts this representative name as a hybrid. Woody peonies are often grown with good drainage and sun or light shade.", "season": "Typically mid to late spring.", "note": "The multiplication sign in the scientific name indicates a hybrid. Garden tree peonies include several groups.", "culture": [["Tang dynasty poetry", "The flower that stirs the capital", "Liu Yuxi contrasts the flowers in a courtyard and pond with the tree peony that draws the city out when it blooms.", "Admiring Peonies", "Liu Yuxi"]], "art": ["White, pink and scarlet peonies bloom among leaves on a hanging scroll.", "This Edo-period painting originally formed part of a folding screen and was later mounted as a hanging scroll.", "Fukae Roshū", "Early to mid-18th century", "The Metropolitan Museum of Art"]},
-  "wisteria": {"family": "Fabaceae", "traits": ["A deciduous woody vine that twines around supports", "Pinnate leaves and drooping clusters of blue-violet pea flowers", "Long, velvety pods after flowering"], "habitat": "Native to China. In cultivation it grows in sun to partial shade and well-drained ground.", "season": "Spring, often before the leaves have fully opened.", "note": "This page represents Chinese wisteria. Japanese wisteria and other relatives can also have drooping flower clusters.", "culture": [["Tang dynasty poetry", "Flowering vines, birdsong and fragrance", "Li Bai starts with vines climbing into a tree, then describes birds hidden in leaves and scent carried on the wind.", "Wisteria Tree", "Li Bai"]], "art": ["Blue-violet and pale flower clusters hang among green leaves in a woodblock print.", "Kamisaka Sekka uses blocks of violet and green to describe the cascading flower clusters.", "Kamisaka Sekka", "1909-1910", "Cleveland Museum of Art"]}
+  "wisteria": {"family": "Fabaceae", "traits": ["A deciduous woody vine that twines around supports", "Pinnate leaves and drooping clusters of blue-violet pea flowers", "Long, velvety pods after flowering"], "habitat": "Native to China. In cultivation it grows in sun to partial shade and well-drained ground.", "season": "Spring, often before the leaves have fully opened.", "note": "This page represents Chinese wisteria. Japanese wisteria and other relatives can also have drooping flower clusters.", "comparison": "Both wisteria and hydrangea can look blue-purple. A side view of the complete cluster shows wisteria's hanging chains of pea flowers and hydrangea's rounded or flatter heads.", "culture": [["Tang dynasty poetry", "Flowering vines, birdsong and fragrance", "Li Bai starts with vines climbing into a tree, then describes birds hidden in leaves and scent carried on the wind.", "Wisteria Tree", "Li Bai"]], "art": ["Blue-violet and pale flower clusters hang among green leaves in a woodblock print.", "Kamisaka Sekka uses blocks of violet and green to describe the cascading flower clusters.", "Kamisaka Sekka", "1909-1910", "Cleveland Museum of Art"]},
+  "china-rose": {
+    "family": "Rosaceae",
+    "traits": [
+      "Several toothed leaflets form each pinnate leaf.",
+      "Stems often have prickles. Flower colour and petal count vary in cultivation."
+    ],
+    "habitat": "Widely grown in gardens, often in a sunny position with well-drained soil.",
+    "season": "Can flower repeatedly through the growing season in suitable conditions.",
+    "note": "Recognition is scoped to Rosa chinensis. Garden hybrids and Rosa rugosa have separate taxonomic scopes.",
+    "culture": [
+      [
+        "Play",
+        "Names and fragrance",
+        "Juliet uses a rose's unchanged fragrance to question why a family name should determine their relationship. The play leaves the species unspecified.",
+        "Romeo and Juliet",
+        "William Shakespeare"
+      ]
+    ]
+  },
+  "florist-chrysanthemum": {
+    "family": "Asteraceae",
+    "traits": [
+      "Each flower head contains many florets, often with ray florets around the edge.",
+      "Leaves are usually lobed. Cultivars bear single, double or pompon heads."
+    ],
+    "habitat": "Grown in borders, gardens and containers as an ornamental.",
+    "season": "Often flowers from late summer through autumn. Timing varies with cultivar and light.",
+    "note": "Kew accepts this hybrid taxon. The category covers cultivated chrysanthemums, with wild chrysanthemums treated separately.",
+    "culture": [
+      [
+        "Poetry",
+        "Chrysanthemums by the eastern fence",
+        "Picking chrysanthemums and seeing the southern hills become part of a quiet moment in the poet's rural life. The poem uses the common name.",
+        "Drinking Wine V",
+        "Tao Yuanming"
+      ]
+    ]
+  },
+  "arabian-jasmine": {
+    "family": "Oleaceae",
+    "traits": [
+      "Fragrant white flowers occur in single and double cultivated forms.",
+      "Leaves are relatively broad and usually opposite. Flowers often occur in small terminal clusters."
+    ],
+    "habitat": "Widely cultivated in warm regions, in both gardens and containers.",
+    "season": "The flora records flowering chiefly in summer. Climate and cultivation influence timing.",
+    "note": "This folio covers Jasminum sambac. The name jasmine is also used for other plants.",
+    "culture": [
+      [
+        "Historical use",
+        "Scenting tea with fresh jasmine",
+        "Fuzhou jasmine tea is made by allowing tea leaves to absorb the scent of fresh jasmine blossoms. The process links cultivation and tea-making.",
+        "Fuzhou Jasmine and Tea Culture System",
+        "Food and Agriculture Organization"
+      ]
+    ]
+  },
+  "gardenia": {
+    "family": "Rubiaceae",
+    "traits": [
+      "Fragrant white flowers are typically solitary at the tips of branches.",
+      "Glossy leathery leaves are opposite or whorled, and fruits may show longitudinal ridges."
+    ],
+    "habitat": "Found in shrublands, woodland and gardens in southern China, and widely cultivated.",
+    "season": "Usually flowers from late spring into summer, depending on growing conditions.",
+    "note": "Cape jasmine here refers to gardenia, in a different family from true jasmine.",
+    "culture": [
+      [
+        "Tang poetry",
+        "A gardenia by the river",
+        "Du Fu describes fruit and rain-wet branches before imagining the plant reflected beside the river. The poem uses a historical plant name.",
+        "Gardenia from Four Poems at the River",
+        "Du Fu"
+      ]
+    ]
+  },
+  "ivy-leaved-morning-glory": {
+    "family": "Convolvulaceae",
+    "traits": [
+      "A twining herb with leaves that are often three-lobed.",
+      "The corolla is funnel-shaped. The calyx often has long hairs."
+    ],
+    "habitat": "Found along roadsides, among fences and in gardens, twining around plants or supports.",
+    "season": "Commonly blooms in summer and autumn, with colour and timing varying in cultivation.",
+    "note": "Recognition is scoped to Ipomoea nil. Common morning glory and other trumpet-shaped flowers are separate plants.",
+    "culture": [
+      [
+        "Poetry",
+        "A flower that belongs to the morning",
+        "The poem uses a conversation with a short-lived flower to ask how a brief life can still be complete. The English common name is broader than the species here.",
+        "The Morning-Glory",
+        "Florence Earle Coates"
+      ]
+    ]
+  }
 }

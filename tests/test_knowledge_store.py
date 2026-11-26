@@ -3,11 +3,12 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from knowledge_store import initialize, open_store
+from knowledge_store import SCHEMA, TRANSLATION_SCHEMA, initialize, open_store
 
 
 class KnowledgeStoreTest(unittest.TestCase):
@@ -40,7 +41,7 @@ class KnowledgeStoreTest(unittest.TestCase):
 
     def test_seed_coverage_and_edits_survive_reinitialization(self):
         with open_store(self.path) as store:
-            self.assertEqual(list(range(17)), [row["class_id"] for row in store.list_flowers()])
+            self.assertEqual(list(range(30)), [row["class_id"] for row in store.list_flowers()])
             for row in store.list_flowers():
                 flower = store.flower(row["class_key"])
                 self.assertTrue(flower["botanical_profile"]["sources"])
@@ -51,6 +52,29 @@ class KnowledgeStoreTest(unittest.TestCase):
         with open_store(self.path) as store:
             self.assertFalse(store.seed())
             self.assertEqual("已核对的修订", store.flower("snowdrop")["botanical_profile"]["habitat"])
+
+    def test_version_two_migration_preserves_existing_document_review(self):
+        old = self.root / "existing.sqlite3"
+        with closing(sqlite3.connect(old)) as db, db:
+            db.executescript(SCHEMA.read_text(encoding="utf-8"))
+            db.executescript(TRANSLATION_SCHEMA.read_text(encoding="utf-8"))
+            db.execute("INSERT INTO flower_classes VALUES ('daffodil', 0, '黄水仙', 'Daffodil', NULL, 'edited note')")
+            db.execute("INSERT INTO documents (document_id, sha256, original_name, local_path) VALUES (1, ?, 'old.pdf', '')",
+                       ("d" * 64,))
+            db.execute("""INSERT INTO document_parses (parse_id, document_id, parsed_at, mineru_version, tier, device, output_dir)
+                          VALUES (1, 1, '2026-11-18', '4.2.3', 'flash', 'cpu', 'test')""")
+            db.execute("INSERT INTO document_pages VALUES (1, 1)")
+            db.execute("""INSERT INTO document_evidence VALUES
+                          (1, 'daffodil', 1, 1, 'flower', 'old source', 'old summary', 'source_statement', 'verified')""")
+            db.execute("INSERT INTO evidence_translations VALUES (1, 'old source', '已有译文', 'Hy-MT2', 'verified')")
+        initialize(old)
+        with open_store(old) as store:
+            self.assertTrue(store.seed())
+            self.assertFalse(store.seed())
+            self.assertEqual("edited note", store.list_flowers()[0]["scientific_name_note"])
+            self.assertEqual("已有译文", store.source_evidence("daffodil")[0]["translation"])
+            self.assertEqual("Ipomoea nil", store.flower("ivy-leaved-morning-glory")["scientific_name"])
+            self.assertFalse(store.rows("PRAGMA foreign_key_check"))
 
     def test_document_versions_page_constraint_review_and_delete(self):
         first_dir = self.make_parse("first", "2026-11-18T00:00:00+00:00")

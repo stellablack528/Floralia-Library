@@ -16,7 +16,8 @@ from knowledge_store import initialize, open_store
 class DocumentImportTest(unittest.TestCase):
     def test_pending_selection_deduplication_cache_and_temporary_cleanup(self):
         raw = b"%PDF-1.7\nexample"
-        excerpt = "the common snowdrop"
+        excerpt = "the Cape jasmine"
+        class_key = "gardenia"
         block = Event()
         paths = []
 
@@ -56,19 +57,21 @@ class DocumentImportTest(unittest.TestCase):
             self.assertTrue(imports.status(cached)["cached"])
             self.assertEqual(1, len(paths))
             with self.assertRaises(ValueError):
-                imports.save(job, "snowdrop", "Snowdrop", "Invented text", "", "")
+                imports.save(job, class_key, "Gardenia", "Invented text", "", "")
             with self.assertRaises(ValueError):
-                imports.save(job, "snowdrop", "Snowdrop", excerpt, "", "javascript:alert(1)")
+                imports.save(job, class_key, "Gardenia", excerpt, "", "javascript:alert(1)")
             source = "https://example.org/example.pdf"
-            result = imports.save(job, "snowdrop", "Snowdrop", excerpt, "", source)
-            duplicate = imports.save(cached, "snowdrop", "Snowdrop", excerpt, "Different notes", source)
+            result = imports.save(job, class_key, "Gardenia", excerpt, "", source)
+            duplicate = imports.save(cached, class_key, "Gardenia", excerpt, "Different notes", source)
             self.assertFalse(result["duplicate"])
             self.assertTrue(duplicate["duplicate"])
             self.assertEqual(result["evidence_id"], duplicate["evidence_id"])
             with open_store(db) as store:
-                self.assertFalse(store.source_evidence("snowdrop"))
-                record, = store.source_evidence("snowdrop", "pending")
+                self.assertFalse(store.source_evidence(class_key))
+                record, = store.source_evidence(class_key, "pending")
                 self.assertEqual((excerpt, 4, source), (record["excerpt"], record["page_number"], record["source_url"]))
                 document, = store.list_documents()
                 self.assertEqual("", document["local_path"])
                 self.assertEqual(1, document["parse_count"])
+                self.assertTrue(store.update("document_evidence", result["evidence_id"], review_status="verified"))
+                self.assertEqual(excerpt, store.source_evidence(class_key)[0]["excerpt"])

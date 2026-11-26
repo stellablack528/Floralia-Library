@@ -1,12 +1,12 @@
 # Floralia SQLite 数据库
 
-数据库文件为 `data/knowledge/floralia.sqlite3`，基础表由 `src/knowledge_schema.sql` 创建。版本 2 通过 `src/evidence_translations.sql` 增加译文表，本机服务启动时自动升级已有版本 1 的数据库。依赖 Python 3.12 自带的 `sqlite3`，新建连接开启外键检查，库启用 WAL。本地运行库放在 Git 忽略目录。建表文件、导入脚本和原始知识 JSON 可用于从头重建，数据库内后续录入的文献和修改需要保留本地库。表用 SQLite 的 STRICT 模式，并校验 JSON 数组。未来 Qt 如直接连接，请选择 SQLite 3.38 或更新版并在每个连接执行 `PRAGMA foreign_keys = ON`。参考 [外键](https://sqlite.org/foreignkeys.html)、[STRICT 表](https://sqlite.org/stricttables.html)和 [WAL](https://sqlite.org/wal.html)。
+数据库文件为 `data/knowledge/floralia.sqlite3`，基础表由 `src/knowledge_schema.sql` 创建。版本 2 增加译文表。版本 3 在事务内升级类别表并核对外键，服务在启动时追加新类别。已有文献、摘录、审核状态、译文和人工修改保留原值。依赖 Python 3.12 自带的 `sqlite3`，新建连接开启外键检查，库启用 WAL。本地运行库放在 Git 忽略目录。建表、导入脚本和原始知识 JSON 可重建初始库，后续录入和修改随本地库保存。表使用 STRICT 模式并校验 JSON 数组。[SQLite 外键](https://sqlite.org/foreignkeys.html) · [STRICT 表](https://sqlite.org/stricttables.html) · [WAL](https://sqlite.org/wal.html)
 
 ## 表名和关系
 
 | 表 | 主键 | 用途 |
 | --- | --- | --- |
-| `flower_classes` | `class_key`，`class_id` 唯一 | 固定的 Flower17 0–16 类映射，模型和网页用同一类别代号。 |
+| `flower_classes` | `class_key`，`class_id` 唯一 | 保留 Flower17 的 0–16 和 Bloom 25 的 17–24，追加 Bloom 30 的 25–29。 |
 | `botanical_profiles` | `class_key` | 每类一份代表植物档案，含科属、特征、生境、花期和适用范围。 |
 | `sources` | `source_id` | 网页出处登记，URL 唯一。 |
 | `botanical_sources` | `class_key` + `source_id` | 一份植物档案可以引用多个出处。 |
@@ -43,7 +43,7 @@ CRUD 支持表为 `botanical_profiles`、`sources`、`cultural_entries`、`docum
 .\.venv\Scripts\python.exe src\knowledge_store.py import-mineru "某次解析输出的完整目录"
 ~~~
 
-`init` 首次导入 17 类、植物档案和文化记录。重复运行会检查类别映射，保留已经产生的编辑。`--db` 支持在子命令前指定其它 SQLite 文件，适合测试。
+`init` 导入 30 类及各自的植物档案和文化记录。对现有库只补齐缺少的类别，保留已经产生的编辑。`--db` 支持在子命令前指定其它 SQLite 文件，适合测试。
 
 本机书页的「审核文献摘录」可查看 SQLite 中已审核和待审核的摘录，核对原文与中文整理并保存决定。审核按打开时读到的证据版本保存，证据若已变更需要重新核对。本机和静态网页的「文学典故与用物史」读取由 `knowledge/` 按收录标准生成的条目。[资料收录裁定](knowledge.md#资料收录裁定)
 
